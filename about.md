@@ -20,5 +20,4 @@ Inheritage), PELAGIOS (Linked Data), and C2-SENSE (Sensor Web and Interoperabili
 work on the ALIGNED project (Semantic Web). His current research field is Semantic Web Technologies, Community Building, and Time Series Processing. 
 
 Source code from some of the projects:
-{% include icon-github.html username="bozicb" %} /
-[bozicb](https://github.com/bozicb)
+{% include icon-github.html username="bozicb" %} 
