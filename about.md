@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-![That's me.](/images/profile.jpg){:height="10%" width="10%"}
+![That's me.](/images/profile.jpg){:height="20%" width="20%"}
 
 Dr. Bojan Božić is a researcher in computer science at Dublin Institute of Technology and has worked on Semantic Web, Machine Learning, and Data 
 Science technologies for 7 years. He was a software engineer in Speech Recognition at Philips Speech Recognition Systems, a Scientist at the 
