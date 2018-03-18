@@ -19,4 +19,4 @@ github_username:  bozicb
 
 # Build settings
 markdown: kramdown
-theme: Midnight
+theme: jekyll-theme-midnight
