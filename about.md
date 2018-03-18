@@ -44,6 +44,8 @@ Awards
 
 Publications
 ------------
+
+
 2016
 ====
 * B. Božić, R. Brennan, K. Feeney, G. Mendel-Gleason: "Describing Reasoning Results with RVO, the Reasoning Violations Ontology"; Extended Semantic Web Conference, Heraklion; 29.05.2016 - 02.06.2016; in: "Linkded Data Quality Workshop"
