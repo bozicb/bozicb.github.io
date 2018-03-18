@@ -6,7 +6,7 @@ categories: jekyll update
 ---
 Hi everyone and welcome to my brand new blot 'Problems with Puffins'!
 
-{% puffin.png  %}
+![I'm a puffin!]({{ "/_includes/puffin.png" | absolute_url }})
 
 In this blog, I will introduce you to puffins and numerous problems they encounter on their journey through the world of machine learning, natural
 language processing, and many other research areas, but also just funny and interesting maths problems. In fact everything that crosses the puffins' minds will be covered in this blog, and those brilliant little fellas have a lot on their plates.
