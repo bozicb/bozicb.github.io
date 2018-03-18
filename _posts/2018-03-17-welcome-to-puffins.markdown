@@ -6,7 +6,7 @@ categories: jekyll update
 ---
 Hi everyone and welcome to my brand new blog 'Problems with Puffins'!
 
-![I'm a puffin!](/images/puffin.png){:height="50%"}
+![I'm a puffin!](/images/puffin.png){:height="50%" width="50%"}
 
 In this blog, I will introduce you to puffins and numerous problems they 
 encounter on their journey through the world of machine learning, natural
