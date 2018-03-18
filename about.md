@@ -7,7 +7,7 @@ permalink: /about/
 ![That's me.](/images/profile.jpg){:height="20%" width="20%"}
 
 Dr. Bojan Božić is a researcher in computer science at Dublin Institute of Technology and has worked on Semantic Web, Machine Learning, and Data 
-Science technologies for 7 years. He was a software engineer in Speech Recognition at Philips Speech Recognition Systems, a Scientist at the 
+Science technologies for almost a decade. He was a software engineer in Speech Recognition at Philips Speech Recognition Systems, a Scientist at the 
 Austrian Institute of Technology and a Lecturer at the University of Applied Sciences Burgenland and University of Vienna. At AIT's Safety and 
 Security department, he worked in leading roles in European research projects such as SANY (Sensor Web Enablement), TaToo (Tagging Tools for 
 Semantic Discovery), Europeana Creative (Cultural Inheritage), PELAGIOS (Linked Data), and C2-SENSE (Sensor Web and Interoperability). At Trinity 
@@ -45,6 +45,7 @@ Awards
 Publications
 ------------
 2016
+
 ====
 * B. Božić, R. Brennan, K. Feeney, G. Mendel-Gleason: "Describing Reasoning Results with RVO, the Reasoning Violations Ontology"; Extended Semantic Web Conference, Heraklion; 29.05.2016 - 02.06.2016; in: "Linkded Data Quality Workshop"
 * O. Gavin, D. Kontokostas, A. Koller, J. Davies, P. Francois, A. Marciniak, B. Božić, G. Mendel-Gleason, K. Feeney, R. Brennan: "The ALIGNED Project â€“ Aligned, Quality-centric Software and Data Engineering Driven by Semantics"; Extended Semantic Web Conference, Heraklion; 29.05.2016 - 02.06.2016; in LNCS, H. Sack, Blomqvist, E., d'Aquin, M., Ghidini, C., Paolo Ponzetto, S., Lange, C. (eds.) (2016). (Vol. 9678)
