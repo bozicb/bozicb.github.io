@@ -18,7 +18,7 @@ fellas have a lot on their plates.
 Also the puffins' favourite programming language seems to be Ruby (for 
 some reason), so I guess we will come across code like this:
 
-{% highlight ruby %}
+{% highlight ruby linenos %}
 def print_hi(name)
   puts "Hi, #{name}"
 end
@@ -31,4 +31,4 @@ dealing with: [Github][bozicb-gh].
 
 Thanks for reading, we'll be back soon!
 
-[jekyll-gh]:   https://github.com/jekyll/jekyll
+[bozicb-gh]:   https://github.com/bozicb
