@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Problems with Puffins</title>
+    <description>This is a blog about cool problems and their solutions, crazy ideas, tech news,  algorithms with puffins, and many other topics in Machine Learning, Natural Language Processing, and any other awesome research field that might come to my attention :)
+</description>
+    <link>http://yourdomain.com/</link>
+    <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sun, 18 Mar 2018 02:09:45 +0000</pubDate>
+    <lastBuildDate>Sun, 18 Mar 2018 02:09:45 +0000</lastBuildDate>
+    <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>Welcome to Puffins!</title>
+        <description>&lt;p&gt;Hi everyone and welcome to my brand new blot ‘Problems with Puffins’!&lt;/p&gt;
+
+&lt;p&gt;In this blog, I will introduce you to puffins and numerous problems they encounter on their journey through the world of machine learning, natural
+language processing, and many other research areas, but also just funny and interesting maths problems. In fact everything that crosses the puffins’ minds will be covered in this blog, and those brilliant little fellas have a lot on their plates.&lt;/p&gt;
+
+&lt;p&gt;Also the puffins’ favourite programming language seems to be Ruby (for some reason), so I guess we will come across code like this:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Tesla the Puffin&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &#39;Hi, Tesla the Puffin&#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Check out github to see what other problems the puffins and I are dealing with: [Github][bozicb-gh].&lt;/p&gt;
+
+&lt;p&gt;Thanks for reading, we’ll be back soon!&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 17 Mar 2018 23:31:55 +0000</pubDate>
+        <link>http://yourdomain.com/jekyll/update/2018/03/17/welcome-to-puffins.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/jekyll/update/2018/03/17/welcome-to-puffins.html</guid>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
+    
+  </channel>
+</rss>

@@ -4,6 +4,8 @@ title: About
 permalink: /about/
 ---
 
+![That's me.](/images/profile.jpg)
+
 Dr. Bojan Božić is a researcher in computer science at Dublin Institute of Technology and has worked on Semantic Web, Machine Learning, and Data 
 Science technologies for 7 years. He was a software engineer in Speech Recognition at Philips Speech Recognition Systems, a Scientist at the 
 Austrian Institute of Technology and a Lecturer at the University of Applied Sciences Burgenland and University of Vienna. At AIT's Safety and 
@@ -21,8 +23,8 @@ work on the ALIGNED project (Semantic Web). His current research field is Semant
 
 Links
 =====
-* PhD Thesis
-* CV
+* [PhD Thesis](http://othes.univie.ac.at/32976/)
+* [CV](https://ceadar.dit.ie/bojan.bozic/bojan_bozic.pdf)
 
 Memberships and Reviews
 =======================
@@ -65,7 +67,7 @@ Publications
 * B. Božić, W. Winiwarter: "A Showcase of Semantic Time Series Processing"; International Journal of Web Information Systems 9, no. 2 (2013): 117-141.
 
 2012
-
+----
 * B. Božić, W. Winiwarter: "Community Building Based on Semantic Time Series"; International Conference on Information Integration and Web-based Applications & Services, Bali; 03.12.2012 - 05.12.2012; in: "Proceedings of the 14th International Conference on Information Integration and Web-based Applications & Services" Association for Computing Machinery, New York,(2012), ISBN: 978-1-4503-1306-3; p. 213 - 222.
 * B. Božić: "A Multi-Domain Framework for Community Building Based on Data Tagging"; International Semantic Web Conference, Boston; 11.11.2012 - 15.11.2012; in: "The Semantic Web - ISWC 2012" Springer, Heidelberg Berlin (2012), ISBN: 978-3-642-35172-3; p. 441 - 444.
 * B. Božić, J. Peters-Anders, G. Schimak: "Filtering of Semantically Enriched Environmental Time Series"; International Congress on Environmental Modelling and Software, Leipzig; 01.07.2012 - 05.07.2012; in: "Proceedings of the sixth biennal meeting of the International Environmental Modelling and Software Society" Int. Environmental Modelling and Software Society, Leipzig (2012), ISBN: 78-88-9035-742-8; p. 2395 - 2402.
