@@ -45,7 +45,6 @@ Awards
 Publications
 ------------
 2016
-
 ====
 * B. Božić, R. Brennan, K. Feeney, G. Mendel-Gleason: "Describing Reasoning Results with RVO, the Reasoning Violations Ontology"; Extended Semantic Web Conference, Heraklion; 29.05.2016 - 02.06.2016; in: "Linkded Data Quality Workshop"
 * O. Gavin, D. Kontokostas, A. Koller, J. Davies, P. Francois, A. Marciniak, B. Božić, G. Mendel-Gleason, K. Feeney, R. Brennan: "The ALIGNED Project â€“ Aligned, Quality-centric Software and Data Engineering Driven by Semantics"; Extended Semantic Web Conference, Heraklion; 29.05.2016 - 02.06.2016; in LNCS, H. Sack, Blomqvist, E., d'Aquin, M., Ghidini, C., Paolo Ponzetto, S., Lange, C. (eds.) (2016). (Vol. 9678)
