@@ -19,4 +19,4 @@ github_username:  bozicb
 
 # Build settings
 markdown: kramdown
-theme: jekyll-theme-awesome
+theme: hyperspace-jekyll-theme
