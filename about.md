@@ -37,6 +37,7 @@ Memberships and Reviews
 * Open Geospatial Consortium (Member)
 * 21st International Congress on Modelling and Simulation (Session Organiser)
 * 2nd International Workshop on Computational History and Data-Driven Humanities (Co-chair)
+* NumFOCUS Community Member
 
 Awards
 ------
