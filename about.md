@@ -86,3 +86,7 @@ Publications
 2009
 ====
 * Bleier, T.; Božić, B.; Bumerl-Lexa, R.; Da Costa, A.; Costes, S.; Iosifescu, I.; Martin, O.; Frysinger, S.; Havlik, D.; Hilbring, D.; Jacques, P.; Klopfer, M.; Kunz, S.; Kutschera, P.; Lidstone, M.; Middleton, S.E.; Roberts, Z.; Sabeur, Z.; Schabauer, J.; Schlobinski, S.; Shu, T.; Simonis, I.; Stevenot, B.; UslÃ¤nder, T.; Watson, K.; Wittamore, K. : "SANY - an open service architecture for sensor networks "; Book: SANY Consortium, ISBN 978-3-00-028571-4; 2009.
+
+{::nomarkdown}
+{% jupyter_notebook sample.ipynb %}
+{:/nomarkdown}
