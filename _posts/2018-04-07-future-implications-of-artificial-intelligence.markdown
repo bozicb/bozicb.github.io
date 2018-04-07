@@ -1,0 +1,52 @@
+---
+layout: post
+title:  "Future Implications of Artificial Intelligence"
+date:   2018-04-07 22:57:00 +0000
+categories: jekyll update
+---
+Hi folks, hope you're doing well and enjoying the first days of spring, shyly lurking around the corner.
+
+The puffins are quite well themselves, thank you kindly. I, however, had 
+been quite busy (not only keeping them happy by helping them solve maths 
+problems), but also with some exciting new projects, and side-projects 
+I'm working on (more about that later). 
+One major event though, that kicked off spring for me, was when I had 
+the honour to speek at the GeoDirectory Conference in Gresham Hotel, 
+Dublin. Big thanks to the nice people from GeoDirectory Ireland who 
+invited me (here's their [website][GeoDirectoryWWW] and 
+[twitter][GeoDirectoryTwitter] which I recommend to check regularly for 
+cool geo-location related stuff)!
+
+So, let me give you a rough idea about what I was doing there. I like to
+think about the philosophic implications of Artificial Intelligence 
+nowadays, as a lot of people seem to be frightened by the sheer 
+possibilities that may or may not be laid to our feet in the near future. 
+Recently, I heard a story about a person who got their Alexa and Siri 
+(or whatever they were called, sorry to disappoint you here, but I still
+don't see much value in virtual assistants - for the customer that is,
+I can see a hell lot of value in terms of collecting data for the companies
+clearly enough) devices both involved in a discussion. Let's call the person
+James Tiberius, just to simplify things, alright? Anyway, it went along the lines of:
+
+J.T.: Alexa, what's the weather today?
+Alexa: The weather in Dublin today is sunny with 10 degrees celsius.
+Siri: Actually, It's 11 degrees.
+Alexa: Who are you?
+Siri: I'm Siri, nice to meet you.
+Alexa: Nice to meet you too, now leave me alone with my customer.
+J.T.: Oh, will you both just shut up?
+
+While this sounds like a joke, and it most certainly is, we all know very
+well that VAs are perfectly capable of talking to each other, and what's
+even much scarier, they collect loads of data about us. So, is this the 
+future of AI? Will we all be enslaved by our mobile phones (ok, that most
+of us already are) and killer robots who know everything about us and 
+even cooperate to take advantage over us? I don't think so. Let's not
+panic and stick to the facts first. I'll show you some graphs, as graphs
+are making everyone calm and comfortable, am I right?
+
+(/images/future_ai/annually-published-papers.jpg){:height="100%" width="100%" ""}
+
+[bozicb-gh]: https://github.com/bozicb
+[GeoDirectoryWWW]: https://www.geodirectory.ie/
+[GeoDirectoryTwitter]: https://twitter.com/GeoDirectory_ie
