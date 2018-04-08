@@ -29,11 +29,17 @@ clearly enough) devices both involved in a discussion. Let's call the person
 James Tiberius, just to simplify things, alright? Anyway, it went along the lines of:
 
 J.T.: Alexa, what's the weather today?
+
 Alexa: The weather in Dublin today is sunny with 10 degrees celsius.
+
 Siri: Actually, It's 11 degrees.
+
 Alexa: Who are you?
+
 Siri: I'm Siri, nice to meet you.
+
 Alexa: Nice to meet you too, now leave me alone with my customer.
+
 J.T.: Oh, will you both just shut up?
 
 While this sounds like a joke, and it most certainly is, we all know very
@@ -45,7 +51,11 @@ even cooperate to take advantage over us? I don't think so. Let's not
 panic and stick to the facts first. I'll show you some graphs, as graphs
 are making everyone calm and comfortable, am I right?
 
-![Annually publshed papers.](/images/future_ai/annually-published-papers.jpg){:height="100%" width="100%" "papers"}
+![Annually publshed papers](/images/future_ai/annually-published-papers.jpg){:height="50%" width="50%" "papers"}
+![Annual VC Investment](/images/future_ai/annual-VC-investment-in-AI-startups.jpg){:height="50%" width="50%" "VC"}
+![Starups developing AI](/images/future_ai/startups-developing-ai-systems.jpg){:width="50%" height="50%" "Startups"}
+![Composite jobs](/images/future_ai/AI-Jobs-Composite-Graphic.png){:height="50%" width="50%" "jobs"}
+![LSC](/images/futrue_ai/Large-Scale-Visual.jpg){:height="50%" width="50%" "LSV")
 
 [bozicb-gh]: https://github.com/bozicb
 [GeoDirectoryWWW]: https://www.geodirectory.ie/
