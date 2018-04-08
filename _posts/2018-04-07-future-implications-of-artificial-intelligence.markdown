@@ -52,10 +52,10 @@ panic and stick to the facts first. I'll show you some graphs, as graphs
 are making everyone calm and comfortable, am I right?
 
 ![Annually publshed papers](/images/future_ai/annually-published-papers.jpg){:height="80%" width="80%" "papers"}
-![Annual VC Investment](/images/future_ai/annual-VC-investment-in-AI-startups.jpg){:height="80%" width="800%" "VC"}
-![Starups developing AI](/images/future_ai/startups-developing-ai-systems.jpg){:width="80%" height="800%" "Startups"}
-![Composite jobs](/images/future_ai/AI-Jobs-Composite-Graphic.png){:height="80%" width="80%" "jobs"}
-![LSC](/images/future_ai/Large-Scale-Visual.jpg){:height="80%" width="80%" "LSV")
+![Annual VC Investment](/images/future_ai/annual-VC-investment-in-AI-startups.jpg){:height="80%" width="80%" "VC"}
+![Starups developing AI](/images/future_ai/startups-developing-ai-systems.jpg){:width="80%" height="80%" "Startups"}
+![Composite jobs](/images/future_ai/AI-Jobs-Composite-Graphic.png){:height="100%" width="100%" "jobs"}
+![LSC](/images/future_ai/Large-Scale-Visual.jpg){:height="80%" width="80%" "LSV"}
 
 [bozicb-gh]: https://github.com/bozicb
 [GeoDirectoryWWW]: https://www.geodirectory.ie/
