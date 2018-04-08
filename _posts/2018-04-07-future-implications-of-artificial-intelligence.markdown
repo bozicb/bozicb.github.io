@@ -45,7 +45,7 @@ even cooperate to take advantage over us? I don't think so. Let's not
 panic and stick to the facts first. I'll show you some graphs, as graphs
 are making everyone calm and comfortable, am I right?
 
-(/images/future_ai/annually-published-papers.jpg){:height="100%" width="100%" ""}
+![Annually publshed papers.](/images/future_ai/annually-published-papers.jpg){:height="100%" width="100%" "papers"}
 
 [bozicb-gh]: https://github.com/bozicb
 [GeoDirectoryWWW]: https://www.geodirectory.ie/
