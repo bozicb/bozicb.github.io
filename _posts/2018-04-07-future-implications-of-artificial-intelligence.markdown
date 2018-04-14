@@ -52,10 +52,36 @@ panic and stick to the facts first. I'll show you some graphs, as graphs
 are making everyone calm and comfortable, am I right?
 
 ![Annually publshed papers](/images/future_ai/annually-published-papers.jpg){:height="80%" width="80%" "papers"}
+
+In academia, Artificial Intelligence has been around for decades, but only recently there has been a big push in 
+publications. If we have a look at annually published AI papers, we can see a big jump from 2000 to up until about
+now. This has 2 reasons: 1) we have never produced even closely as much data as we do now and 2) we finally have
+the processing power to analyse it.
+
 ![Annual VC Investment](/images/future_ai/annual-VC-investment-in-AI-startups.jpg){:height="80%" width="80%" "VC"}
+
+And as usual, industry isn't far behind as well. There has been a huge jump of investments in AI startups during the 
+last 10 years. Since 2010 venture capital has quadrupled. 
+
 ![Starups developing AI](/images/future_ai/startups-developing-ai-systems.jpg){:width="80%" height="80%" "Startups"}
+
+This leads of course to many newly developed AI systems in startups as the graph above shows. Nowadays, hundreds of 
+US startups develop some kind of AI as part of their businesses.
+
 ![Composite jobs](/images/future_ai/AI-Jobs-Composite-Graphic.png){:height="100%" width="100%" "jobs"}
+
+We all have noticed how anyone wants to be a Data Scientist nowadays. Also uncoutable universities and 
+education institutes, companies, and dubious other kinds of organisations try to offer and sell courses
+that miraculously turn everyone into a Data Scientist. This is supposed to cover the market need for 
+Data Scientists as every company feels they would need the one or the other Data Scientist to help them 
+with problems they haven't yet encountered, but are sure they must exist.
+
 ![LSC](/images/future_ai/Large-Scale-Visual.jpg){:height="80%" width="80%" "LSV"}
+
+And finally, my favourite graph! In 2014, an AI system was able to beat humans in detecting 
+objects at he LSVRC competition. That's a remarkable step for the whole research field of AI.
+
+
 
 [bozicb-gh]: https://github.com/bozicb
 [GeoDirectoryWWW]: https://www.geodirectory.ie/
