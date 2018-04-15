@@ -92,20 +92,20 @@ beginners. Actually even a slimmed down version wich can run on phones is on its
 called TensorFlow Lite and runs on embedded devices like printers, fridges, thermostats, 
 speakers, and household gadgets.
 
-So what are the most popular usage areas for AI? Well, *virtual personal assistants* seem to be 
+So what are the most popular usage areas for AI? Well, **virtual personal assistants** seem to be 
 very popular, yes I mean you Siri, Alexa, and the rest of you lot  (don't ask me why, maybe 
-more people should watch Black Mirror). Also, *video games* have always tried to use some kind
+more people should watch Black Mirror). Also, **video games** have always tried to use some kind
 of AI to make themselves more interesting, but nowadays various AIs with different characteristics
 can even communicate with each other and develop elaborate strategies to beat you. Then 
-everyone's darlings *smart cars and smart homes* (please don't tell me you're surprised they use
+everyone's darlings **smart cars and smart homes** (please don't tell me you're surprised they use
 AI). Oh yeah, let's not forget all the commercial stuff that generates piles of cash, like 
-*purchase prediction, fraud detection, and online customer support*. None of this would
+**purchase prediction, fraud detection, and online customer support**. None of this would
 work in a manner that would be really helpful without using AI research outputs from resent 
-years. The areas I find a little scary, but make heavy use of AI nevertheless are *news generation and 
-security surveillance*. It might make sense to generate simple news articles like those about 
+years. The areas I find a little scary, but make heavy use of AI nevertheless are **news generation and 
+security surveillance**. It might make sense to generate simple news articles like those about 
 sports matches automatically, or not forcing people to sit in front of cameras and watching them.
 But we should be aware that we are only scratching the surface here and shouldn't forget 
-how this can be misused to harm us. And last but not least, media recommendation (you can thank 
+how this can be misused to harm us. And last but not least, **media recommendation** (you can thank 
 us later, Netflix).
 
 ## Some headspinning facts and predictions
@@ -131,7 +131,7 @@ to train itself and learn on its own errors.
 
 To get a better picture of what this all can do for us, let's dig a little deeper into ML.
 Machine learning is a method of data analysis that automates analytical model building. It has an inherently different approach: rather than pushing commands by a programmer that would tell a computer how to solve a problem, it explains the problem and enforces learning to solve it on it without instructions. Resurging interest in machine learning is due to the fact that it works by learning to identify patterns in data and then make predictions from those patterns. These technologies are widely used in projects including spelling correction in web search engines, analysis of information from IoT devices, real-time language translation, etc.
-All used algorithms can be broadly classified as *supervised, unsupervised, and reinforcement learning*.
+All used algorithms can be broadly classified as **supervised, unsupervised, and reinforcement learning**.
 
 *Supervised Machine Learning: works on predictions and searches for patterns on a given set of samples. Supervised Machine Learning Algorithms attempt to render relationships and dependencies between target prediction output and input features. In this, we start from input variables (x) and an output variable (Y) and try to map functions from the input to the output so that they establish a relationship which can be used for prediction.Common models: linear regression, random forest, support vector machines, nearest neighbour, etc. Supervised learning is commonly used in classification problems, such as digit recognition, speech recognition, diagnostics, identity fraud detection and regression problems such as weather forecasting, estimating life expectance, population growth prediction etc.
 
@@ -141,10 +141,89 @@ All used algorithms can be broadly classified as *supervised, unsupervised, and 
 
 ## What will the future bring?
 
+So what will happen in the near future? Well, as most of us now, machine learning is currently one of the hottest topics in Computer Science. The reason stems from the seemingly unlimited use cases in which machine learning can play a role. Where are we going? 
+What will be the next big thing? Where will we be in ten years' time? 
+The truth is, we are most probably goint to be surprised again by the next hot topic.
+However, some things are not all that unlikely to play are role very soon.
+
+1. Quantum Computing: Machine learning tasks involve problems such as manipulating and classifying large numbers of vectors in high-dimensional spaces. The classical algorithms we currently use for solving such problems take time. Quantum computers will likely be very good at manipulating high-dimensional vectors in large tensor product spaces. Therefore, it is likely that both the development of supervised and unsupervised quantum machine learning algorithms will hugely increase the number of vectors and their dimensions exponentially more quickly than classical algorithms. This will likely result in a massive increase in the speed at which machine learning algorithms will run.
+2. Better Unsupervised Algorithms: As of now unsupervised learning is not yet being applied very successfully in industrial software. Therefore, we expect a lot of improvements, such as discovering hidden patterns in data, or a means towards an end, often called feature learning, to happen before we can apply it to solve "real problems". It is likely that advances in building smarter, unsupervised learning algorithms will lead to faster and more accurate outcomes.
+3. Collaborative Learning: This is about utilizing different computational entities so that they collaborate in order to produce better learning results than they would have achieved on their own. An example of this would be utilizing the nodes of an IoT sensor network, or what is called edge analytics. With the growth of IoT, it is likely that large numbers of separate entities will be utilized to learn collaboratively in many ways.
+4. Deeper Personalisation: Personalisation isn't the worst thing per se, but it can get very annoying. We have all experienced recommendations that seem to bear no actual relation to anything that we may actually be interested in. In the future, users will likely receive more precise recommendations and adverts will become both more effective and less inaccurate. The user experience will vastly improve for all.
+5. Cognitive Services: This technology includes APIs and services through which developers can create more discoverable and intelligent applications. Machine learning APIs will allow developers to introduce intelligent features such as emotion detection; speech, facial, and vision recognition; and language and speech understanding into their applications. The future of this field will be the introduction of deeply personalized computing experiences for all.
+
+These are things I think can and should happen in the machine learning's near future, but it is equally likely that some new unknown disruptive technology none of us would have predicted gets introduced. In any case, the future is now, and we have 3 facts that already are changing the whole IT landscape. They are that:
+
+* Every company can now be a data company
+* Every company can now access algorithmic intelligence
+* Every app can now be an intelligent app
+
+Yes folks, it's really easy. And this is again one of the reasons why everyone is talking about Data Science right now.
+
 ## Who needs ML and why is GeoDirectory important?
+While speaking about all that artificial intelligence and machine learning hype, we ofter forget 
+to address the most important question: Who needs it and why? I would like to address two major 
+users specifically, and only list some of the others:
+* Government agencies, such as public safety and utilities have a particular need for machine learning since they have multiple sources of data that can be mined for insights. Analyzing sensor data, for example, identifies ways to increase efficiency and save money. Machine learning can also help detect fraud and minimize identity theft. \\ \vspace{0.5cm}
+* Geospatial Data Organisations and Businesses: Imagine being able to train your GIS to perceive and understand the world, and give you insights based on your data. Today, geospatial experts are using machine learning for analyzing big datasets (what do these 2 million points actually mean?) and predictive analytics (e.g. forecasting risk). \\ \vspace{0.5cm}
+* Who else? Finacial Services, Health Care, Marketing and Sales, Transportation, and many more.
+
+Most AI and ML algorithms require location information, which is hence becoming more and more important, therefore GeoDirectory data could be a key variable.Here are some examples:
+* Market research, market segmentation 
+* Risk estimation (e.g. mortgages and loans)
+* Spatial patterns of sentiment towards institutions/products 
+* Land use planning 
+* Housing policy and provision
+* Logistics (routing) 
+* Understanding change processes in variety of fields (e.g. health, transport, housing, environment)
 
 ## Where can I get more information?
+
+Do you feel this is you? Do you have a lot of data and are not sure what do with it, i.e. how to
+use it to improve your business? The best thing to do (especially if you are in Ireland) is to 
+contact a research centre for data analytics. Personally, I would recommend the following one 
+(and that's not only because I work there myself):
+
+![ceadar](/images/future_ai/ceadar.jpg){:height="50%" width="50%" "ceadar"}
+Website: [CeADAR on the WWW][CeadarWWW]
+![ceadar_twitter](/images/future_ai/twitter-logo.png){:height="100%" width="100%" "ceadar_twitter"} [CeADAR on Twitter][CeadarTwitter]
+![ceadar_facebook](/images/future_ai/logo-facebook.png){:height="100%" width="100%" "ceadar_facebook"} [CeADAR on Facebook][CeadarFacebook]
+![ceadar_youtube](/images/future_ai/youtube-logo.png){:height="100%" width="100%" "ceadar_youtube"}[CeADAR on Youtube][CeadarYoutube]
+![ceadar_linkedin](/images/future_ai/linkedin-logo.png){:height="100%" width="100%" "ceadar_linkedin"} [CeADAR on LinkedIn][CeadarLinkedin]
+
+CeADAR provides industry prototypes and demonstrators along with state of the art reviews of data analytics technology, tools, best practice methodologies and processes. \\
+Main areas: Intelligent Analytic Interfaces, Data Management for Analytics, Advanced Analytics.
+
+## Quotes
+
+And for the end, some quotes. I won't comment on them, let 'em just sink in and tell me your own 
+opinion ;)
+
+"AI is likely to be either the best or worst thing to happen to humanity."
+**Stephen Hawking**
+
+"Worth reading Superintelligence by Boston. We need to be super careful with AI. Potentially more dangerous than nukes."
+**Elon Musk**
+
+"I am in the camp that is concerned about artificial intelligence. First the machines will do a lot of jobs for us and not be super intelligent. That should be positive if we manage it well. A few decades after that though the intelligence is strong enough to be a concern.  I agree with Elon Musk and some others on this and don’t understand why some people are not concerned."
+**Bill Gates**
+
+OK, I was lying to you, but you know me I can't resist telling you what I think of it, so here it is:
+I can't help but think about what this means to us. Will machines take over the world? Are we 
+in danger of being wiped out by killer robots? Please, of course not. At least not in the next 
+several hundred years, I don't think. But, there is real danger of people being controlled and 
+manipulated by misinformation and social media. And this is already happening. Just think of recent
+political developments and how they started. I don't want to start a politcal discussion here,
+but think about fake news which can be produced on the fly and tailored for the target groups 
+they are accessing. It is fairly easy to manipulate people into voting against their interests 
+that way and this is where we need to take up responsibility and fight against misuse of 
+artificial intelligence technology that we originally designated to the greater good.
 
 [bozicb-gh]: https://github.com/bozicb
 [GeoDirectoryWWW]: https://www.geodirectory.ie/
 [GeoDirectoryTwitter]: https://twitter.com/GeoDirectory_ie
+[CeadarWWW]: https://ceadar.ie
+[CeadarTwitter]: https://twitter.com/CeADARIreland
+[CeadarFacebook]: facebook.com/CeADARIreland
+[CeadarYoutube]: https://www.youtube.com/channel/UCyHC1tbyvD-TX_2UGsGGFRw
+[CeadarLinkedin]: linkedin.com/profile/view?id=231055523
