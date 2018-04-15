@@ -185,11 +185,16 @@ contact a research centre for data analytics. Personally, I would recommend the 
 (and that's not only because I work there myself):
 
 ![ceadar](/images/future_ai/ceadar.jpg){:height="50%" width="50%" "ceadar"}
+
 Website: [CeADAR on the WWW][CeadarWWW]
-![ceadar_twitter](/images/future_ai/twitter-logo.png){:height="100%" width="100%" "ceadar_twitter"} [CeADAR on Twitter][CeadarTwitter]
-![ceadar_facebook](/images/future_ai/logo-facebook.png){:height="100%" width="100%" "ceadar_facebook"} [CeADAR on Facebook][CeadarFacebook]
-![ceadar_youtube](/images/future_ai/youtube-logo.png){:height="100%" width="100%" "ceadar_youtube"}[CeADAR on Youtube][CeadarYoutube]
-![ceadar_linkedin](/images/future_ai/linkedin-logo.png){:height="100%" width="100%" "ceadar_linkedin"} [CeADAR on LinkedIn][CeadarLinkedin]
+
+![ceadar_twitter](/images/future_ai/twitter-logo.png){:height="5%" width="5%" "ceadar_twitter"} [CeADAR on Twitter][CeadarTwitter]
+
+![ceadar_facebook](/images/future_ai/logo-facebook.png){:height="5%" width="5%" "ceadar_facebook"} [CeADAR on Facebook][CeadarFacebook]
+
+![ceadar_youtube](/images/future_ai/youtube-logo.png){:height="5%" width="5%" "ceadar_youtube"}[CeADAR on Youtube][CeadarYoutube]
+
+![ceadar_linkedin](/images/future_ai/linkedin-logo.png){:height="5%" width="5%" "ceadar_linkedin"} [CeADAR on LinkedIn][CeadarLinkedin]
 
 CeADAR provides industry prototypes and demonstrators along with state of the art reviews of data analytics technology, tools, best practice methodologies and processes. \\
 Main areas: Intelligent Analytic Interfaces, Data Management for Analytics, Advanced Analytics.
