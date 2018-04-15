@@ -42,6 +42,8 @@ Alexa: Nice to meet you too, now leave me alone with my customer.
 
 J.T.: Oh, will you both just shut up?
 
+##Graphs
+
 While this sounds like a joke, and it most certainly is, we all know very
 well that VAs are perfectly capable of talking to each other, and what's
 even much scarier, they collect loads of data about us. So, is this the 
@@ -81,6 +83,8 @@ with problems they haven't yet encountered, but are sure they must exist.
 And finally, my favourite graph! In 2014, an AI system was able to beat humans in detecting 
 objects at he LSVRC competition. That's a remarkable step for the whole research field of AI.
 
+##Where do we use AI?
+
 As a result, we could say that AI is almost everywhere now. Cheap and tiny smart devices using 
 AI are on the way which will make date analysis on the fly very easy. Google's TensorFlow is in 
 use by Airbnb, eBay, Uber, Snapchat, Dropbox, etc.and makes Neural Networks approachable by 
@@ -104,6 +108,8 @@ But we should be aware that we are only scratching the surface here and shouldn'
 how this can be misused to harm us. And last but not least, media recommendation (you can thank 
 us later, Netflix).
 
+##Some headspinning facts and predictions
+
 Let me also show you some head spinning facts and predictions, that will blow your mind, while 
 I'm at it:
 1. 1 Billion Video Cameras Connected to AI: according to NVIDIA by 2020 that manny cameras will be connected to AI and used in Smart Cities. When connected to AI, cameras can be used to recognize shapes, faces and even the emotions of individuals, which has varied applications: autonomous cars, video surveillance (traffic flow, crime monitoring), and consumer behavior analysis (reaction to ads for example).
@@ -114,7 +120,30 @@ I'm at it:
 6. 4 Billion AI-Powered Devices in 2017: Smart voice assistants are on the rise. In a recent report, IHS Markit forecasts that, by the end of this year, 4 billion devices will be equipped by digital voice assistants like Amazon’s Alexa, Google’s Assistant, Apple’s Siri and Samsung’s Bixby.
 7. 30,000 Lives Could Be Saved Each Year in the U.S. Thanks to AI: Over 30,000 Americans die each year in traffic accidents, not to mention millions of injured and hundreds of billions of dollars in property damage and other expenses. In the future, road crash fatalities would decline with more progress, and ubiquity, of autonomous cars that, unlike human drivers, don’t get distracted and are less likely to bump into each other. And self-driving tech seems to be delivering on its promises. According to data provided by Tesla to NHTSA investigators (National Highway Traffic Safety Administration), Tesla accidents drop by 40% after the installation of its Autopilot software.  
 
+##What is AI and ML?
+As our next figure shows, most commonly AI is defined as a very broad field that spans over 
+everything that enables computers to mimic human intelligence with logic. Naturally this means
+that AI includes Machine Learning (ML), which uses statistics and mathematical models to 
+improve results with experience, and that again includes Deep Learning, which enables software 
+to train itself and learn on its own errors.
 
+![AIML](/images/future_ai/ai-ml-dl.jpg){:height="80%" width="80%" "AIML"}
+
+To get a better picture of what this all can do for us, let's dig a little deeper into ML.
+Machine learning is a method of data analysis that automates analytical model building. It has an inherently different approach: rather than pushing commands by a programmer that would tell a computer how to solve a problem, it explains the problem and enforces learning to solve it on it without instructions. Resurging interest in machine learning is due to the fact that it works by learning to identify patterns in data and then make predictions from those patterns. These technologies are widely used in projects including spelling correction in web search engines, analysis of information from IoT devices, real-time language translation, etc.
+All used algorithms can be broadly classified as *supervised, unsupervised, and reinforcement learning*.
+
+*Supervised Machine Learning: works on predictions and searches for patterns on a given set of samples. Supervised Machine Learning Algorithms attempt to render relationships and dependencies between target prediction output and input features. In this, we start from input variables (x) and an output variable (Y) and try to map functions from the input to the output so that they establish a relationship which can be used for prediction.Common models: linear regression, random forest, support vector machines, nearest neighbour, etc. Supervised learning is commonly used in classification problems, such as digit recognition, speech recognition, diagnostics, identity fraud detection and regression problems such as weather forecasting, estimating life expectance, population growth prediction etc.
+
+*Unsupervised Machine Learning: arranges data into clusters and describes its structure in order to make complex data look simple and organised. Unsupervised learning can be applied when there is no labelled data available for training. Examples are k-means for clustering problems used in recommender systems, customer segmentation and targeting marketing and dimensionality reduction problems for big data visualisation, feature elicitation, structure discovery etc.
+
+*Reinforcement Machine Learning: forwards an action according to the data point and later assess the decision. It utilises observations collected from interactions and takes actions so as to minimise the risk and maximise the benefits. It learns in an iterative fashion. Examples are Q-Learning, Deep Adversarial Networks, and Temporal Difference. Can be applied in Game AI, skill acquisition, learning tasks, robot navigation and real-time decision taking.
+
+##What will the future bring?
+
+##Why is GeoDirectory important?
+
+##Where can I get more information?
 
 [bozicb-gh]: https://github.com/bozicb
 [GeoDirectoryWWW]: https://www.geodirectory.ie/
