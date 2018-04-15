@@ -229,6 +229,6 @@ artificial intelligence technology that we originally designated to the greater 
 [GeoDirectoryTwitter]: https://twitter.com/GeoDirectory_ie
 [CeadarWWW]: https://ceadar.ie
 [CeadarTwitter]: https://twitter.com/CeADARIreland
-[CeadarFacebook]: facebook.com/CeADARIreland
+[CeadarFacebook]: https://facebook.com/CeADARIreland
 [CeadarYoutube]: https://www.youtube.com/channel/UCyHC1tbyvD-TX_2UGsGGFRw
-[CeadarLinkedin]: linkedin.com/profile/view?id=231055523
+[CeadarLinkedin]: https://linkedin.com/profile/view?id=231055523
