@@ -192,7 +192,7 @@ Website: [CeADAR on the WWW][CeadarWWW]
 
 ![ceadar_facebook](/images/future_ai/logo-facebook.png){:height="5%" width="5%" "ceadar_facebook"} [CeADAR on Facebook][CeadarFacebook]
 
-![ceadar_youtube](/images/future_ai/youtube-logo.png){:height="5%" width="5%" "ceadar_youtube"}[CeADAR on Youtube][CeadarYoutube]
+![ceadar_youtube](/images/future_ai/youtube-logo.png){:height="5%" width="5%" "ceadar_youtube"} [CeADAR on Youtube][CeadarYoutube]
 
 ![ceadar_linkedin](/images/future_ai/linkedin-logo.png){:height="5%" width="5%" "ceadar_linkedin"} [CeADAR on LinkedIn][CeadarLinkedin]
 
