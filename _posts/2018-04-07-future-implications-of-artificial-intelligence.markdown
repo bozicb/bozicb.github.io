@@ -104,43 +104,17 @@ But we should be aware that we are only scratching the surface here and shouldn'
 how this can be misused to harm us. And last but not least, media recommendation (you can thank 
 us later, Netflix).
 
-Head Spinning Facts and Predictions
+Let me also show you some head spinning facts and predictions, that will blow your mind, while 
+I'm at it:
+1. 1 Billion Video Cameras Connected to AI: according to NVIDIA by 2020 that manny cameras will be connected to AI and used in Smart Cities. When connected to AI, cameras can be used to recognize shapes, faces and even the emotions of individuals, which has varied applications: autonomous cars, video surveillance (traffic flow, crime monitoring), and consumer behavior analysis (reaction to ads for example).
+2. 20% of Workforce Dedicated to Neural Networks: This figure comes from Gartner, a research company. The report says that, by 2020, companies will dedicate up to 20% of their workforce to neural networks which, because of the way AIs have been designed still need human intervention. Neural networks need to be maintained, monitored and retrained all the time to produce meaningful results.
+3. 85% of Customer Interactions Will be Managed Without Humans By 2020: Customers will be relying less on human interaction and more on chatbots, virtual advisors, and other digital assistants in their day-to-day business with various companies.
+4. 38% of Jobs in the U.S. Could be Automated: By the early 2030s, robots might replace 38% of human-staffed jobs in the U.S., according to a PwC report. In other countries, the numbers are very similar. At least that doesn’t mean that these jobs will disappear altogether by that date. For the most part, this indicates a certain vulnerability for some industries.
+5. $60 Billion AI Market by 2025: Tractica expects the AI software market to reach nearly $59.8 billion by 2025. But that’s not the whole picture. The AI-driven economic growth of many industries will be much more substantial and far-reaching. By 2030, an estimated $15.7 trillion will be added to the global GDP thanks to AI.
+6. 4 Billion AI-Powered Devices in 2017: Smart voice assistants are on the rise. In a recent report, IHS Markit forecasts that, by the end of this year, 4 billion devices will be equipped by digital voice assistants like Amazon’s Alexa, Google’s Assistant, Apple’s Siri and Samsung’s Bixby.
+7. 30,000 Lives Could Be Saved Each Year in the U.S. Thanks to AI: Over 30,000 Americans die each year in traffic accidents, not to mention millions of injured and hundreds of billions of dollars in property damage and other expenses. In the future, road crash fatalities would decline with more progress, and ubiquity, of autonomous cars that, unlike human drivers, don’t get distracted and are less likely to bump into each other. And self-driving tech seems to be delivering on its promises. According to data provided by Tesla to NHTSA investigators (National Highway Traffic Safety Administration), Tesla accidents drop by 40% after the installation of its Autopilot software.  
 
-1. 1 Billion Video Cameras Connected to AI
-Last month, NVIDIA announced the addition of Huawei and Alibaba as adopters of its system “Metropolis”, an AI-platform for smart cities.
-More than 50 organizations are already using Metropolis and, by 2020, according to NVIDIA, there will be 1 billion video cameras worldwide that could be connected to AI platforms to make cities smarter.
-When connected to AI, cameras can be used to recognize shapes, faces and even the emotions of individuals, which has varied applications: autonomous cars, video surveillance (traffic flow, crime monitoring), and consumer behavior analysis (reaction to ads for example).
 
-2. 20% of Workforce Dedicated to Neural Networks
-This figure comes from Gartner, a research company, in its report “The Disruptive Power of Artificial Intelligence”.
-The report says that, by 2020, companies will dedicate up to 20% of their workforce to neural networks which, because of the way AIs have been designed (read more here) still need human intervention. Neural networks need to be maintained, monitored and retrained all the time to yield the most-fulfilling results.
-
-3. 85% of Customer Interactions Will be Managed Without Humans By 2020
-Another forecast from a Gartner 2011 brochure shows how deep AI is disrupting companies.
-Customers will be relying less on human interaction and more on chatbots, virtual advisors, and other digital assistants in their day-to-day business with various companies.
-That leads us to the next figure.
-
-4. 38% of Jobs in the U.S. Could be Automated
-By the early 2030s, robots might replace 38% of human-staffed jobs in the U.S., according to a PwC report. In other countries, the numbers are as follows:
-
-    Germany (35%)
-    UK (30%)
-    Japan (21%)
-
-Perhaps to some this is the most alarming figure on this list, but that doesn’t mean that these jobs will disappear altogether by that date. For the most part, this indicates a certain vulnerability for some industries.
-
-5. $60 Billion AI Market by 2025
-Growing from a value of $1.5 billion USD in 2016, Tractica expects the AI software market to reach nearly $59.8 billion by 2025.
-But that’s not the whole picture. The AI-driven economic growth of many industries will be much more substantial and far-reaching. By 2030, an estimated $15.7 trillion will be added to the global GDP thanks to AI.
-
-6. 4 Billion AI-Powered Devices in 2017
-Smart voice assistants are on the rise. In a recent report, IHS Markit forecasts that, by the end of this year, 4 billion devices will be equipped by digital voice assistants like Amazon’s Alexa, Google’s Assistant, Apple’s Siri and Samsung’s Bixby.
-By 2020, the number of AI-enabled devices is expected to jump to 7 billion.
-
-7. 30,000 Lives Could Be Saved Each Year in the U.S. Thanks to AI
-Over 30,000 Americans die each year in traffic accidents, not to mention millions of injured and hundreds of billions of dollars in property damage and other expenses.
-In the future, road crash fatalities would decline with more progress, and ubiquity, of autonomous cars that, unlike human drivers, don’t get distracted and are less likely to bump into each other.
-And self-driving tech seems to be delivering on its promises. According to data provided by Tesla to NHTSA investigators (National Highway Traffic Safety Administration), Tesla accidents drop by 40% after the installation of its Autopilot software.  
 
 [bozicb-gh]: https://github.com/bozicb
 [GeoDirectoryWWW]: https://www.geodirectory.ie/
