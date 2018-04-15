@@ -42,7 +42,7 @@ Alexa: Nice to meet you too, now leave me alone with my customer.
 
 J.T.: Oh, will you both just shut up?
 
-##Graphs
+## Show me some graphs
 
 While this sounds like a joke, and it most certainly is, we all know very
 well that VAs are perfectly capable of talking to each other, and what's
@@ -83,7 +83,7 @@ with problems they haven't yet encountered, but are sure they must exist.
 And finally, my favourite graph! In 2014, an AI system was able to beat humans in detecting 
 objects at he LSVRC competition. That's a remarkable step for the whole research field of AI.
 
-##Where do we use AI?
+## Where do we use AI?
 
 As a result, we could say that AI is almost everywhere now. Cheap and tiny smart devices using 
 AI are on the way which will make date analysis on the fly very easy. Google's TensorFlow is in 
@@ -108,7 +108,7 @@ But we should be aware that we are only scratching the surface here and shouldn'
 how this can be misused to harm us. And last but not least, media recommendation (you can thank 
 us later, Netflix).
 
-##Some headspinning facts and predictions
+## Some headspinning facts and predictions
 
 Let me also show you some head spinning facts and predictions, that will blow your mind, while 
 I'm at it:
@@ -120,7 +120,7 @@ I'm at it:
 6. 4 Billion AI-Powered Devices in 2017: Smart voice assistants are on the rise. In a recent report, IHS Markit forecasts that, by the end of this year, 4 billion devices will be equipped by digital voice assistants like Amazon’s Alexa, Google’s Assistant, Apple’s Siri and Samsung’s Bixby.
 7. 30,000 Lives Could Be Saved Each Year in the U.S. Thanks to AI: Over 30,000 Americans die each year in traffic accidents, not to mention millions of injured and hundreds of billions of dollars in property damage and other expenses. In the future, road crash fatalities would decline with more progress, and ubiquity, of autonomous cars that, unlike human drivers, don’t get distracted and are less likely to bump into each other. And self-driving tech seems to be delivering on its promises. According to data provided by Tesla to NHTSA investigators (National Highway Traffic Safety Administration), Tesla accidents drop by 40% after the installation of its Autopilot software.  
 
-##What is AI and ML?
+## What is AI and ML?
 As our next figure shows, most commonly AI is defined as a very broad field that spans over 
 everything that enables computers to mimic human intelligence with logic. Naturally this means
 that AI includes Machine Learning (ML), which uses statistics and mathematical models to 
@@ -139,11 +139,11 @@ All used algorithms can be broadly classified as *supervised, unsupervised, and 
 
 *Reinforcement Machine Learning: forwards an action according to the data point and later assess the decision. It utilises observations collected from interactions and takes actions so as to minimise the risk and maximise the benefits. It learns in an iterative fashion. Examples are Q-Learning, Deep Adversarial Networks, and Temporal Difference. Can be applied in Game AI, skill acquisition, learning tasks, robot navigation and real-time decision taking.
 
-##What will the future bring?
+## What will the future bring?
 
-##Why is GeoDirectory important?
+## Who needs ML and why is GeoDirectory important?
 
-##Where can I get more information?
+## Where can I get more information?
 
 [bozicb-gh]: https://github.com/bozicb
 [GeoDirectoryWWW]: https://www.geodirectory.ie/
