@@ -225,6 +225,10 @@ they are accessing. It is fairly easy to manipulate people into voting against t
 that way and this is where we need to take up responsibility and fight against misuse of 
 artificial intelligence technology that we originally designated to the greater good.
 
+Before I say goodbye for now, let's see what the puffins think:
+
+![intelligence](/images/future_ai/intelligence.png){:height="100%" width="100%" "intelligence"}
+
 [bozicb-gh]: https://github.com/bozicb
 [GeoDirectoryWWW]: https://www.geodirectory.ie/
 [GeoDirectoryTwitter]: https://twitter.com/GeoDirectory_ie
