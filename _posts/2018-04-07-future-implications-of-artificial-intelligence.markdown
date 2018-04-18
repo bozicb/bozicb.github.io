@@ -227,7 +227,7 @@ artificial intelligence technology that we originally designated to the greater 
 
 Before I say goodbye for now, let's see what the puffins think:
 
-![intelligence](/images/future_ai/intelligence.png){:height="100%" width="100%" "intelligence"}
+![intelligence](/images/future_ai/intelligence.png){:height="50%" width="50%" "intelligence"}
 
 [bozicb-gh]: https://github.com/bozicb
 [GeoDirectoryWWW]: https://www.geodirectory.ie/
