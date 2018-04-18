@@ -73,7 +73,7 @@ US startups develop some kind of AI as part of their businesses.
 
 ![Composite jobs](/images/future_ai/AI-Jobs-Composite-Graphic.png){:height="100%" width="100%" "jobs"}
 
-We all have noticed how anyone wants to be a Data Scientist nowadays. Also uncoutable universities and 
+We all have noticed how everyone wants to be a Data Scientist nowadays. Also uncoutable universities and 
 education institutes, companies, and dubious other kinds of organisations try to offer and sell courses
 that miraculously turn everyone into a Data Scientist. This is supposed to cover the market need for 
 Data Scientists as every company feels they would need the one or the other Data Scientist to help them 
@@ -134,18 +134,18 @@ To get a better picture of what this all can do for us, let's dig a little deepe
 Machine learning is a method of data analysis that automates analytical model building. It has an inherently different approach: rather than pushing commands by a programmer that would tell a computer how to solve a problem, it explains the problem and enforces learning to solve it on it without instructions. Resurging interest in machine learning is due to the fact that it works by learning to identify patterns in data and then make predictions from those patterns. These technologies are widely used in projects including spelling correction in web search engines, analysis of information from IoT devices, real-time language translation, etc.
 All used algorithms can be broadly classified as **supervised, unsupervised, and reinforcement learning**.
 
-*Supervised Machine Learning: works on predictions and searches for patterns on a given set of samples. Supervised Machine Learning Algorithms attempt to render relationships and dependencies between target prediction output and input features. In this, we start from input variables (x) and an output variable (Y) and try to map functions from the input to the output so that they establish a relationship which can be used for prediction.Common models: linear regression, random forest, support vector machines, nearest neighbour, etc. Supervised learning is commonly used in classification problems, such as digit recognition, speech recognition, diagnostics, identity fraud detection and regression problems such as weather forecasting, estimating life expectance, population growth prediction etc.
+* Supervised Machine Learning: works on predictions and searches for patterns on a given set of samples. Supervised Machine Learning Algorithms attempt to render relationships and dependencies between target prediction output and input features. In this, we start from input variables (x) and an output variable (Y) and try to map functions from the input to the output so that they establish a relationship which can be used for prediction.Common models: linear regression, random forest, support vector machines, nearest neighbour, etc. Supervised learning is commonly used in classification problems, such as digit recognition, speech recognition, diagnostics, identity fraud detection and regression problems such as weather forecasting, estimating life expectance, population growth prediction etc.
 
-*Unsupervised Machine Learning: arranges data into clusters and describes its structure in order to make complex data look simple and organised. Unsupervised learning can be applied when there is no labelled data available for training. Examples are k-means for clustering problems used in recommender systems, customer segmentation and targeting marketing and dimensionality reduction problems for big data visualisation, feature elicitation, structure discovery etc.
+* Unsupervised Machine Learning: arranges data into clusters and describes its structure in order to make complex data look simple and organised. Unsupervised learning can be applied when there is no labelled data available for training. Examples are k-means for clustering problems used in recommender systems, customer segmentation and targeting marketing and dimensionality reduction problems for big data visualisation, feature elicitation, structure discovery etc.
 
-*Reinforcement Machine Learning: forwards an action according to the data point and later assess the decision. It utilises observations collected from interactions and takes actions so as to minimise the risk and maximise the benefits. It learns in an iterative fashion. Examples are Q-Learning, Deep Adversarial Networks, and Temporal Difference. Can be applied in Game AI, skill acquisition, learning tasks, robot navigation and real-time decision taking.
+* Reinforcement Machine Learning: forwards an action according to the data point and later assess the decision. It utilises observations collected from interactions and takes actions so as to minimise the risk and maximise the benefits. It learns in an iterative fashion. Examples are Q-Learning, Deep Adversarial Networks, and Temporal Difference. Can be applied in Game AI, skill acquisition, learning tasks, robot navigation and real-time decision taking.
 
 ## What will the future bring?
 
 So what will happen in the near future? Well, as most of us now, machine learning is currently one of the hottest topics in Computer Science. The reason stems from the seemingly unlimited use cases in which machine learning can play a role. Where are we going? 
 What will be the next big thing? Where will we be in ten years' time? 
 The truth is, we are most probably goint to be surprised again by the next hot topic.
-However, some things are not all that unlikely to play are role very soon.
+However, some things are not all that unlikely to play a role very soon.
 
 1. Quantum Computing: Machine learning tasks involve problems such as manipulating and classifying large numbers of vectors in high-dimensional spaces. The classical algorithms we currently use for solving such problems take time. Quantum computers will likely be very good at manipulating high-dimensional vectors in large tensor product spaces. Therefore, it is likely that both the development of supervised and unsupervised quantum machine learning algorithms will hugely increase the number of vectors and their dimensions exponentially more quickly than classical algorithms. This will likely result in a massive increase in the speed at which machine learning algorithms will run.
 2. Better Unsupervised Algorithms: As of now unsupervised learning is not yet being applied very successfully in industrial software. Therefore, we expect a lot of improvements, such as discovering hidden patterns in data, or a means towards an end, often called feature learning, to happen before we can apply it to solve "real problems". It is likely that advances in building smarter, unsupervised learning algorithms will lead to faster and more accurate outcomes.
@@ -213,6 +213,8 @@ opinion ;)
 
 "I am in the camp that is concerned about artificial intelligence. First the machines will do a lot of jobs for us and not be super intelligent. That should be positive if we manage it well. A few decades after that though the intelligence is strong enough to be a concern.  I agree with Elon Musk and some others on this and don’t understand why some people are not concerned."
 **Bill Gates**
+
+## Final Remarks
 
 OK, I was lying to you, but you know me I can't resist telling you what I think of it, so here it is:
 I can't help but think about what this means to us. Will machines take over the world? Are we 
