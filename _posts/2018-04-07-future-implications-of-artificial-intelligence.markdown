@@ -166,7 +166,7 @@ Yes folks, it's really easy. And this is again one of the reasons why everyone i
 While speaking about all that artificial intelligence and machine learning hype, we ofter forget 
 to address the most important question: Who needs it and why? I would like to address two major 
 users specifically, and only list some of the others:
-* Government agencies, such as public safety and utilities have a particular need for machine learning since they have multiple sources of data that can be mined for insights. Analyzing sensor data, for example, identifies ways to increase efficiency and save money. Machine learning can also help detect fraud and minimize identity theft. \\ \vspace{0.5cm}
+* Government agencies, such as public safety and utilities have a particular need for machine learning since they have multiple sources of data that can be mined for insights. Analyzing sensor data, for example, identifies ways to increase efficiency and save money. Machine learning can also help detect fraud and minimize identity theft.
 * Geospatial Data Organisations and Businesses: Imagine being able to train your GIS to perceive and understand the world, and give you insights based on your data. Today, geospatial experts are using machine learning for analyzing big datasets (what do these 2 million points actually mean?) and predictive analytics (e.g. forecasting risk).
 * Who else? Finacial Services, Health Care, Marketing and Sales, Transportation, and many more.
 
