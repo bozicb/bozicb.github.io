@@ -113,7 +113,7 @@ us later, Netflix).
 
 Let me also show you some head spinning facts and predictions, that will blow your mind, while 
 I'm at it:
-1. 1 Billion Video Cameras Connected to AI: according to NVIDIA by 2020 that manny cameras will be connected to AI and used in Smart Cities. When connected to AI, cameras can be used to recognize shapes, faces and even the emotions of individuals, which has varied applications: autonomous cars, video surveillance (traffic flow, crime monitoring), and consumer behavior analysis (reaction to ads for example).
+1. 1 Billion Video Cameras Connected to AI: according to NVIDIA by 2020 that many cameras will be connected to AI and used in Smart Cities. When connected to AI, cameras can be used to recognize shapes, faces and even the emotions of individuals, which has varied applications: autonomous cars, video surveillance (traffic flow, crime monitoring), and consumer behavior analysis (reaction to ads for example).
 2. 20% of Workforce Dedicated to Neural Networks: This figure comes from Gartner, a research company. The report says that, by 2020, companies will dedicate up to 20% of their workforce to neural networks which, because of the way AIs have been designed still need human intervention. Neural networks need to be maintained, monitored and retrained all the time to produce meaningful results.
 3. 85% of Customer Interactions Will be Managed Without Humans By 2020: Customers will be relying less on human interaction and more on chatbots, virtual advisors, and other digital assistants in their day-to-day business with various companies.
 4. 38% of Jobs in the U.S. Could be Automated: By the early 2030s, robots might replace 38% of human-staffed jobs in the U.S., according to a PwC report. In other countries, the numbers are very similar. At least that doesn’t mean that these jobs will disappear altogether by that date. For the most part, this indicates a certain vulnerability for some industries.
@@ -142,7 +142,7 @@ All used algorithms can be broadly classified as **supervised, unsupervised, and
 
 ## What will the future bring?
 
-So what will happen in the near future? Well, as most of us now, machine learning is currently one of the hottest topics in Computer Science. The reason stems from the seemingly unlimited use cases in which machine learning can play a role. Where are we going? 
+So what will happen in the near future? Well, as most of us know, machine learning is currently one of the hottest topics in Computer Science. The reason stems from the seemingly unlimited use cases in which machine learning can play a role. Where are we going? 
 What will be the next big thing? Where will we be in ten years' time? 
 The truth is, we are most probably goint to be surprised again by the next hot topic.
 However, some things are not all that unlikely to play a role very soon.
