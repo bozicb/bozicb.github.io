@@ -162,11 +162,12 @@ These are things I think can and should happen in the machine learning's near fu
 Yes folks, it's really easy. And this is again one of the reasons why everyone is talking about Data Science right now.
 
 ## Who needs ML and why is GeoDirectory important?
+
 While speaking about all that artificial intelligence and machine learning hype, we ofter forget 
 to address the most important question: Who needs it and why? I would like to address two major 
 users specifically, and only list some of the others:
 * Government agencies, such as public safety and utilities have a particular need for machine learning since they have multiple sources of data that can be mined for insights. Analyzing sensor data, for example, identifies ways to increase efficiency and save money. Machine learning can also help detect fraud and minimize identity theft. \\ \vspace{0.5cm}
-* Geospatial Data Organisations and Businesses: Imagine being able to train your GIS to perceive and understand the world, and give you insights based on your data. Today, geospatial experts are using machine learning for analyzing big datasets (what do these 2 million points actually mean?) and predictive analytics (e.g. forecasting risk). \\ \vspace{0.5cm}
+* Geospatial Data Organisations and Businesses: Imagine being able to train your GIS to perceive and understand the world, and give you insights based on your data. Today, geospatial experts are using machine learning for analyzing big datasets (what do these 2 million points actually mean?) and predictive analytics (e.g. forecasting risk).
 * Who else? Finacial Services, Health Care, Marketing and Sales, Transportation, and many more.
 
 Most AI and ML algorithms require location information, which is hence becoming more and more important, therefore GeoDirectory data could be a key variable.Here are some examples:
@@ -221,9 +222,9 @@ I can't help but think about what this means to us. Will machines take over the 
 in danger of being wiped out by killer robots? Please, of course not. At least not in the next 
 several hundred years, I don't think. But, there is real danger of people being controlled and 
 manipulated by misinformation and social media. And this is already happening. Just think of recent
-political developments and how they started. I don't want to start a politcal discussion here,
+political developments and how they started. Now, I don't want to start a politcal discussion here,
 but think about fake news which can be produced on the fly and tailored for the target groups 
-they are accessing. It is fairly easy to manipulate people into voting against their interests 
+they are addressing. It is fairly easy to manipulate people into voting against their interests 
 that way and this is where we need to take up responsibility and fight against misuse of 
 artificial intelligence technology that we originally designated to the greater good.
 
