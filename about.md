@@ -33,13 +33,14 @@ Awards
 
 Recent Talks
 ------------
-* PyCon Ireland 2018: Can we talk? Neural Machine Translation with Keras.
-* Predict Conference 2018: It's about Time - How to make sense of your time series data?
-* GeoDirectory Conference 2018: Future Implications of Artificial Intelligence
-* Predict Conference 2017: Time is on Your Side - Semantic Enrichment of Time Series
+* PyCon Ireland 2018: [Can we talk? Neural Machine Translation with Keras.](https://github.com/bozicb/presentations/raw/master/can_we_talk/Can_we_talk_.pdf)
+* Predict Conference 2018: [It's about Time - How to make sense of your time series data?](https://github.com/bozicb/presentations/raw/master/Bojan_Bozic_It_s_about_Time.pdf)
+* GeoDirectory Conference 2018: [Future Implications of Artificial Intelligence](https://vimeo.com/287975414)
+* Predict Conference 2017: [Time is on Your Side - Semantic Enrichment of Time Series](https://www.youtube.com/watch?v=nyWCRWKJUOg)
 
 Publications
 ------------
+
 2018
 ====
 * B. Božić, A. Rios, S.J. Delany: "Validation of Tagging Suggestion Models for a Hotel Ticketing Corpus"; International Conference on Information Integration and Web-based Applications & Services, Yogyakarta; 19.11.2012 - 21.11.2012; in: "Proceedings of the 20th International Conference on Information Integration and Web-based Applications & Services".
