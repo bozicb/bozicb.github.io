@@ -4,22 +4,9 @@ title: About
 permalink: /about/
 ---
 
-![That's me.](/images/profile.jpg){:height="20%" width="20%"}
+![That's me.](/images/predict2018_1.jpg){:height="20%" width="20%"}
 
-Dr. Bojan Božić is a researcher in computer science at Dublin Institute of Technology and has worked on Semantic Web, Machine Learning, and Data 
-Science technologies for almost a decade. He was a software engineer in Speech Recognition at Philips Speech Recognition Systems, a Scientist at the 
-Austrian Institute of Technology and a Lecturer at the University of Applied Sciences Burgenland and University of Vienna. At AIT's Safety and 
-Security department, he worked in leading roles in European research projects such as SANY (Sensor Web Enablement), TaToo (Tagging Tools for 
-Semantic Discovery), Europeana Creative (Cultural Inheritage), PELAGIOS (Linked Data), and C2-SENSE (Sensor Web and Interoperability). At Trinity 
-College he worked on the ALIGNED project, modelling data and software engineering processes through ontologies and annotations for the Dacura 
-platform. He joined CeADAR and the Dublin Institute of Technology to commence research in Data Science and approach innovation and collaboration 
-opportunities in new projects.
-
-During his studies he worked full-time at Philips Speech Recognition Systems as Software Developer and Project Manager for 4 years. In March 2009 
-he decided to start a career in Research and Science and became part of the Safety and Security department at AIT, where he worked in leading roles 
-in European research projects such as SANY (Sensor Web Enablement), TaToo (Tagging Tools for Semantic Discovery), Europeana Creative (Cultural 
-Inheritage), PELAGIOS (Linked Data), and C2-SENSE (Sensor Web and Interoperability). In 2015, he decided to join the Trinity College in Dublin and 
-work on the ALIGNED project (Semantic Web). His current research field is Semantic Web Technologies, Community Building, and Time Series Processing. 
+Dr. Bojan Božić is an Assistant Lecturer in Computer Science at TU Dublin and has worked on Semantic Web, Machine Learning, and Data Science technologies since 2010. He was a Software Development Engineer in Speech Recognition at Philips Speech Recognition Systems in Vienna, a Scientist at the Austrian Institute of Technology, an External Lecturer at the University of Applied Sciences Burgenland and University of Vienna, and a Research Fellow at Trinity College Dublin and the Centre for Applied Data Analytics Research at Dublin Institute of Technology. At AIT's Safety and Security department, he worked in leading roles in European research projects such as SANY (Sensor Web Enablement), TaToo (Tagging Tools for Semantic Discovery), Europeana Creative (Cultural Inheritage), PELAGIOS (Linked Data), and C2-SENSE (Sensor Web and Interoperability). At Trinity College he worked on the H2020 project ALIGNED, modelling data and software engineering processes through ontologies and annotations for the Dacura platform. He joined CeADAR and the Dublin Institute of Technology to commence research in Data Science and approach innovation and collaboration opportunities in new projects and is now lecturing, performing leading research and colaborating on several academic and industrial research projects. His current research interests are Semantic Web, Machine Learning, and Natural Language Processing. 
 
 Links
 -----
@@ -28,7 +15,8 @@ Links
 
 Memberships and Reviews
 -----------------------
-* Information Integration and Web-based Applications and Services (Program Committee Member)
+* Irish Conference on Artificial Intelligence and Cognitive Science (Program Committee) 
+* Information Integration and Web-based Applications and Services (Program Committee)
 * Journal of Knowledge Management (Reviewer)
 * Journal of Science and Technology Policy Management (Reviewer)
 * Journal of Environmental Modeling and Software (Reviewer)
@@ -37,15 +25,31 @@ Memberships and Reviews
 * Open Geospatial Consortium (Member)
 * 21st International Congress on Modelling and Simulation (Session Organiser)
 * 2nd International Workshop on Computational History and Data-Driven Humanities (Co-chair)
-* NumFOCUS Community Member
+* NumFOCUS Diversity and Inclusion Committee (Member)
 
 Awards
 ------
 * Winner of the Web Intelligence Summer School Hackathon 2014
 
+Recent Talks
+------------
+* PyCon Ireland 2018: Can we talk? Neural Machine Translation with Keras.
+* Predict Conference 2018: It's about Time - How to make sense of your time series data?
+* GeoDirectory Conference 2018: Future Implications of Artificial Intelligence
+* Predict Conference 2017: Time is on Your Side - Semantic Enrichment of Time Series
+
 Publications
 ------------
+2018
+====
+* B. Božić, A. Rios, S.J. Delany: "Validation of Tagging Suggestion Models for a Hotel Ticketing Corpus"; International Conference on Information Integration and Web-based Applications & Services, Yogyakarta; 19.11.2012 - 21.11.2012; in: "Proceedings of the 20th International Conference on Information Integration and Web-based Applications & Services".
+* R. Brennan, B. Božić, O. Gavin, M. Solanki: "ALIGNED MetaModel Overview"; In: K. Feeney et. al. (eds) Engineering Agile Big Data Systems; 2018; ISBN 9788770220163. 
+* K. Barry, K. Feeney, G. Mendel-Gleason, B. Božić: "Is It Joyce We Are Reading? Non-Fiction, Authorship, and Digital Humanities"; In: Ebury K., Fraser J. (eds) Joyce's Non-Fiction Writings. Palgrave Macmillan, Cham; 2018; pp 93-107; ISBN 978-3-319-72241-2. 
 
+2017
+====
+* B. Božić, G. Mendel-Gleason, C. Debruyne, D. O'Sullivan: Computational History and Data-Driven Humanities - Second IFIP WG 12.7 International Workshop, CHDDH 2016, Dublin, Ireland, May 25, 2016, Revised Selected Papers. IFIP Advances in Information and Communication Technology 482, 2016, ISBN 978-3-319-46223-3. 
+* M. Solanki, B. Božić, M. Freudenberg, D. Kontokostas, C. Dirschl, R. Brennan: "Enabling Combined Software and Data Engineering at Web-Scale: The ALIGNED Suite of Ontologies."; International Semantic Web Conference (2) 2016: 195-203. 
 
 2016
 ====
