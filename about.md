@@ -11,7 +11,7 @@ Dr. Bojan Božić is an Assistant Lecturer in Computer Science at TU Dublin and 
 Links
 -----
 * [PhD Thesis](http://othes.univie.ac.at/32976/)
-* [CV](https://ceadar.dit.ie/bojan.bozic/bojan_bozic.pdf)
+* [CV](CV.pdf)
 
 Memberships and Reviews
 -----------------------
