@@ -1,4 +1,4 @@
-`---
+---
 layout: post
 title: "Trip Report ISWC 2018"
 date: 2018-12-01 00:05:00 +0000
@@ -28,7 +28,7 @@ The success can also be derived from the statistics of this year's ISWC:
 * Posters and Demos 38 and 39.
 * 14 industry presentations.
 
-This shows as well that Semantic Web at a very usable stage now.
+This shows as well that Semantic Web technologies have a very high level of usability now.
 
 ## Semantic Web is now Knowledge Graphs
 ## Other Emerging Topcs
@@ -38,3 +38,25 @@ This shows as well that Semantic Web at a very usable stage now.
 ## What are the Conclusions?
 
 [ISWC]: http://iswc2018.semanticweb.org/
+
+{% if page.comments %}
+<div id="disqus_thread"></div>
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://bozicb-github-io.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+{% endif %}
