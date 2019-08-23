@@ -40,6 +40,7 @@ Recent Talks
 
 Publications
 ------------
+
 2019
 ====
 * M. Solanki, B. Božić, C. Dirschl, R. Brennan: "Towards a knowledge driven framework for bridging the gap between software and data engineering". Journal of Systems and Software 149: 476-484 (2019)
