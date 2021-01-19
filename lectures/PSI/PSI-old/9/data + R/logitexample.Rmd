@@ -1,0 +1,37 @@
+---
+title: "Logistic Regression"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r}
+library(aod)
+mydata <- read.csv("https://stats.idre.ucla.edu/stat/data/binary.csv")
+## view the first few rows of the data
+head(mydata)
+summary(mydata)
+
+sapply(mydata, sd)
+## two-way contingency table of categorical outcome and predictors we want
+## to make sure there are not 0 cells
+xtabs(~admit + rank, data = mydata)
+
+```
+```{r}
+#convert rank to a factor to indicate that rank should be treated as a categorical variable.
+mydata$rank <- factor(mydata$rank)
+mylogit <- glm(admit ~ gre + gpa + rank, data = mydata, family = "binomial")
+summary(mylogit)
+coef(mylogit)
+
+aod::wald.test(b = coef(mylogit), Sigma = vcov(mylogit),Terms=4:6)
+```
+
+

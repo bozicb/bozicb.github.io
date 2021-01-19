@@ -1,0 +1,466 @@
+---
+title: "Assignment 2"
+date: "10/28/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(ggplot2)
+
+library(pastecs) #For creating descriptive statistic summaries
+library(ggplot2) #For creating histograms with more detail than plot
+library(semTools) #For skewness and kurtosis
+
+```
+
+# Q1
+
+```{r}
+library(ggplot2)
+temp <- c(91,56,75,68,50,39,98)
+accidents <- c(2,9,7,6,6,10,1) 
+accTemp <- data.frame(temp, accidents)
+scatter <- ggplot(accTemp, aes(temp, accidents))
+scatter + geom_point() + labs(x = "Temperature", y = "Total accidednts") + geom_smooth(method = "lm", colour = "Red", se = F) 
+```
+
+*Reporting*
+
+Correlation between variables in terms of positive, negative ; strong weak.
+
+# Q2
+
+
+```{r}
+#We will allocate the histogram to a variable to allow use to manipulate it
+maths <- c(50,54,56,59,60,62,61,65,67,71,71,74)
+stat <- c(22,25,34,28,26,30,32,30,28,34,36,40)
+scoreSet <- data.frame(maths, stat)
+gg <- ggplot(scoreSet, aes(x=maths))
+#Change the label of the x axis
+gg <- gg + labs(x="Maths")
+#manage binwidth and colours
+gg <- gg + geom_histogram(binwidth=2, colour="black", aes(y=..density.., fill=..count..))
+gg <- gg + scale_fill_gradient("Count", low="#DCDCDC", high="#7C7C7C")
+
+#adding a normal curve
+#use stat_function to compute a normalised score for each value of tpcoiss
+#pass the mean and standard deviation
+#use the na.rm parameter to say how missing values are handled
+gg <- gg + stat_function(fun=dnorm, color="red",args=list(mean=mean(scoreSet$maths, na.rm=TRUE), sd=sd(scoreSet$maths, na.rm=TRUE)))
+
+#to display the graph request the contents of the variable be shown
+gg
+
+
+#Create a qqplot
+qqnorm(scoreSet$maths)
+
+qqline(scoreSet$maths) #show a line on theplot
+
+
+pastecs::stat.desc(scoreSet$maths, basic=F)
+
+#We can make our decision based on the value of the standardized score for skew and kurtosis
+#We divide the skew statistic by the standard error to get the standardized score
+#This will indicate if we have a problem
+tpskew<-semTools::skew(scoreSet$maths)
+tpkurt<-semTools::kurtosis(scoreSet$maths)
+tpskew[1]/tpskew[2]
+
+tpkurt[1]/tpkurt[2]
+
+zmaths<- abs(scale(scoreSet$maths))
+
+FSA::perc(as.numeric(zmaths), 1.96, "gt")
+
+```
+
+*Reporting*
+
+Is the data normal?!
+
+
+Example format:
+Maths was assessed for normality. Visual inspection of the histogram and QQ-Plot identified kurtosis. The standardized score for skewness (-0.02)  and standardized score for kurtosis (-0.57) are within acceptable range of normality using the criteria proposed by West, Finch and Curran (1996). All the standardized scores for scores achieved in maths fall within the bounds of +/- 3.29, using the guidance of Field, Miles and Field (2013) the data can be considered to a normal distribution (m=62.5, sd=7.35, n=12). 
+
+
+**The same format is expected for all the subsequent report of normality check**
+
+```{r}
+#We will allocate the histogram to a variable to allow use to manipulate it
+gg <- ggplot(scoreSet, aes(x=stat))
+
+#Change the label of the x axis
+gg <- gg + labs(x="stat")
+
+#manage binwidth and colours
+gg <- gg + geom_histogram(binwidth=2, colour="black", aes(y=..density.., fill=..count..))
+gg <- gg + scale_fill_gradient("Count", low="#DCDCDC", high="#7C7C7C")
+
+#adding a normal curve
+#use stat_function to compute a normalised score for each value of tpcoiss
+#pass the mean and standard deviation
+#use the na.rm parameter to say how missing values are handled
+gg <- gg + stat_function(fun=dnorm, color="red",args=list(mean=mean(scoreSet$stat, na.rm=TRUE), sd=sd(scoreSet$stat, na.rm=TRUE)))
+
+#to display the graph request the contents of the variable be shown
+gg
+
+
+#Create a qqplot
+qqnorm(scoreSet$stat)
+
+qqline(scoreSet$stat) #show a line on theplot
+
+
+pastecs::stat.desc(scoreSet$stat, basic=F)
+
+#We can make our decision based on the value of the standardised score for skew and kurtosis
+#We divide the skew statistic by the standard error to get the standardised score
+#This will indicate if we have a problem
+tpskew<-semTools::skew(scoreSet$stat)
+tpkurt<-semTools::kurtosis(scoreSet$stat)
+tpskew[1]/tpskew[2]
+
+tpkurt[1]/tpkurt[2]
+
+zstat<- abs(scale(scoreSet$stat))
+
+FSA::perc(as.numeric(zstat), 1.96, "gt")
+
+```
+*Conclusion about the correlation test*
+Both variables are normally distributed. Hence Pearson correlation is selected. 
+
+```{r}
+scatter <- ggplot(scoreSet, aes(maths, stat))
+scatter + geom_point() + labs(x = "Score in Maths", y = "Score in Stats") + geom_smooth(method = "lm", colour = "Red", se = F) 
+
+stats::cor.test(scoreSet$maths, scoreSet$stat, method='pearson')
+```
+*Reporting Pearson*
+The relationship between maths score and stats score was investigated using a
+Pearson correlation. A strong positive correlation was found (r = 3.99 ; n = 12 ; p < :001).
+
+
+# Q3
+
+```{r}
+heartdisease <- read.csv("heartdisease.csv")
+```
+
+
+```{r}
+gg <- ggplot(heartdisease, aes(x=Chol))
+
+gg <- gg + labs(x="Cholesterol level")
+
+gg <- gg + geom_histogram(binwidth=2, colour="black", aes(y=..density.., fill=..count..))
+gg <- gg + scale_fill_gradient("Count", low="#DCDCDC", high="#7C7C7C")
+
+
+gg <- gg + stat_function(fun=dnorm, color="red",args=list(mean=mean(heartdisease$Chol, na.rm=TRUE), sd=sd(heartdisease$Chol, na.rm=TRUE)))
+
+gg
+```
+```{r}
+qqnorm(heartdisease$Chol)
+
+qqline(heartdisease$Chol) #show a line on theplot
+
+
+#stat.desc is a function from pastecs - make sure you include the basic switch=F to ensure you don't get scienfitic notation
+pastecs::stat.desc(heartdisease$Chol, basic=F)
+
+
+tpskew<-semTools::skew(heartdisease$Chol)
+tpkurt<-semTools::kurtosis(heartdisease$Chol)
+tpskew[1]/tpskew[2]
+
+tpkurt[1]/tpkurt[2]
+
+zchol<- abs(scale(heartdisease$Chol))
+
+FSA::perc(as.numeric(zchol), 1.96, "gt")
+FSA::perc(as.numeric(zchol), 3.29, "gt")
+
+
+```
+
+Only 0.33% of data is outlier. so Chol can be considered as approximate normal. 
+
+*Report normality as per format*
+
+
+```{r}
+gg <- ggplot(heartdisease, aes(x=RestBP))
+
+#Change the label of the x axis
+gg <- gg + labs(x="BP level")
+
+gg <- gg + geom_histogram(binwidth=2, colour="black", aes(y=..density.., fill=..count..))
+gg <- gg + scale_fill_gradient("Count", low="#DCDCDC", high="#7C7C7C")
+
+
+gg <- gg + stat_function(fun=dnorm, color="red",args=list(mean=mean(heartdisease$RestBP, na.rm=TRUE), sd=sd(heartdisease$RestBP, na.rm=TRUE)))
+
+#to display the graph request the contents of the variable be shown
+gg
+
+qqnorm(heartdisease$RestBP)
+
+qqline(heartdisease$RestBP) #show a line on theplot
+
+
+pastecs::stat.desc(heartdisease$RestBP, basic=F)
+
+
+tpskew<-semTools::skew(heartdisease$RestBP)
+tpkurt<-semTools::kurtosis(heartdisease$RestBP)
+tpskew[1]/tpskew[2]
+
+tpkurt[1]/tpkurt[2]
+
+zchol<- abs(scale(heartdisease$RestBP))
+
+FSA::perc(as.numeric(zchol), 1.96, "gt")
+FSA::perc(as.numeric(zchol), 3.29, "gt")
+
+```
+.66% of data is outlier. So data is approximate normal.
+
+*Report normality as per format*
+
+
+
+```{r}
+gg <- ggplot(heartdisease, aes(x=MaxHR))
+
+#Change the label of the x axis
+gg <- gg + labs(x="BP level")
+
+#manage binwidth and colours
+gg <- gg + geom_histogram(binwidth=2, colour="black", aes(y=..density.., fill=..count..))
+gg <- gg + scale_fill_gradient("Count", low="#DCDCDC", high="#7C7C7C")
+
+
+gg <- gg + stat_function(fun=dnorm, color="red",args=list(mean=mean(heartdisease$MaxHR, na.rm=TRUE), sd=sd(heartdisease$MaxHR, na.rm=TRUE)))
+
+#to display the graph request the contents of the variable be shown
+gg
+
+qqnorm(heartdisease$MaxHR)
+
+qqline(heartdisease$MaxHR) #show a line on theplot
+
+
+pastecs::stat.desc(heartdisease$MaxHR, basic=F)
+
+
+tpskew<-semTools::skew(heartdisease$MaxHR)
+tpkurt<-semTools::kurtosis(heartdisease$MaxHR)
+tpskew[1]/tpskew[2]
+
+tpkurt[1]/tpkurt[2]
+
+
+zchol<- abs(scale(heartdisease$MaxHR))
+
+FSA::perc(as.numeric(zchol), 1.96, "gt")
+FSA::perc(as.numeric(zchol), 3.29, "gt")
+
+```
+
+
+
+Data is approximate normal. 
+
+*Report normality as per format*
+
+
+
+# Q4
+
+```{r}
+scatter <- ggplot(heartdisease, aes(Chol, RestBP))
+scatter + geom_point() + labs(x = "Chol", y = "BP") + geom_smooth(method = "lm", colour = "Red", se = F) 
+
+stats::cor.test(heartdisease$Chol, heartdisease$RestBP, method='pearson')
+```
+
+*Report Pearson correlation*
+
+
+```{r}
+gg <- ggplot(heartdisease, aes(x=Oldpeak))
+
+gg <- gg + labs(x="BP level")
+
+gg <- gg + geom_histogram(binwidth=2, colour="black", aes(y=..density.., fill=..count..))
+gg <- gg + scale_fill_gradient("Count", low="#DCDCDC", high="#7C7C7C")
+
+gg <- gg + stat_function(fun=dnorm, color="red",args=list(mean=mean(heartdisease$Oldpeak, na.rm=TRUE), sd=sd(heartdisease$Oldpeak, na.rm=TRUE)))
+
+gg
+
+qqnorm(heartdisease$Oldpeak)
+
+qqline(heartdisease$Oldpeak) #show a line on theplot
+
+pastecs::stat.desc(heartdisease$Oldpeak, basic=F)
+
+tpskew<-semTools::skew(heartdisease$Oldpeak)
+tpkurt<-semTools::kurtosis(heartdisease$Oldpeak)
+tpskew[1]/tpskew[2]
+
+tpkurt[1]/tpkurt[2]
+
+zchol<- abs(scale(heartdisease$Oldpeak))
+
+FSA::perc(as.numeric(zchol), 1.96, "gt")
+FSA::perc(as.numeric(zchol), 3.29, "gt")
+```
+Both skewness and kurtosis are not within acceptable range. So data is not considered as normal. 
+
+*Report normality as per format*
+
+
+```{r}
+scatter <- ggplot(heartdisease, aes(Chol, Oldpeak))
+scatter + geom_point() + labs(x = "Chol", y = "BP") + geom_smooth(method = "lm", colour = "Red", se = F) 
+
+stats::cor.test(heartdisease$Chol, heartdisease$Oldpeak, method='kedall')
+
+```
+
+
+*Reporting kendalls correlation as per format*
+
+
+
+# Q5
+```{r}
+hepatitis <- read.csv("hepatitis.data")
+
+colnames(hepatitis) <- c("Class", "AGE", "SEX", "STEROID", "ANTIVIRALS",
+  "FATIGUE", "MALAISE", "ANOREXIA", "LIVER BIG", "LIVER FIRM", "SPLEN PALPABLE",
+  "SPIDERS", "ASCITES", "VARICES","BILIRUBIN","ALK PHOSPHATE", "SGOT","ALBMIN",
+  "PROTIME", "HISTOLOGY")
+
+
+hepatitis$BILIRUBIN <- as.numeric(hepatitis$BILIRUBIN)
+hepatitis$SGOT <- as.numeric(hepatitis$SGOT)
+hepatitis$`ALK PHOSPHATE` <- as.numeric(hepatitis$`ALK PHOSPHATE`)
+hepatitis$`LIVER FIRM` <- as.character(hepatitis$`LIVER FIRM`)
+hepatitis$HISTOLOGY <- as.numeric(hepatitis$HISTOLOGY)
+hepatitis$STEROID <- as.numeric(hepatitis$STEROID)
+
+
+hepatitis <- replace(hepatitis, hepatitis == "?", NA)
+```
+
+Check biluribin for normality
+
+```{r}
+pastecs::stat.desc(hepatitis$BILIRUBIN, basic=F)
+
+gg <- ggplot(hepatitis, aes(x=BILIRUBIN))
+
+gg <- gg + labs(x="Bilirubin")
+
+gg <- gg + geom_histogram(binwidth=2, colour="black", aes(y=..density.., fill=..count..))
+gg <- gg + scale_fill_gradient("Count", low="#DCDCDC", high="#7C7C7C")
+
+gg <- gg + stat_function(fun=dnorm, color="red",args=list(mean=mean(hepatitis$BILIRUBIN, na.rm=TRUE), sd=sd(hepatitis$BILIRUBIN, na.rm=TRUE)))
+
+gg
+
+qqnorm(hepatitis$BILIRUBIN)
+
+qqline(hepatitis$BILIRUBIN) #show a line on theplot
+
+pastecs::stat.desc(hepatitis$BILIRUBIN, basic=F)
+
+tpskew<-semTools::skew(hepatitis$BILIRUBIN)
+tpkurt<-semTools::kurtosis(hepatitis$BILIRUBIN)
+tpskew[1]/tpskew[2]
+
+tpkurt[1]/tpkurt[2]
+
+zchol<- abs(scale(hepatitis$BILIRUBIN))
+
+FSA::perc(as.numeric(zchol), 1.96, "gt")
+FSA::perc(as.numeric(zchol), 3.29, "gt")
+```
+
+BILIRUBIN is not normally distributed. So Mann whiteny test is selected. 
+
+
+*Report normality as per format*
+
+
+```{r}
+wilcox.test(hepatitis$BILIRUBIN~hepatitis$HISTOLOGY,data = hepatitis)
+```
+*Report Mann whitney test*
+
+```{r}
+pastecs::stat.desc(hepatitis$STEROID, basic=F)
+
+#skewness and kurtosis from semTools with standard error 
+skew<-semTools::skew(hepatitis$STEROID)
+kurt<-semTools::kurtosis(hepatitis$STEROID)
+
+#We divide the skew statistic by the standard error to get the standardised score
+skew[1]/skew[2]
+kurt[1]/kurt[2]
+
+#We will allocate the histogram to a variable to allow use to manipulate it
+gg <- ggplot(hepatitis, aes(x=STEROID)) + labs(x="STEROID")
+
+gg <- gg + geom_histogram(binwidth=2, colour="black", aes(y=..density.., fill=..count..))
+gg <- gg + scale_fill_gradient("Count", low="#DCDCDC", high="#7C7C7C")
+
+gg <- gg + stat_function(fun=dnorm, color="red",args=list(mean=mean(hepatitis$STEROID, na.rm=TRUE), sd=sd(hepatitis$STEROID, na.rm=TRUE)))
+
+gg
+
+#Create a qqplot
+qqnorm(hepatitis$STEROID)
+qqline(hepatitis$STEROID, col=2) #show a line on the plot
+
+FSA::perc(as.numeric(zchol), 1.96, "gt")
+FSA::perc(as.numeric(zchol), 3.29, "gt")
+```
+
+*Report normality as per format*
+
+```{r}
+wilcox.test(hepatitis$STEROID~hepatitis$HISTOLOGY,data = hepatitis)
+```
+*Report Mann whitney test as per format*
+
+#Q6
+
+Mention null hypothesis and alternate hypothesis(H0,H1)
+
+It is expected to write a hypothesis to compare two variables.
+
+Perform a suitable test based on normality of the ALK PHOSPHATE. 
+
+Report your finding.
+
+#Q7
+a.
+1. Check distribution of Biluribin.
+2. Mann whitney test
+3. Report the test
+
+b.
+1. Since both variables are categorical variables it is expected to conduct chi-square test. 
+

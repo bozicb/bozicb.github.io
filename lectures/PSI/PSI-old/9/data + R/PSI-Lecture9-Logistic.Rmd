@@ -1,0 +1,77 @@
+---
+title: "Logistic Regression"
+author: "HTML"
+date: "10 November 2018"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+#Read in the data 
+
+```{r}
+#load the libraries needed
+
+library(AutoModel)
+library(Epi)
+library(rcompanion)
+library(stargazer)
+library(foreign)
+
+mydata <- read.spss("youthcohort.sav")
+
+#Check your proportions for bias - are these representative?
+table(mydata$satmath)
+
+```
+
+###Build baseline model with gender and parental education level as predictors
+```{r}
+#Make sure categorical data is used as factors
+
+logmodel1 <- glm(satmath ~ s1gender+s1pared, data = mydata, na.action = na.exclude, family = binomial())
+
+#Summary of the model with co-efficients
+stargazer(logmodel1, type="text")
+#Full summary of the model
+summary(logmodel1)
+
+#Chi-square plus significance
+lmtest::lrtest(logmodel1)
+
+#Pseudo Rsquared plus Chi-square of the model
+rcompanion::nagelkerke(logmodel1,restrictNobs=TRUE)
+
+#Exponentiate the co-efficients
+exp(coefficients(logmodel1))
+
+
+#Calculate confusion matrix
+AutoModel::classification_table(logmodel1, mydata$satmath)
+#Output the sensitivity, specificity, and ROC plot
+
+Epi::ROC(form=mydata$satmath ~ mydata$s1gender+mydata$s1pared, plot="ROC")
+                      
+
+
+
+
+
+
+#Chi-square and Pseudo R2 calculation for information
+modelChi <- logmodel1$null.deviance - logmodel1$deviance
+modelChi
+pseudo.R2 <- modelChi / logmodel1$null.deviance
+pseudo.R2
+Chidf <- logmodel1$df.null - logmodel1$df.residual
+chisq.prob <- 1 - pchisq(modelChi, Chidf)
+chisq.prob
+
+
+
+
+
+```

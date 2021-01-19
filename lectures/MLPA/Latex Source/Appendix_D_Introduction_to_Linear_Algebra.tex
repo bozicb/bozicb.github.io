@@ -1,0 +1,349 @@
+\documentclass[xcolor={table}]{beamer}
+\usepackage{fleqn}
+\usepackage{graphicx}
+\usepackage{coordsys} %for \numbline commander
+
+%Setup appearance:
+\usetheme{Darmstadt}
+\usefonttheme[onlylarge]{structurebold}
+\setbeamerfont*{frametitle}{size=\normalsize,series=\bfseries}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{bibliography item}{[\theenumiv]}
+
+% Standard packages
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\usepackage{multirow}
+\usepackage{subfigure}
+\usepackage{pbox}
+\usepackage{arydshln}
+\usepackage{pifont}
+\usepackage{cancel}
+\usepackage{rotating} % for sideways headings
+
+% Source Code packages
+\usepackage{algorithm2e}
+\usepackage{algorithmic}
+
+\DeclareSymbolFont{extraup}{U}{zavm}{m}{n}
+\DeclareMathSymbol{\varclub}{\mathalpha}{extraup}{84}
+\DeclareMathSymbol{\varspade}{\mathalpha}{extraup}{85}
+\DeclareMathSymbol{\varheart}{\mathalpha}{extraup}{86}
+\DeclareMathSymbol{\vardiamond}{\mathalpha}{extraup}{87}
+
+%%% This section command that adds a big page with section dividers
+\usepackage{xifthen}% provides \isempty test
+\newcommand{\SectionSlide}[2][]{
+	\ifthenelse{\isempty{#1}}
+		{\section{#2}\begin{frame} \begin{center}\begin{huge}#2\end{huge}\end{center}\end{frame}}
+		{\section[#1]{#2}\begin{frame} \begin{center}\begin{huge}#2\end{huge}\end{center}\end{frame}}
+}
+%Extends the section slide to to include a shortened section title for the navigation bar as a second parameter
+\newcommand{\SectionSlideShortHeader}[3][]{
+	\ifthenelse{\isempty{#1}}
+		{\section[#3]{#2}\begin{frame} \begin{center}\begin{huge}#2\end{huge}\end{center}\end{frame}}
+		{\section[#1]{#2}\begin{frame} \begin{center}\begin{huge}#3\end{huge}\end{center}\end{frame}}
+}
+
+\newcommand{\refer}[1]{\footnote{#1}}
+\newcommand{\GW}{\text{\textit{Guess-Who~}}}
+\newcommand{\keyword}[1]{\alert{\textbf{#1}}\index{#1}}
+\newcommand{\firstkeyword}[1]{\textbf{#1}\index{#1}}
+\newcommand{\indexkeyword}[1]{\alert{\textbf{#1}\index{#1}}}
+\newcommand{\featN}[1]{\textsc{#1}}
+\newcommand{\featL}[1]{\textit{'#1'}}
+ \newcommand{\ourRef}[1]{\ref{#1} $^{\text{\tiny[\pageref{#1}]}}$}
+ \newcommand{\ourEqRef}[1]{\eqref{#1}$^{\text{\tiny[\pageref{#1}]}}$}
+  
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\argmin}{argmin}
+
+\title{Appendix D Introduction to Linear Algebra}
+	\author{John D. Kelleher and Brian Mac Namee and Aoife D'Arcy}
+	\institute{}
+	\date{}
+
+\begin{document}
+\begin{frame}
+	\titlepage
+\end{frame}
+\begin{frame}
+	 \tableofcontents
+\end{frame}
+
+\section{Basic Types}
+
+\begin{frame}
+\begin{itemize}
+	\item A \keyword{scalar} is a single number. 
+	\item A \keyword{matrix} is a 2-dimensional ($n \times m$) array of numbers. 
+	\begin{equation*}
+		\mathbf{C} = 
+		\begin{bmatrix}
+			c_{1,1} & c_{1,2} & \dots & c_{1,m}\\
+			c_{2,1} & c_{2,2} & \dots & c_{2,m}\\
+			\dots & \dots & \dots & \dots\\
+			c_{n,1} & c_{1,2} & \dots & c_{n,m}\\
+		\end{bmatrix}
+	\end{equation*}	
+	\item Each element in a matrix is identified by two indices, the row index and then the column index. For example, 
+	\begin{equation*}
+	\mathbf{C}[2,2]=c_{2,2}
+	\end{equation*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+	\item A \keyword{vector} is an array of numbers, organized in a specific order. 
+	\item A vector can be either a column vector or a row vector. 
+	\item For example, $\mathbf{a}$ is a column vector, and $\mathbf{b}$ is a row vector.	
+	\begin{alignat*}{2}
+		\mathbf{a} &= 
+		\begin{bmatrix}
+			a_1\\
+			a_2\\
+			\dots\\
+			a_n\\
+		\end{bmatrix} \notag\\
+		\mathbf{b} &= 
+		\begin{bmatrix}
+			b_1 & b_2 & \dots & b_m\\
+		\end{bmatrix} \notag\\
+	\end{alignat*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Each element in a vector is identified by a single index. For example: 
+	\begin{alignat*}{2}
+	\mathbf{a}[2]&=a_{2}\\
+	\mathbf{b}[2]&=b_{2}\\
+	\end{alignat*}
+\item Vectors are often treated as special cases of matrices:
+	\begin{itemize}
+		\item a column vector can be thought of as a matrix with just one column,
+		\item a row vector can be thought of as a matrix with a single row.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{Transpose}
+
+\begin{frame}
+\begin{itemize}
+ \item The transpose of a vector converts a column vector to a row vector, and vice versa. 
+ \item If $\mathbf{a}$ is a vector, then we write $\mathbf{a}^\intercal$ for the transpose of $\mathbf{a}$. 
+ \end{itemize}
+ \end{frame}
+ 
+ \begin{frame}
+ \begin{example}
+	\begin{alignat*}{2}
+		\mathbf{a} &= 
+		\begin{bmatrix}
+			a_1\\
+			a_2\\
+			\dots\\
+			a_n\\
+		\end{bmatrix} \notag\\
+		\mathbf{a}^\intercal &= 
+		\begin{bmatrix}
+			a_1 & a_2 & \dots & a_n\\
+		\end{bmatrix} \notag\\
+	\end{alignat*}
+\end{example}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item The transpose of a matrix flips the matrix on its main diagonal
+	\begin{itemize}
+		\item the main diagonal of a matrix contain all the elements whose indices are equal, e.g., $c_{1,1}, c_{2,2},$ and so on.
+	\end{itemize} 
+\item To create the transpose of a matrix, take the first row of the matrix and write it as the first column; then write the second row of the matrix and write it as the second column; and so on. 
+\end{itemize}
+\end{frame}
+\begin{frame}
+\begin{example} 
+	\begin{alignat*}{2}
+		\mathbf{C} &= 
+		\begin{bmatrix}
+			c_{1,1} & c_{1,2} & c_{1,3} & c_{1,4}\\
+			c_{2,1} & c_{2,2} & c_{2,3} & c_{2,4}\\
+			c_{3,1} & c_{3,2} & c_{3,3} & c_{3,4}\\
+		\end{bmatrix} \notag\\
+		\mathbf{C}^\intercal &= 
+		\begin{bmatrix}
+			c_{1,1} & c_{2,1} & c_{3,1}\\
+			c_{1,2} & c_{2,2} & c_{3,2}\\
+			c_{1,3} & c_{2,3} & c_{3,3}\\
+			c_{1,4} &c_{2,4} & c_{3,4}\\
+		\end{bmatrix} \notag\\
+	\end{alignat*}
+\end{example}
+\end{frame}
+
+\section{Multiplication}
+
+\begin{frame}
+\begin{itemize}
+	\item In general, there is no special symbol used to denote a matrix product. 
+	\item We write the matrix product by writing the names of the two matrices side by side. 
+\end{itemize}
+\begin{example}
+	For example, $\mathbf{DE}$ is the way we write the product for two matrices $\mathbf{D}$ and $\mathbf{E}$, although sometimes a \emph{dot} may be inserted between the two matrices (a $\cdot$ is frequently used to highlight that one or both of the matrices is a vector):
+ 
+\begin{equation*}
+\mathbf{DE} = \mathbf{D} \cdot \mathbf{E}
+\end{equation*}
+\end{example}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item To multiply one matrix by another, the number of columns in the matrix on the left of the product must equal the number of rows in the matrix on the right. 
+\item If this condition does not hold, then the product of the two matrices is not defined. 
+\end{itemize}
+\end{frame}
+\begin{frame}
+\begin{example}
+\begin{itemize}
+	\item if $\mathbf{D}$ is a $2 \times 3$ matrix (i.e., a matrix with 2 rows and 3 columns) and  $\mathbf{E}$ is a $3 \times 3$ matrix, then
+	\begin{itemize}
+		\item the matrix product $\mathbf{DE}$ is defined, because the number of columns in $\mathbf{D}$ (3) equals the number of rows in $\mathbf{E}$ (3). 
+		\item the matrix product $\mathbf{ED}$ is not defined because the number of columns in $\mathbf{E}$ (3) is not equal to the number of rows in $\mathbf{D}$ (2). 
+	\item the matrix product $\mathbf{ED}^\intercal$ is defined because $\mathbf{D}^\intercal$ is a $3\times2$ matrix and the number of columns is $\mathbf{E}$ (3) equals the number of rows in $\mathbf{D}^\intercal$ (3).
+	\end{itemize}
+\end{itemize}
+\end{example}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+	\item The result of multiplying two matrices is another matrix whose dimensions are equal to the number of rows in the left matrix and the number of columns in the right matrix. 
+	\item Multiplying a $2 \times 3$ matrix by a $3 \times 3$ matrix results in a $2 \times 3$. 
+	\item Each value in the resulting matrix is calculated as follows, where $i$ iterates over the columns in the first matrix ($\mathbf{D}$) and the rows in the second matrix ($\mathbf{E}$)
+\begin{equation*}
+\mathbf{DE}_{r,c} = \sum_i \mathbf{D}[r,i] \times \mathbf{E}[i,c]
+\end{equation*} 
+\end{itemize}
+\end{frame}
+\begin{frame}
+\begin{example}
+	\begin{alignat*}{2}
+		\mathbf{D} &= 
+		\begin{bmatrix}
+			d_{1,1} & d_{1,2} & d_{1,3}\\
+			d_{2,1} & d_{2,2} & d_{2,3}\\
+		\end{bmatrix}
+		\quad
+		\mathbf{E} &= 
+		\begin{bmatrix}
+			e_{1,1} & e_{1,2} & e_{1,3} \\
+			e_{2,1} & e_{2,2} & e_{2,3}\\
+			e_{3,1} & e_{3,2} & e_{3,3}\\
+		\end{bmatrix} \notag\\
+	\end{alignat*}
+	{\tiny
+	\begin{alignat*}{2}
+		&\mathbf{DE} = \\
+		&\begin{bmatrix}
+			(d_{1,1} e_{1,1}) {+}  (d_{1,2} e_{2,1}) {+}  (d_{1,3} e_{3,1}) &  
+			(d_{1,1} e_{1,2}) {+}  (d_{1,2} e_{2,2}) {+}  (d_{1,3} e_{3,2}) &
+			(d_{1,1} e_{1,3}) {+}  (d_{1,2} e_{2,3}) {+}  (d_{1,3} e_{3,3}) \\
+			(d_{2,1} e_{1,1}) {+}  (d_{2,2} e_{2,1}) {+}  (d_{2,3} e_{3,1}) &  
+			(d_{2,1} e_{1,2}) {+}  (d_{2,2} e_{2,2}) {+}  (d_{2,3} e_{3,2}) &
+			(d_{2,1} e_{1,3}) {+}  (d_{2,2} e_{2,3}) {+}  (d_{2,3} e_{3,3}) \\
+		\end{bmatrix} \notag\\
+	\end{alignat*}
+	}
+\end{example}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+	\item The product of two vectors of the same dimensions is known as the \keyword{dot product}. 
+\end{itemize}
+	\begin{example}
+		\begin{itemize}
+			\item if $\mathbf{F}$ and $\mathbf{G}$ are row vectors which have dimensions $1 \times 3$
+\begin{alignat*}{2}
+\mathbf{F} & =
+\begin{bmatrix}
+f_1 & f_2 & f_3\\
+\end{bmatrix}
+\quad
+\mathbf{G} & =
+\begin{bmatrix}
+g_1 & g_2 & g_3\\
+\end{bmatrix}\notag\\
+\end{alignat*}
+		\item the \keyword{dot product} of $\mathbf{F}$ and $\mathbf{G}$, written $\mathbf{F} \cdot \mathbf{G}$ is equivalent to the matrix product $\mathbf{F}\mathbf{G}^\intercal$
+\begin{alignat*}{2}
+\mathbf{F} & =
+\begin{bmatrix}
+f_1 & f_2 & f_3\\
+\end{bmatrix}
+\quad
+\mathbf{G}^\intercal & =
+\begin{bmatrix}
+g_1\\
+g_2\\
+g_3\\
+\end{bmatrix}\notag\\
+\mathbf{F} \cdot \mathbf{G} & =
+\begin{matrix}
+(f_1 g_1) + (f_2 g_2) + (f_3 g_3)
+\end{matrix}
+\end{alignat*}
+\end{itemize}
+\end{example}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item In \keyword{deep learning} we frequently use an elementwise product of two matrices, known as the \keyword{Hadamard product}. 
+\item The symbol $\odot$ denotes the Hadamard product, and the Hadamard product of two matrices $\mathbf{D}$ and $\mathbf{E}$ is written $\mathbf{D} \odot \mathbf{E}$. 
+\item The Hadamard product assumes that both matrices have the same dimensions, and it produces a matrix with the same dimensions as the two inputs. 
+\item Each value in the resulting matrix is the product of the corresponding cells in the two input matrices: 
+\begin{equation*}
+\mathbf{DE}_{r,c} = \mathbf{D}[r,c] \times \mathbf{E}[r,c]
+\end{equation*} 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{example}
+	\begin{alignat*}{2}
+		\mathbf{D} &= 
+		\begin{bmatrix}
+			d_{1,1} & d_{1,2} \\
+			d_{2,1} & d_{2,2} \\
+		\end{bmatrix}
+		\quad
+		\mathbf{E} &= 
+		\begin{bmatrix}
+			e_{1,1} & e_{1,2} \\
+			e_{2,1} & e_{2,2} \\
+		\end{bmatrix} \notag\\
+	\end{alignat*}
+	\begin{alignat*}{2}
+		&\mathbf{D} \odot \mathbf{E} = \begin{bmatrix}
+			(d_{1,1} e_{1,1}) &  (d_{1,2} e_{1,2})\\
+			(d_{2,1} e_{2,1}) &  (d_{2,2} e_{2,2})\\
+		\end{bmatrix} \notag
+	\end{alignat*}
+\end{example}
+\end{frame}
+
+\SectionSlide{Summary}
+
+\begin{frame}
+	\tableofcontents
+\end{frame}
+
+\end{document}

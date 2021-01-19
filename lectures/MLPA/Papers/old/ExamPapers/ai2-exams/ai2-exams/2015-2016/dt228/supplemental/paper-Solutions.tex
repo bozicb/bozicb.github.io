@@ -1,0 +1,575 @@
+% Filename  : samplepaper.tex
+% Purpose   : A sample exam paper to demonstrate how to use the 'ditpaper'
+%             TeX class.
+% Author    : Emmet Caulfield
+% Revision  : $Id: samplepaper.tex 2 2006-02-19 20:34:45Z emmet $
+% Repository: $HeadURL: http://svn.netrogen.lan/tex-ditpaper/trunk/samplepaper.tex $
+%
+
+% 'nosolution' (default) and 'solution' toggle the inclusion of solutions
+% in the output. The tag solution, below, is replaced by 'sed' 
+% in the Makefile to cause both the paper and the solutions to be produced.
+\documentclass[solution]{ditpaper}
+%\documentclass[solution]{ditpaper}
+
+
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{rotating}
+\usepackage{amsmath}
+
+
+% These must be set or bizarre defaults will be used:
+\facility{Kevin Street, Dublin 8}
+\course{BSc. (Honours)\\Degree in Computer Science}
+\examcode{R228/419C \& R211C/419C}
+\stage{Year 4}
+\session{Supplemental Examinations 2016}
+\title{Artificial Intelligence II [CMPU4011]}
+\examiners{Dr. John Kelleher\\
+Dr. Deirdre. Lillis\\
+Mr. P. Collins (DT228 External)\\
+Mr. T. Nolan (DT211 External)}
+\examdate{}
+\examtime{Duration: 2 Hours}
+\instructions{Question 1 is \textbf{compulsory}\par{} Answer Question 1 (40 marks) \textbf{and}\par{} any 2 Other Questions (30 marks each).}
+
+
+\begin{document}
+
+
+%aima chapters 18
+% inductive bias, learning theory - supervised/unsupervised, overfitting, lazy/eager learner, classification v regression, false positive v false negatives, linear separability, consistency, evaluation
+
+\question
+\begin{enumerate}
+	\item Explain what is meant by \textbf{inductive learning}.
+	\marks{5}
+	\begin{answer}
+		Inductive Learning involves the process of learning by example where a system tries to induce a general rule from a set of observed instances
+	\end{answer}
+	\item  In the context of machine learning, explain what is meant by the term \textbf{inductive bias} and illustrate your explanation using examples of inductive biases used by machine learning algorithms.
+	\marks{15}
+	\begin{answer}
+		\begin{itemize}
+				\item The inductive bias of a learning algorithm:
+				\begin{enumerate}
+					\item is a set of assumption about what the true function we are trying to model looks like.
+					\item defines the set of hypotheses that a learning algorithm considers when it is learning.
+					\item guides the learning algorithm to prefer one hypothesis (i.e. the hypothesis that best fits with the assumptions) over the others. 
+					\item is a necessary prerequisite for learning to happen because inductive learning is an ill posed problem. 
+				\end{enumerate}	
+				\item An example of the specific inductive bias introduced by particular machine learning algorithms would be good here. E.g.:		
+				\begin{itemize}
+					\item Maximum margin: when drawing a boundary between two classes, attempt to maximize the width of the boundary. This is the bias used in Support Vector Machines. The assumption is that distinct classes tend to be separated by wide boundaries.
+					\item Minimum cross-validation error: when trying to choose among hypotheses, select the hypothesis with the lowest cross-validation error.
+				\end{itemize}
+			\end{itemize}
+	\end{answer}
+
+	\item Table \ref{tab:testSetPredictions} shows the predictions made for a categorical target feature by a model for a test dataset. 
+\begin{enumerate} 
+\item Create the \textbf{confusion matrix} for the results listed in Table \ref{tab:testSetPredictions}.
+\marks{5}
+\begin{answer}
+%\begin{tabular}{c >{}r @{\hspace{0.7em}} !{\color{black}\vrule} c @{\hspace{0.4em}} c @{\hspace{0.7em}}}
+\begin{tabular}{c c c  c }
+   ~ & ~ &  \multicolumn{2}{c}{Prediction} \\
+  ~ & ~ &  \textit{true} &  \textit{false} \\
+  \hline
+  \multirow{2}{*}{\parbox{1.1cm}{\raggedleft Target}}  & \textit{true} & $1$	&	$3$ \\
+  & \textit{false} & $2$	&	$14$ 
+\end{tabular}
+\end{answer}
+
+\item Calculate the \textbf{classification accuracy} for the results listed in Table \ref{tab:testSetPredictions}.
+\begin{equation*}
+classification~accuracy = \frac{\left(TP + TN\right)}{\left(TP + TN + FP + FN\right)}
+\end{equation*}
+\marks{5}
+\begin{answer}
+Classification accuracy can be calculated as
+\begin{alignat*}{2}
+classification~rate & = \frac{\left(TP + TN\right)}{\left(TP + TN + FP + FN\right)} \\
+ & = \frac{\left(1 + 14\right)}{\left(1 + 14 + 3 + 2\right)} \\ 
+ & = 0.75
+\end{alignat*}
+\end{answer}
+
+\item Calculate the \textbf{average class accuracy (harmonic mean)} for the results listed in Table \ref{tab:testSetPredictions}. (During this calculation you should round all long floats to 4 places of decimal.)
+\begin{equation*}
+average~class~accuracy_{HM} = \displaystyle \frac{1}{\displaystyle \frac{1}{|levels(t)|}\sum_{l \in levels(t)} \frac{1}{recall_l}} \\
+\end{equation*}
+\marks{10}
+\begin{answer}
+Note, in this solution we round all figures to four places of decimal.
+First, we calculate the recall for each target level:
+\begin{alignat*}{3}
+recall_{\textit{true}} & = \frac{1}{4} & = 0.25 \\
+recall_{\textit{false}} & = \frac{14}{16} & = 0.875
+\end{alignat*}
+Then we can calculate a harmonic mean as
+\begin{alignat*}{2}
+average~class~accuracy_{HM} & = \displaystyle \frac{1}{\displaystyle \frac{1}{|levels(t)|}\sum_{l \in levels(t)} \frac{1}{recall_l}} \\
+& = \displaystyle \frac{1}{\displaystyle \frac{1}{2}\left( \frac{1}{0.25} + \frac{1}{0.875} \right) } \\
+& = \displaystyle \frac{1}{\displaystyle \frac{1}{2}\left( 4 + 1.1429 \right) } \\
+& = 0.38889
+\end{alignat*}
+\end{answer}
+	\end{enumerate}
+\end{enumerate} 
+
+
+
+
+\begin{table}[htb]
+	\caption{The predictions made by a model for a categorical target on a test set of 20 instances  }
+	\label{tab:testSetPredictions}
+\begin{center}
+	{\setlength{\tabcolsep}{2em}
+	\begin{tabular}{cc}
+		\hline
+		\begin{minipage}{0.3\textwidth}
+			\raggedright
+				{\setlength{\tabcolsep}{1em}
+			\begin{tabular}{@{\extracolsep{\fill}}c c c@{}}
+ID	 & Target & Prediction \\
+\hline
+1	&	false	&	false \\
+2	&	false	&	false \\
+3	&	false	&	false \\
+4	&	false	&	false \\
+5	&	false	&	true \\
+6	&	false	&	false \\
+7	&	false	&	false \\
+8	&	false	&	false \\
+9	&	false	&	false \\
+10	&	false	&	false \\
+\hline
+			\end{tabular}
+			}
+		\end{minipage}
+		&
+		\begin{minipage}{0.3\textwidth}
+			\raggedleft
+				{\setlength{\tabcolsep}{1em}
+			\begin{tabular}{@{\extracolsep{\fill}}c c c@{}}
+ID	 & Target	& Prediction \\
+\hline
+11	&	false	&	false \\
+12	&	false	&	true \\
+13	&	false	&	false \\
+14	&	false	&	false \\
+15	&	false	&	false \\
+16	&	false	&	false \\
+17	&	true	&	false \\
+18	&	true	&	false \\
+19	&	true	&	false \\
+20	&	true	&	true \\
+\hline
+			\end{tabular}
+			}
+		\end{minipage}\\
+	\end{tabular}
+	}
+\end{center}
+\end{table}
+
+\clearpage
+
+
+\newpage
+
+%Q2
+% knn and CBR 
+% information theory, entropy, Decision Trees, Inductive logic programming
+\question 
+\begin{enumerate}
+	\item You are building a recommender system for an large online shop that has a stock of over 100,000 items. In this domain the behaviour of individuals is captured in terms of what items they have bought or not bought. 
+	\begin{enumerate}
+			\item Table \ref{tab:similaritymetrics} (below) lists 3 different models of similarity that work on binary data, similar to the data in this domain (\textbf{Russell-Rao}, \textbf{Sokal-Michener}, and \textbf{Jaccard}). Given that there are over 100,000 items available in the store which of these models of similarity (\textbf{Russell-Rao}, \textbf{Sokal-Michener}, or \textbf{Jaccard}) is most appropriate for this domain. Give an explanation for your choice.
+	\marks{5}
+	\begin{answer}
+In a domain where there are 100,000's of items co-absenses aren't that meaningful. For example, you may be in a domain where there are so many items most people haven't seen, listened to, bought or visited the vast majority of them and as a result the majority of features will be co-absenses. The technical term to describe dataset where most of the features have zero values is \textbf{sparse data}. In these situations you should use a metric that ignore co-absenses and if your features are binary then you should use the \textbf{Jaccard similarity} index. 
+	\end{answer}
+			\item Table \ref{tab:binarydata} (on the next page) lists the behaviour of two individuals in this domain for a subset of the items that at least one of the individuals has bought; and,  Table \ref{tab:binaryquery} (also, on the next page) lists the behaviour of a customer \textbf{Q} that you want to generate recommendations for. Assuming that the recommender system uses the similarity metric you selected in Part (i) and that the system will recommend to person Q the items that the person most similar to person Q has already bought but that person Q has not bought, \textbf{which item or items will the system recommend to person Q?} Support you answer by showing your calculations and explaining your analysis of the results.
+	\marks{10}
+	\begin{answer}
+		Using a similarity metric the higher the value returned by the metric the more similar the two items are.\\
+		Assuming the student chose the \textbf{Jaccard} similarity metric then Person A is more similar to Q than Person B: $Jaccard(Q,A) = \frac{2}{2+1}= 0.6667$, $Jaccard(Q,B) = \frac{1}{4}= 0.25$. As a result the system will recommend item \textbf{498}.\\
+		If the student selected one of the other similarity metrics for part (a), the supporting calculations should be:
+\begin{itemize}
+	\item Russell-Rao(Q,A)$=\frac{2}{5}= 0.4$
+	\item Russell-Rao(Q,B)$=\frac{1}{5}= 0.2$
+	\item Sokal-Michener(Q,A)$=\frac{4}{5}= 0.8$
+	\item Sokal-Michener(Q,B)$=\frac{2}{5}= 0.4$	
+\end{itemize}
+		As is evident from these calculations regardless of which similarity metric is used Person A is more similar to Q than Person B. So the system will recommend item \textbf{498} regardless of which similarity metric is used.
+	\end{answer}
+     \end{enumerate}
+	\begin{table}[h]
+				\renewcommand{\arraystretch}{1.5}
+	\caption{Similarity Metrics for Binary Data.}
+	\label{tab:similaritymetrics}
+	\begin{center}
+	\begin{tabular}{rl}
+	\hline
+	Russell-Rao(X,Y) & $= \frac{CP(X,Y)}{P}$\\
+	Sokal-Michener(X,Y) & $=\frac{CP(X,Y)+CA(X,Y)}{P}$\\
+	Jaccard(X,Y) & $=\frac{CP(X,Y)}{CP(X,Y)+PA(X,Y)+AP(X,Y)}$\\
+	\hline
+	\end{tabular}
+	\end{center}
+	\end{table}
+
+		% Information theory and Decision Trees
+	\item Table \ref{tab:id3datacensus} on the next page lists a sample of data from a census. There are four descriptive features in this dataset (\textsc{Age}, \textsc{Education}, \textsc{Marital Status}, \textsc{Occupation}) and the target feature \textsc{Annual Income} has 3 levels (\textit{$<$$25K$},  \textit{$25K$--$50K$}, \textit{$>$$50K$}). Note, Table \ref{tab:info-eqs}, also on the next page, lists some equations that you may find useful for this question.
+		\begin{enumerate}
+			\item Calculate the \textsc{entropy} for this dataset.
+			\marks{5}
+				\begin{answer}
+	\begin{equation*}
+	\begin{alignedat}{12}
+&H\left(\textsc{Annual Income}, \mathcal{D} \right)\\
+		&= - \sum_{l \in \left\{\begin{subarray}{1}\textit{$<$$25K$},\\ \textit{$25K$--$50K$}, \\ \textit{$>$$50K$} \\\end{subarray}\right\}} P(\textsc{An. Inc.}=l) \times log_2 \left(P(\textsc{An. Inc.}=l)\right)\\
+		&= -\left(\left( \frac{2}{8} \times log_2 \left(\frac{2}{8}\right)\right) + \left(\frac{5}{8} \times log_2 \left( \frac{5}{8} \right)\right) + \left(\frac{1}{8} \times log_2 \left( \frac{1}{8} \right)\right)\right)\\
+		&= 1.2988~bits
+	\end{alignedat}
+\end{equation*}
+				\end{answer}
+%			\item Calculate the \textsc{Gini index} for this dataset.
+%			\marks{4}
+%				\begin{answer}
+%		\begin{equation*}
+%	\begin{alignedat}{2}
+%&Gini\left(\textsc{Annual Income}, \mathcal{D} \right)\\
+%		&= 1 - \sum_{l \in \left\{\begin{subarray}{1}\textit{$<$$25K$},\\ \textit{$25K$--$50K$}, \\ \textit{$>$$50K$} \\\end{subarray}\right\}} P(\textsc{An. Inc.}=l)^2\\
+%		&= 1 -  \left( \left(\frac{2}{8}\right)^2 + \left(\frac{5}{8}\right)^2 + \left(\frac{1}{8}\right)^2\right) = 0.5313
+%	\end{alignedat}
+%\end{equation*}
+%				\end{answer}			
+			\item When building a decision tree, the easiest way to handle a continuous feature is to define a threshold around which splits will be made. What would be the optimal threshold to split the continuous \textsc{Age} feature (use information gain based on entropy as the feature selection measure)?
+			\marks{10}
+				\begin{answer}
+First sort the instances in the dataset according to the \textsc{Age} feature, as shown in the following table.
+\vspace{1em}
+\begin{scriptsize}
+					\begin{tabular}{@{}cccccc@{}}
+\hline
+\textsc{ID} & \textsc{Age} & \textsc{Annual Income}\\
+\hline
+$3$ & $18$ &  $<$$25K$\\
+$6$ & $24$ &  $<$$25K$\\
+$4$ & $28$ &  $25K$--$50K$\\
+$5$ & $37$ &  $25K$--$50K$\\
+$1$ & $39$ &  $25K$--$50K$\\
+$8$ & $40$ &  $>$$50K$\\
+$2$ & $50$ &  $25K$--$50K$\\
+$7$ & $52$ &  $25K$--$50K$\\
+\hline
+					\end{tabular}
+\end{scriptsize}
+\vspace{1em}
+\noindent Based on this ordering, the mid-points in the \textsc{Age} values of  instances that are adjacent in the new ordering but that have different target levels define the possible threshold points. These points are $26$, $39.5$, and $45$.
+
+We calculate the information gain for each of these possible threshold points using the entropy value we calculated in part (a) of this question ($1.2988$ bits) as follows:
+
+\vspace{1em}
+\noindent\begin{scriptsize}
+%\resizebox{\linewidth}{!}{
+{\setlength{\tabcolsep}{0.9em}
+\begin{tabular}{cccccc}
+\hline
+Split by &              &  & Partition &  & Info.\\
+Feature & Partition  & Instances & Entropy & Rem. & Gain \\
+\hline
+\multirow{2}{*}{$>$$26$} & $\mathcal{D}_1$  & $\mathbf{d}_3,\mathbf{d}_6$ & 0 & \multirow{2}{*}{0.4875} & \multirow{2}{*}{0.8113}\\
+ & $\mathcal{D}_2$ & $\mathbf{d}_1,\mathbf{d}_2,\mathbf{d}_4,\mathbf{d}_5,\mathbf{d}_7,\mathbf{d}_8$ & 0.6500 &  & \\
+\hline
+\multirow{2}{*}{$>$$39.5$} & $\mathcal{D}_3$ & $\mathbf{d}_1,\mathbf{d}_3,\mathbf{d}_4,\mathbf{d}_5,\mathbf{d}_6$ & 0.9710 & \multirow{2}{*}{0.9456} & \multirow{2}{*}{0.3532}\\
+& $\mathcal{D}_4$ & $\mathbf{d}_2,\mathbf{d}_7,\mathbf{d}_8$ & 0.9033 &  & \\
+\hline
+\multirow{2}{*}{$>$$45$} & $\mathcal{D}_5$ & $\mathbf{d}_1,\mathbf{d}_3,\mathbf{d}_4,\mathbf{d}_5,\mathbf{d}_6,\mathbf{d}_8$ & 1.4591 & \multirow{2}{*}{1.0944} & \multirow{2}{*}{0.2044}\\
+& $\mathcal{D}_6$ & $\mathbf{d}_2,\mathbf{d}_7$ & 0 &  & \\
+\hline
+\end{tabular}
+}
+%}
+\end{scriptsize}
+\vspace{1em}
+
+The threshold \textsc{Age} $>26$ has the highest information gain, and consequently, it is the best threshold to use if we are splitting the dataset using the \textsc{Age} feature.
+				\end{answer}
+\end{enumerate}
+
+\clearpage
+
+\begin{table}[!tb]
+\caption{A dataset showing the behaviour of two individuals in an online shop. A 1 indicates that the person bought the item a 0 indicates that they did not.}
+\label{table:binaryDataset}
+\centering
+\begin{tabular}{  c  c  c  c  c  c }
+\hline
+Person ID & Item 107 & Item 498 & Item 7256 & Item 28063 & Item 75328\\
+\hline
+A  &  1 & 1 & 1 & 0 & 0\\
+B  &  1 & 0 & 0 & 1 & 1\\
+\hline 
+\end{tabular}
+\label{tab:binarydata}
+\end{table}
+
+\begin{table}[!tb]
+\caption{A query instance from the same domain as the examples listed in Table \ref{tab:binarydata}. A 1 indicates that the person bought the item a 0 indicates that they did not.}
+\label{table:binaryDataset}
+\centering
+\begin{tabular}{  c  c  c  c  c  c }
+\hline
+Person ID & Item 107 & Item 498 & Item 7256 & Item 28063 & Item 75328\\
+\hline
+Q  &  1 & 0 & 1 & 0 & 0\\
+\hline 
+\end{tabular}
+\label{tab:binaryquery}
+\end{table}
+
+\begin{table}[htb]
+\caption{Census data for the ID3 Algorithm Question}
+\label{tab:id3datacensus}
+\centerline{
+{\setlength{\tabcolsep}{0.1em}
+\noindent\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}cccccc@{}}
+\hline
+ &  &  & \textsc{Marital} &  & \textsc{Annual}\\
+\textsc{ID} & \textsc{Age} & \textsc{Education} & \textsc{Status} & \textsc{Occupation} & \textsc{Income}\\
+\hline
+$1$ & $39$ & bachelors & never married & transport & $25K$--$50K$\\
+$2$ & $50$ & bachelors & married & professional & $25K$--$50K$\\
+$3$ & $18$ & high school & never married & agriculture & $<$$25K$\\
+$4$ & $28$ & bachelors & married & professional & $25K$--$50K$\\
+$5$ & $37$ & high school & married & agriculture & $25K$--$50K$\\
+$6$ & $24$ & high school & never married & armed forces & $<$$25K$\\
+$7$ & $52$ & high school & divorced & transport & $25K$--$50K$\\
+$8$ & $40$ & doctorate & married & professional & $>$$50K$\\
+\hline
+\end{tabular*}
+}
+}
+\end{table}
+
+	\begin{table}[!hb]
+			\renewcommand{\arraystretch}{2}
+	\begin{center}
+	\caption{Equations from information theory.}
+	\label{tab:info-eqs}
+		\begin{tabular}{ll}
+	\hline
+	$H(\mathbf{f}, \mathcal{D})$ & $= -\displaystyle\sum_{l \in levels(f)} P(f=l) \times log_2(P(f=l))$\\
+	$rem(\mathbf{f}, \mathcal{D})$ & $=\displaystyle\sum_{l \in levels(f)} \frac{|\mathcal{D}_{f=l}|}{|\mathcal{D}|} \times H(t, \mathcal{D})$\\
+	$IG(\mathbf{d},\mathcal{D})$ & $=H(\mathbf{t}, \mathcal{D})-rem(\mathbf{d}, \mathcal{D})$\\
+	\hline
+	\end{tabular}
+	\end{center}
+	\end{table}		
+
+
+	\end{enumerate}
+
+\clearpage
+\newpage
+	
+%Q3 30 marks
+% basic probability 5
+% bayesian networks 10
+% bayesian learning  15
+
+\question Table \ref{tab:rest} lists a dataset of books and whether or not they were purchased by an individual (i.e., the feature \textsc{Purchased} is the target feature in this domain). 
+	\begin{enumerate}
+		\item Calculate the probabilities (to four places of decimal) that a \textbf{naive Bayes} classifier would use to represent this domain.
+		\marks{18}
+		\begin{answer}
+		A naive Bayes classifier would require the prior probability for each level of the target feature and the conditional probability for each level of each descriptive feature given each level of the target feature:
+		\begin{footnotesize}
+		\begin{tabular}{ll}
+		$P(Purchased=Yes)=0.4$ & $P(Purchased=No)=0.6$\\
+		$P(2nd Hand=True|Purchased=Yes)=0.5 $& $P(2nd Hand=True|Purchased=No)=0.5$\\
+		$P(2nd Hand=False|Purchased=Yes)=0.5 $& $P(2nd Hand=False|Purchased=No)=0.5$\\
+		$P(Genre=Literature\mid Purchased=Yes)= 0.25$ & $P(Genre=Literature\mid Purchased=No)=0.1667$\\
+		$P(Genre=Romance\mid Purchased=Yes)= 0.5$ & $P(Genre=Romance\mid Purchased=No)=0.3333$\\
+		$P(Genre=Science\mid Purchased=Yes)= 0.25$ & $P(Genre=Science\mid Purchased=No)=0.5$\\
+		$P(Price=Cheap\mid Purchased=Yes)= 0.5$ & $P(Price=Cheap\mid Purchased=No)=0.5$\\
+		$P(Price=Reasonable\mid Purchased=Yes)= 0.25$ & $P(Price=Reasonable\mid Purchased=No)=0.3333$\\
+		$P(Price=Expensive\mid Purchased=Yes)= 0.25$ & $P(Price=Expensive\mid Purchased=No)=0.1667$\\
+		\end{tabular}
+		\end{footnotesize}
+		\end{answer}
+		\item Assuming conditional independence between features given the target feature value, calculate the \textbf{probability} of each outcome (\textsc{Purchased}=Yes, and \textsc{Purchased}=No) for the following book (marks will be deducted if workings are not shown, round your results to four places of decimal)\\
+		\begin{center}
+		\textsc{2nd Hand}=False, \textsc{Genre}=Literature, \textsc{Cost}=Expensive
+		\end{center}
+		\marks{10}
+		\begin{answer}
+		The initial score for each outcome is calculated as follows:\\
+		$(Purchased=Yes) =  0.5 \times 0.25 \times 0.25 \times 0.4 = 0.0125$\\
+		$(Purchased=No) =  0.5 \times 0.1667 \times 0.1667 \times 0.6 = 0.0083$\\
+		However, these scores are not probabilities. To get real probabilities we must normalise these scores. The normalisation constant is calculated as follows:\\
+		$\alpha=0.0125+0.0083=0.0208$\\
+		The actual probabilities of each outcome is then calculated as:
+		$P(Purchased=Yes) =  \frac{0.0125}{0.0208}=(0.600961...)=0.6010$ \\
+		$P(Purchased=No) =  \frac{0.0083}{0.0208}=(0.399038...)=0.3990$\\
+		\end{answer}
+		\item What prediction would a \textbf{naive Bayes} classifier return for the 	above book?			\marks{2}
+		\begin{answer}
+		A naive Bayes classifier returns outcome with the maximum a posteriori probability as its prediction. In this instance the outcome \textsc{Purchased}=Yes is the MAP prediction and will be the outcome returned by a naive Bayes model.
+		\end{answer} 
+\end{enumerate}
+\begin{table}[h]
+%\begin{tiny}
+\begin{center}
+\caption{A dataset describing the a set of books and whether or not they were purchased by an individual.}
+\label{tab:rest}
+\vspace{0.5em}
+\begin{tabular}{lcccc}
+\hline
+ ID & \textsc{2nd Hand} & \textsc{Genre} & \textsc{Cost} & \textsc{Purchased} \\
+\hline
+$1$  & False & Romance & Expensive &  Yes\\
+$3$    & True & Romance & Cheap &   Yes\\
+$4$    & False & Science & Cheap &   Yes\\
+$10$ & True & Literature & Reasonable &   Yes\\
+$2$    & False & Science & Cheap &   No\\
+$5$    & False & Science & Expensive &   No\\
+$6$    & True & Romance & Reasonable &   No\\
+$7$    & True & Literature & Cheap &   No\\
+$8$    & False & Romance & Reasonable &   No\\
+$9$     & True & Science & Cheap &   No\\
+\hline
+\end{tabular}
+\end{center}
+%\end{tiny}
+\end{table}
+
+\clearpage
+
+%Q4
+%Linear Regression Neural Nets, SVMs, Ensemble Learning
+
+\question 
+	\begin{enumerate}
+\question A multivariate linear regression model has been built to predict the \textsc{heating load} in a residential building based on a set of descriptive features describing the characteristics of the building. Heating load is the amount of heat energy required to keep a building at a specified temperature, usually $65^{\circ}$ Fahrenheit, during the winter regardless of outside temperature. The descriptive features used are the overall surface area of the building, the height of the building, the area of the building's roof, and the percentage of wall area in the building that is glazed. This kind of model would be useful to architects or engineers when designing a new building. The trained model is
+\begin{alignat*}{2}
+\textsc{Heating~Load} = & -26.030 + 0.0497 \times \textsc{Surface~Area} \\ 
+& + 4.942\times \textsc{Height} - 0.090 \times \textsc{Roof~Area} \\ 
+& + 20.523 \times \textsc{Glazing~Area}
+\end{alignat*}
+Use this model to make predictions for each of the query instances shown in the Table \ref{tab:heating} on the next page.
+\marks{12}
+
+%\label{tab:astroOxyData}
+%\end{table}
+
+		\begin{answer}
+		Calculating the predictions made by the model simply involves inserting the descriptive features from each query instance into the prediction model. 
+		
+		\begin{description}
+		\item[1:] $-26.030 + 0.0497 \times 784.0 + 4.942\times 3.5 - 0.090 \times 220.5 + 20.523 \times 0.25$ \\
+		$= 15.5$
+		\item[2:] $-26.030+0.0497\times710.5+4.942\times3.0-0.09\times210.5+20.523\times0.10$ \\
+		$=7.2$ 
+%		\item[3:] $-26.03+0.0497\times563.5+4.942\times7.0-0.09\times122.5+20.523\times0.40$ \\
+%		$=33.8$
+%		\item[4:] $-26.03+0.0497\times637.0+4.942\times6.0-0.09\times147.0+20.523\times0.60$ \\
+%		$=34.4$
+		\end{description}
+		\end{answer}
+
+	
+\item A multivariate logistic regression model has been built to predict the propensity of shoppers to perform a repeat purchase of a free gift that they are given. The descriptive features used by the model are the age of the customer, the average amount of money the customer spends on each visit to the shop, and the average number of visits the customer makes to the shop per week. This model is being used by the marketing department to determine who should be given the free gift. The trained model is
+\begin{alignat*}{2}
+\textsc{Repeat~Purchase} = & -3.82398 - 0.02990   \times \textsc{Age} \\ 
+& + 0.74572 \times \textsc{Shop~Frequency}\\
+& + 0.02999 \times \textsc{Shop~Value}
+\end{alignat*}
+And, the logistic function is defined as:
+\begin{equation*}
+	logistic(x)=\frac{1}{1+e^{-x}}
+\end{equation*}
+Assuming that the \textit{yes} level is the positive level and the classification threshold is $0.5$, use this model to make predictions for each of the query instances shown in Table \ref{tab:logregress} on the next page.
+\marks{18}
+		\begin{answer}
+		Calculating the predictions made by the model simply involves inserting the descriptive features from each query instance into the prediction model. With this information, the predictions can be made as follows:
+				
+		\begin{description}
+		\item[1:] $Logistic(-3.82398+-0.0299\times56+0.74572\times1.6+0.02999\times109.32)$ \\
+		$=Logistic(-1.02672) =\frac{1}{1-e^{1.02672}}$\\
+		$=0.26372 \Rightarrow \textit{no}$
+		\item[2:] $Logistic(-3.82398+-0.0299\times21+0.74572\times4.92+0.02999\times11.28)$ \\
+		$=Logistic(-0.44465)  =\frac{1}{1-e^{0.44465}}$ \\
+		$=0.390633 \Rightarrow \textit{no}$
+		\item[3:] $Logistic(-3.82398+-0.0299\times48+0.74572\times1.21+0.02999\times161.19)$ \\
+		$=Logistic(0.477229)   =\frac{1}{1-e^{-0.477229}}$ \\
+		$=0.6205 \Rightarrow \textit{yes}$
+%		\item[4:] $Logistic(-3.82398+-0.0299\times37+0.74572\times0.72+0.02999\times170.65)$ \\
+%		$=Logistic(0.724432)   =\frac{1}{1-e^{0.-724432}}$ \\
+%		$=0.673582 \Rightarrow \textit{yes}$
+%		\item[5:] $Logistic(-3.82398+-0.0299\times32+0.74572\times1.08+0.02999\times165.39)$ \\
+%		$=Logistic(0.984644)   =\frac{1}{1-e^{-0.98464}}$ \\
+%		$=0.728029 \Rightarrow \textit{yes}$
+		\end{description}
+		\end{answer}
+\end{enumerate}
+
+
+\newpage
+
+\begin{table}[!hb]
+\caption{The queries for the multivariate linear regression \textsc{heating load} question}
+\label{tab:heating}
+{\setlength{\tabcolsep}{0.1em}
+\noindent\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}l r r r r@{}}
+\hline
+				 & \textsc{Surface} &  & \textsc{Roof} & \textsc{Glazing} \\
+				\textsc{ID} & \textsc{Area} & \textsc{Height} & \textsc{Area} & \textsc{Area} \\
+\hline
+		1 & 784.0 & 3.5 &	220.5 & 0.25	\\
+		2 & 710.5 & 3.0 &	210.5 & 0.10	\\
+%		3 & 563.5 & 7.0 &	122.5 & 0.40	\\
+%		4 & 637.0	 & 6.0 & 147.0 & 0.60	\\
+\hline
+\end{tabular*}
+}
+\end{table}
+
+
+
+%\begin{footnotesize}
+%{\setlength{\tabcolsep}{0.1em}
+%\noindent\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}} l r r r@{}}
+\begin{table}[!hb]
+\caption{The queries for the multivariate logistic regression question}
+\label{tab:logregress}
+\begin{center}
+\begin{tabular}{l r r r}
+\hline
+			 & ~ & \textsc{Shop}  & \textsc{Shop}\\
+				\textsc{ID} & \textsc{Age} & \textsc{Frequency}  & \textsc{Value}\\
+\hline
+1 & 56 & 1.60 & 109.32 \\ 
+2 & 21 & 4.92 & 11.28 \\  
+3 & 48 & 1.21 & 161.19 \\ 
+%4 & 37 & 0.72 & 170.65 \\ 
+%5 & 32 & 1.08 & 165.39 \\ 
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+%\end{tabular*}{}
+%}
+%\end{footnotesize}
+%\end{adjustwidth}
+
+
+
+
+
+\end{document}

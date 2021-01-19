@@ -1,0 +1,612 @@
+% Filename  : samplepaper.tex
+% Purpose   : A sample exam paper to demonstrate how to use the 'ditpaper'
+%             TeX class.
+% Author    : Emmet Caulfield
+% Revision  : $Id: samplepaper.tex 2 2006-02-19 20:34:45Z emmet $
+% Repository: $HeadURL: http://svn.netrogen.lan/tex-ditpaper/trunk/samplepaper.tex $
+%
+
+% 'nosolution' (default) and 'solution' toggle the inclusion of solutions
+% in the output. The tag solution, below, is replaced by 'sed' 
+% in the Makefile to cause both the paper and the solutions to be produced.
+\documentclass[solution]{ditpaper}
+%\documentclass[solution]{ditpaper}
+
+
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{rotating}
+\usepackage{amsmath}
+
+
+% These must be set or bizarre defaults will be used:
+\facility{Kevin Street, Dublin 8}
+\course{BSc. (Honours)\\Degree in Computer Science}
+\examcode{R228/419C}
+\stage{Year 4}
+\session{Supplemental Examinations 2015}
+\title{Artificial Intelligence II [CMPU4011]}
+\examiners{Dr. John Kelleher\\
+Dr. Deirdre. Lillis\\
+Mr. P. Collins}
+\examdate{}
+\examtime{Duration: 2 Hours}
+\instructions{Question 1 is \textbf{compulsory}\par{} Answer Question 1 (40 marks) \textbf{and}\par{} any 2 Other Questions (30 marks each).}
+
+
+\begin{document}
+
+
+%aima chapters 18
+% inductive bias, learning theory - supervised/unsupervised, overfitting, lazy/eager learner, classification v regression, false positive v false negatives, linear separability, consistency, evaluation
+
+\question
+\begin{enumerate}
+	\item Explain what is meant by \textbf{inductive learning}.
+	\marks{5}
+	\begin{answer}
+		Inductive Learning involves the process of learning by example where a system tries to induce a general rule from a set of observed instances
+	\end{answer}
+	\item  In the context of machine learning, explain what is meant by the term \textbf{inductive bias} and illustrate your explanation using examples of inductive biases used by machine learning algorithms.
+	\marks{15}
+	\begin{answer}
+		\begin{itemize}
+				\item The inductive bias of a learning algorithm:
+				\begin{enumerate}
+					\item is a set of assumption about what the true function we are trying to model looks like.
+					\item defines the set of hypotheses that a learning algorithm considers when it is learning.
+					\item guides the learning algorithm to prefer one hypothesis (i.e. the hypothesis that best fits with the assumptions) over the others. 
+					\item is a necessary prerequisite for learning to happen because inductive learning is an ill posed problem. 
+				\end{enumerate}	
+				\item An example of the specific inductive bias introduced by particular machine learning algorithms would be good here. E.g.:		
+				\begin{itemize}
+					\item Maximum margin: when drawing a boundary between two classes, attempt to maximize the width of the boundary. This is the bias used in Support Vector Machines. The assumption is that distinct classes tend to be separated by wide boundaries.
+					\item Minimum cross-validation error: when trying to choose among hypotheses, select the hypothesis with the lowest cross-validation error.
+				\end{itemize}
+			\end{itemize}
+	\end{answer}
+
+	\item Table \ref{tab:testSetPredictions} shows the predictions made for a categorical target feature by a model for a test dataset. 
+\begin{enumerate} 
+\item Create the \textbf{confusion matrix} for the results listed in Table \ref{tab:testSetPredictions}.
+\marks{5}
+\begin{answer}
+%\begin{tabular}{c >{}r @{\hspace{0.7em}} !{\color{black}\vrule} c @{\hspace{0.4em}} c @{\hspace{0.7em}}}
+\begin{tabular}{c c c  c }
+   ~ & ~ &  \multicolumn{2}{c}{Prediction} \\
+  ~ & ~ &  \textit{true} &  \textit{false} \\
+  \hline
+  \multirow{2}{*}{\parbox{1.1cm}{\raggedleft Target}}  & \textit{true} & $1$	&	$3$ \\
+  & \textit{false} & $2$	&	$14$ 
+\end{tabular}
+\end{answer}
+
+\item Calculate the \textbf{classification accuracy} for the results listed in Table \ref{tab:testSetPredictions}.
+\begin{equation*}
+classification~accuracy = \frac{\left(TP + TN\right)}{\left(TP + TN + FP + FN\right)}
+\end{equation*}
+\marks{5}
+\begin{answer}
+Classification accuracy can be calculated as
+\begin{alignat*}{2}
+classification~rate & = \frac{\left(TP + TN\right)}{\left(TP + TN + FP + FN\right)} \\
+ & = \frac{\left(1 + 14\right)}{\left(1 + 14 + 3 + 2\right)} \\ 
+ & = 0.75
+\end{alignat*}
+\end{answer}
+
+\item Calculate the \textbf{average class accuracy (harmonic mean)} for the results listed in Table \ref{tab:testSetPredictions}. (During this calculation you should round all long floats to 4 places of decimal.)
+\begin{equation*}
+average~class~accuracy_{HM} = \displaystyle \frac{1}{\displaystyle \frac{1}{|levels(t)|}\sum_{l \in levels(t)} \frac{1}{recall_l}} \\
+\end{equation*}
+\marks{10}
+\begin{answer}
+Note, in this solution we round all figures to four places of decimal.
+First, we calculate the recall for each target level:
+\begin{alignat*}{3}
+recall_{\textit{true}} & = \frac{1}{4} & = 0.25 \\
+recall_{\textit{false}} & = \frac{14}{16} & = 0.875
+\end{alignat*}
+Then we can calculate a harmonic mean as
+\begin{alignat*}{2}
+average~class~accuracy_{HM} & = \displaystyle \frac{1}{\displaystyle \frac{1}{|levels(t)|}\sum_{l \in levels(t)} \frac{1}{recall_l}} \\
+& = \displaystyle \frac{1}{\displaystyle \frac{1}{2}\left( \frac{1}{0.25} + \frac{1}{0.875} \right) } \\
+& = \displaystyle \frac{1}{\displaystyle \frac{1}{2}\left( 4 + 1.1429 \right) } \\
+& = 0.38889
+\end{alignat*}
+\end{answer}
+	\end{enumerate}
+\end{enumerate} 
+
+
+
+
+\begin{table}[htb]
+	\caption{The predictions made by a model for a categorical target on a test set of 20 instances  }
+	\label{tab:testSetPredictions}
+\begin{center}
+	{\setlength{\tabcolsep}{2em}
+	\begin{tabular}{cc}
+		\hline
+		\begin{minipage}{0.3\textwidth}
+			\raggedright
+				{\setlength{\tabcolsep}{1em}
+			\begin{tabular}{@{\extracolsep{\fill}}c c c@{}}
+ID	 & Target & Prediction \\
+\hline
+1	&	false	&	false \\
+2	&	false	&	false \\
+3	&	false	&	false \\
+4	&	false	&	false \\
+5	&	false	&	true \\
+6	&	false	&	false \\
+7	&	false	&	false \\
+8	&	false	&	false \\
+9	&	false	&	false \\
+10	&	false	&	false \\
+\hline
+			\end{tabular}
+			}
+		\end{minipage}
+		&
+		\begin{minipage}{0.3\textwidth}
+			\raggedleft
+				{\setlength{\tabcolsep}{1em}
+			\begin{tabular}{@{\extracolsep{\fill}}c c c@{}}
+ID	 & Target	& Prediction \\
+\hline
+11	&	false	&	false \\
+12	&	false	&	true \\
+13	&	false	&	false \\
+14	&	false	&	false \\
+15	&	false	&	false \\
+16	&	false	&	false \\
+17	&	true	&	false \\
+18	&	true	&	false \\
+19	&	true	&	false \\
+20	&	true	&	true \\
+\hline
+			\end{tabular}
+			}
+		\end{minipage}\\
+	\end{tabular}
+	}
+\end{center}
+\end{table}
+
+\clearpage
+
+
+\newpage
+
+%Q2
+% knn and CBR 
+% information theory, entropy, Decision Trees, Inductive logic programming
+\question 
+\begin{enumerate}
+	\item You are building a recommender system for an large online shop that has a stock of over 100,000 items. In this domain the behaviour of individuals is captured in terms of what items they have bought or not bought. 
+	\begin{enumerate}
+			\item Table \ref{tab:similaritymetrics} (below) lists 3 different models of similarity that work on binary data, similar to the data in this domain (\textbf{Russell-Rao}, \textbf{Sokal-Michener}, and \textbf{Jaccard}). Given that there are over 100,000 items available in the store which of these models of similarity (\textbf{Russell-Rao}, \textbf{Sokal-Michener}, or \textbf{Jaccard}) is most appropriate for this domain. Give an explanation for your choice.
+	\marks{5}
+	\begin{answer}
+In a domain where there are 100,000's of items co-absenses aren't that meaningful. For example, you may be in a domain where there are so many items most people haven't seen, listened to, bought or visited the vast majority of them and as a result the majority of features will be co-absenses. The technical term to describe dataset where most of the features have zero values is \textbf{sparse data}. In these situations you should use a metric that ignore co-absenses and if your features are binary then you should use the \textbf{Jaccard similarity} index. 
+	\end{answer}
+			\item Table \ref{tab:binarydata} (on the next page) lists the behaviour of two individuals in this domain for a subset of the items that at least one of the individuals has bought; and,  Table \ref{tab:binaryquery} (also, on the next page) lists the behaviour of a customer \textbf{Q} that you want to generate recommendations for. Assuming that the recommender system uses the similarity metric you selected in Part (i) and that the system will recommend to person Q the items that the person most similar to person Q has already bought but that person Q has not bought, \textbf{which item or items will the system recommend to person Q?} Support you answer by showing your calculations and explaining your analysis of the results.
+	\marks{10}
+	\begin{answer}
+		Using a similarity metric the higher the value returned by the metric the more similar the two items are.\\
+		Assuming the student chose the \textbf{Jaccard} similarity metric then Person A is more similar to Q than Person B: $Jaccard(Q,A) = \frac{2}{2+1}= 0.6667$, $Jaccard(Q,B) = \frac{1}{4}= 0.25$. As a result the system will recommend item \textbf{498}.\\
+		If the student selected one of the other similarity metrics for part (a), the supporting calculations should be:
+\begin{itemize}
+	\item Russell-Rao(Q,A)$=\frac{2}{5}= 0.4$
+	\item Russell-Rao(Q,B)$=\frac{1}{5}= 0.2$
+	\item Sokal-Michener(Q,A)$=\frac{4}{5}= 0.8$
+	\item Sokal-Michener(Q,B)$=\frac{2}{5}= 0.4$	
+\end{itemize}
+		As is evident from these calculations regardless of which similarity metric is used Person A is more similar to Q than Person B. So the system will recommend item \textbf{498} regardless of which similarity metric is used.
+	\end{answer}
+     \end{enumerate}
+	\begin{table}[h]
+				\renewcommand{\arraystretch}{1.5}
+	\caption{Similarity Metrics for Binary Data.}
+	\label{tab:similaritymetrics}
+	\begin{center}
+	\begin{tabular}{rl}
+	\hline
+	Russell-Rao(X,Y) & $= \frac{CP(X,Y)}{P}$\\
+	Sokal-Michener(X,Y) & $=\frac{CP(X,Y)+CA(X,Y)}{P}$\\
+	Jaccard(X,Y) & $=\frac{CP(X,Y)}{CP(X,Y)+PA(X,Y)+AP(X,Y)}$\\
+	\hline
+	\end{tabular}
+	\end{center}
+	\end{table}
+
+		% Information theory and Decision Trees
+		\item Table \ref{tab:id3data} (on the next page) lists a data set with of 6 examples described in terms of 3 binary descriptive features (\textbf{A}, \textbf{B}, and \textbf{C}) and a target feature (\textbf{Target}). You are asked to create a decision tree model using this data. \textbf{Which of the descriptive features will the ID3 decision tree induction algorithm choose as the feature for the root node of the decision tree?} Support you anwer with appropriate calculations and dicussions of your results. Note that Table \ref{tab:info-eqs} (below) lists some equations that you may find useful for this question.
+				\marks{15}		
+	\begin{table}[!hb]
+			\renewcommand{\arraystretch}{2}
+	\begin{center}
+	\caption{Equations from information theory.}
+	\label{tab:info-eqs}
+		\begin{tabular}{ll}
+	\hline
+	$H(\mathbf{f}, \mathcal{D})$ & $= -\displaystyle\sum_{l \in levels(f)} P(f=l) \times log_2(P(f=l))$\\
+	$rem(\mathbf{f}, \mathcal{D})$ & $=\displaystyle\sum_{l \in levels(f)} \frac{|\mathcal{D}_{f=l}|}{|\mathcal{D}|} \times H(t, \mathcal{D})$\\
+	$IG(\mathbf{d},\mathcal{D})$ & $=H(\mathbf{t}, \mathcal{D})-rem(\mathbf{d}, \mathcal{D})$\\
+	\hline
+	\end{tabular}
+	\end{center}
+	\end{table}		
+		\begin{answer}
+		The ID3 decision tree induction algorithm selects the decriptive feature with the highest information gain as the feature for the root node of the decision tree.  The first step in calculating information gain is to calculate the entropy for the entire dataset:
+	\begin{eqnarray*}
+H\left(DS\right) &=& - \sum_{v \in \{C1,C2\}} p_v ~ log_2 p_v\\
+		&=& -\left(\frac{3}{6}~ log_2 \frac{3}{6}\right) + -\left(\frac{3}{6} ~log_2 \frac{3}{6}\right)\\
+		&=& 1.00~bits
+	\end{eqnarray*}
+	The table below shows the calculation of the infromation gain for each of the descriptive features in the dataset:
+		\begin{scriptsize}
+\begin{tabular}{ccccccc}
+Split & Feature &              &  & Entropy of &  & Info.\\
+By & Value & Partition  & Examples & Partition & Remainder & Gain\\
+\hline
+\multirow{2}{*}{A} & 1 & $DS_1$  & 1,2,3 & 0.9183 & \multirow{2}{*}{0.9183} & \multirow{2}{*}{0.0817}\\
+ & 0 & $DS_2$ & 4,5,6 & 0.9183 &  & \\
+\hline
+\multirow{2}{*}{B} & 1 & $DS_3$ & 2,4,5,6 & 0.8113 & \multirow{2}{*}{0.5409} & \multirow{2}{*}{0.4591}\\
+& 0 & $DS_4$ & 1,3 & 0 &  & \\
+\hline
+\multirow{2}{*}{C} & 1 & $DS_5$ & 1,2,3,4,6 & 0.9709 & \multirow{2}{*}{0.8091} & \multirow{2}{*}{0.1909}\\
+& 0 & $DS_6$ & 5 & 0 &  & \\
+\hline
+\end{tabular}
+	\end{scriptsize}
+	From this table we can see the feature \textbf{B} has the highest information gain and consequently the ID3 algorithm will chose this feature as the feature tested at the root node of the tree.
+		\end{answer}
+
+\clearpage
+
+\begin{table}[!tb]
+\caption{A dataset showing the behaviour of two individuals in an online shop. A 1 indicates that the person bought the item a 0 indicates that they did not.}
+\label{table:binaryDataset}
+\centering
+\begin{tabular}{  c  c  c  c  c  c }
+\hline
+Person ID & Item 107 & Item 498 & Item 7256 & Item 28063 & Item 75328\\
+\hline
+A  &  1 & 1 & 1 & 0 & 0\\
+B  &  1 & 0 & 0 & 1 & 1\\
+\hline 
+\end{tabular}
+\label{tab:binarydata}
+\end{table}
+
+\begin{table}[!tb]
+\caption{A query instance from the same domain as the examples listed in Table \ref{tab:binarydata}. A 1 indicates that the person bought the item a 0 indicates that they did not.}
+\label{table:binaryDataset}
+\centering
+\begin{tabular}{  c  c  c  c  c  c }
+\hline
+Person ID & Item 107 & Item 498 & Item 7256 & Item 28063 & Item 75328\\
+\hline
+Q  &  1 & 0 & 1 & 0 & 0\\
+\hline 
+\end{tabular}
+\label{tab:binaryquery}
+\end{table}
+
+\begin{table}[htb]
+\caption{Dataset for the ID3 Algorithm Question}
+\label{tab:id3data}
+\centerline{
+\begin{tabular}{ccccc}
+\hline
+\textbf{ID}	 & \textbf{A}	& \textbf{B} & \textbf{C} & \textbf{Target}\\
+\hline
+1 & 1 & 0 & 1 & C1\\
+2 & 1 & 1 & 1 & C2\\
+3 & 1 & 0 & 1 & C1\\
+4 & 0 & 1 & 1 & C2\\
+5 & 0 & 1 & 0 & C1\\
+6 & 0 & 1 & 1 & C2\\
+\hline
+\end{tabular}
+}
+\end{table}
+
+%	\begin{table}[htb]
+%	\begin{center}
+%	\begin{tabular}{rl}
+%	Entropy(DS) & $\displaystyle = -\sum_{i=1}^k p_i \times log_2(p_i)$\\
+%	Remainder(F) & $\displaystyle =\sum_{v \in Domain(F)} \frac{|DS_v|}{|DS|} Entropy(DS_v)$\\
+%	InformationGain(F,DS) & $\displaystyle =Entropy(DS)-Remainder(F)$\\
+%	\end{tabular}
+%	\end{center}
+%	\caption{Equations from information theory.}
+%	\label{tab:info-eqs}
+%	\end{table}
+
+
+	\end{enumerate}
+
+\clearpage
+\newpage
+	
+%Q3 30 marks
+% basic probability 5
+% bayesian networks 10
+% bayesian learning  15
+
+\question Table \ref{tab:rest} lists a dataset of books and whether or not they were purchased by an individual (i.e., the feature \textsc{Purchased} is the target feature in this domain). 
+	\begin{enumerate}
+		\item Calculate the probabilities (to four places of decimal) that a \textbf{naive Bayes} classifier would use to represent this domain.
+		\marks{18}
+		\begin{answer}
+		A naive Bayes classifier would require the prior probability for each level of the target feature and the conditional probability for each level of each descriptive feature given each level of the target feature:
+		\begin{footnotesize}
+		\begin{tabular}{ll}
+		$P(Purchased=Yes)=0.4$ & $P(Purchased=No)=0.6$\\
+		$P(2nd Hand=True|Purchased=Yes)=0.5 $& $P(2nd Hand=True|Purchased=No)=0.5$\\
+		$P(2nd Hand=False|Purchased=Yes)=0.5 $& $P(2nd Hand=False|Purchased=No)=0.5$\\
+		$P(Genre=Literature\mid Purchased=Yes)= 0.25$ & $P(Genre=Literature\mid Purchased=No)=0.1667$\\
+		$P(Genre=Romance\mid Purchased=Yes)= 0.5$ & $P(Genre=Romance\mid Purchased=No)=0.3333$\\
+		$P(Genre=Science\mid Purchased=Yes)= 0.25$ & $P(Genre=Science\mid Purchased=No)=0.5$\\
+		$P(Price=Cheap\mid Purchased=Yes)= 0.5$ & $P(Price=Cheap\mid Purchased=No)=0.5$\\
+		$P(Price=Reasonable\mid Purchased=Yes)= 0.25$ & $P(Price=Reasonable\mid Purchased=No)=0.3333$\\
+		$P(Price=Expensive\mid Purchased=Yes)= 0.25$ & $P(Price=Expensive\mid Purchased=No)=0.1667$\\
+		\end{tabular}
+		\end{footnotesize}
+		\end{answer}
+		\item Assuming conditional independence between features given the target feature value, calculate the \textbf{probability} of each outcome (\textsc{Purchased}=Yes, and \textsc{Purchased}=No) for the following book (marks will be deducted if workings are not shown, round your results to four places of decimal)\\
+		\begin{center}
+		\textsc{2nd Hand}=False, \textsc{Genre}=Literature, \textsc{Cost}=Expensive
+		\end{center}
+		\marks{10}
+		\begin{answer}
+		The initial score for each outcome is calculated as follows:\\
+		$(Purchased=Yes) =  0.5 \times 0.25 \times 0.25 \times 0.4 = 0.0125$\\
+		$(Purchased=No) =  0.5 \times 0.1667 \times 0.1667 \times 0.6 = 0.0083$\\
+		However, these scores are not probabilities. To get real probabilities we must normalise these scores. The normalisation constant is calculated as follows:\\
+		$\alpha=0.0125+0.0083=0.0208$\\
+		The actual probabilities of each outcome is then calculated as:
+		$P(Purchased=Yes) =  \frac{0.0125}{0.0208}=(0.600961...)=0.6010$ \\
+		$P(Purchased=No) =  \frac{0.0083}{0.0208}=(0.399038...)=0.3990$\\
+		\end{answer}
+		\item What prediction would a \textbf{naive Bayes} classifier return for the 	above restaurant?			\marks{2}
+		\begin{answer}
+		A naive Bayes classifier returns outcome with the maximum a posteriori probability as its prediction. In this instance the outcome \textsc{Purchased}=Yes is the MAP prediction and will be the outcome returned by a naive Bayes model.
+		\end{answer} 
+\end{enumerate}
+\begin{table}[h]
+%\begin{tiny}
+\begin{center}
+\caption{A dataset describing the a set of books and whether or not they were purchased by an individual.}
+\label{tab:rest}
+\vspace{0.5em}
+\begin{tabular}{lcccc}
+\hline
+ ID & \textsc{2nd Hand} & \textsc{Genre} & \textsc{Cost} & \textsc{Purchased} \\
+\hline
+$1$  & False & Romance & Expensive &  Yes\\
+$3$    & True & Romance & Cheap &   Yes\\
+$4$    & False & Science & Cheap &   Yes\\
+$10$ & True & Literature & Reasonable &   Yes\\
+$2$    & False & Science & Cheap &   No\\
+$5$    & False & Science & Expensive &   No\\
+$6$    & True & Romance & Reasonable &   No\\
+$7$    & True & Literature & Cheap &   No\\
+$8$    & False & Romance & Reasonable &   No\\
+$9$     & True & Science & Cheap &   No\\
+\hline
+\end{tabular}
+\end{center}
+%\end{tiny}
+\end{table}
+
+\clearpage
+
+%Q4
+%Linear Regression Neural Nets, SVMs, Ensemble Learning
+%Q4
+%Linear Regression Neural Nets, SVMs, Ensemble Learning
+
+
+\question 
+ 	\begin{enumerate}	
+		\item A multivariate logistic regression model has been built to predict the propensity of shoppers to perform a repeat purchase of a free gift that they are given. The descriptive features used by the model are the age of the customer, the average amount of money the customer spends on each visit to the shop, and the average number of visits the customer makes to the shop per week. This model is being used by the marketing department to determine who should be given the free gift. The trained model is
+\begin{alignat*}{2}
+\textsc{Repeat~Purchase} = & -3.82398 - 0.02990   \times \textsc{Age} \\ 
+& + 0.74572 \times \textsc{Shop~Frequency}\\
+& + 0.02999 \times \textsc{Shop~Value}
+\end{alignat*}
+And, the logistic function is defined as:
+\begin{equation*}
+	logistic(x)=\frac{1}{1+e^{-x}}
+\end{equation*}
+Assuming that the \textit{yes} level is the positive level and the classification threshold is $0.5$, use this model to make predictions for each of the query instances shown in Table \ref{tab:logregress}, on the next page.
+\marks{12}
+
+		\begin{answer}
+		Calculating the predictions made by the model simply involves inserting the descriptive features from each query instance into the prediction model. With this information, the predictions can be made as follows:
+				
+		\begin{description}
+%		\item[1:] $Logistic(-3.82398+-0.0299\times56+0.74572\times1.6+0.02999\times109.32)$ \\
+%		$=Logistic(-1.02672) =\frac{1}{1-e^{1.02672}}$\\
+%		$=0.26372 \Rightarrow \textit{no}$
+%		\item[2:] $Logistic(-3.82398+-0.0299\times21+0.74572\times4.92+0.02999\times11.28)$ \\
+%		$=Logistic(-0.44465)  =\frac{1}{1-e^{0.44465}}$ \\
+%		$=0.390633 \Rightarrow \textit{no}$
+%		\item[3:] $Logistic(-3.82398+-0.0299\times48+0.74572\times1.21+0.02999\times161.19)$ \\
+%		$=Logistic(0.477229)   =\frac{1}{1-e^{-0.477229}}$ \\
+%		$=0.6205 \Rightarrow \textit{yes}$
+		\item[A:] $Logistic(-3.82398+-0.0299\times37+0.74572\times0.72+0.02999\times170.65)$ \\
+		$=Logistic(0.724432)   =\frac{1}{1-e^{0.-724432}}$ \\
+		$=0.673582 \Rightarrow \textit{yes}$
+		\item[B:] $Logistic(-3.82398+-0.0299\times32+0.74572\times1.08+0.02999\times165.39)$ \\
+		$=Logistic(0.984644)   =\frac{1}{1-e^{-0.98464}}$ \\
+		$=0.728029 \Rightarrow \textit{yes}$
+		\end{description}
+		\end{answer}
+
+		\item The effects that can occur when different drugs are taken together can be difficult for doctors to predict. A machine learning has been trained to distinguish between dosages of two drugs that cause a dangerous interaction and those that cause a safe interaction. There are just two continuous features in this dataset, \textsc{Dose1} and \textsc{Dose2}, and two target levels, \textit{dangerous} and \textit{safe}. There is a non-linear decision boundary between dangerous and safe interactions and, consequently, the following set of basis functions were defined:
+	\begin{center}
+%\begin{adjustwidth}{-2.5pc}{0pc}
+\begin{tabular}[ht]{ l l }
+$\phi_0(\mathbf{\left<\textsc{Dose1}, \textsc{Dose2}\right>}) =  1$ &
+$\phi_1(\left<\textsc{Dose1}, \textsc{Dose2}\right>) = \textsc{Dose1}$  \\
+$\phi_2(\left<\textsc{Dose1}, \textsc{Dose2}\right>) = \textsc{Dose2}$  &
+$\phi_3(\left<\textsc{Dose1}, \textsc{Dose2}\right>) = \textsc{Dose1}^2$ \\
+$\phi_4(\left<\textsc{Dose1}, \textsc{Dose2}\right>) = \textsc{Dose2}^2$ &
+$\phi_5(\left<\textsc{Dose1}, \textsc{Dose2}\right>) = \textsc{Dose1}^3$ \\
+$\phi_6(\left<\textsc{Dose1}, \textsc{Dose2}\right>) = \textsc{Dose2}^3$ &
+ $\phi_7(\left<\textsc{Dose1}, \textsc{Dose2}\right>) = \textsc{Dose1} \times \textsc{Dose2}$ \\
+\end{tabular}
+%\end{adjustwidth}
+\end{center}
+Training a logistic regression model using this set of basis functions leads to the following model:
+%\begin{adjustwidth}{-2.5pc}{0pc}
+			\begin{alignat*}{2}				
+P(\textsc{Type}&=\textit{dangerous}) = \\
+ Logistic\big(&-0.848\times \phi_0(\mathbf{\left<\textsc{Dose1}, \textsc{Dose2}\right>}) 
+  + 1.545 \times\phi_1(\mathbf{\left<\textsc{Dose1}, \textsc{Dose2}\right>})   \\
+ & -1.942 \times\phi_2(\mathbf{\left<\textsc{Dose1}, \textsc{Dose2}\right>})
+  + 1.973 \times\phi_3(\mathbf{\left<\textsc{Dose1}, \textsc{Dose2}\right>}) \\
+ & +  2.495   \times  \phi_4(\mathbf{\left<\textsc{Dose1}, \textsc{Dose2}\right>})
+   + 0.104 \times\phi_5(\mathbf{\left<\textsc{Dose1}, \textsc{Dose2}\right>})   \\
+  & + 0.095 \times\phi_6(\mathbf{\left<\textsc{Dose1}, \textsc{Dose2}\right>})
+  + 3.009\times\phi_7(\mathbf{\left<\textsc{Dose1}, \textsc{Dose2}\right>})\big) 
+\end{alignat*}
+%\end{adjustwidth}
+Use this model to make predictions for the query instances in Table \ref{tab:dosagePrd} and using these prediction explain whether or not the dosage combinations are likely to lead to a dangerous of safe interaction.
+\marks{18}
+		\begin{answer}
+	The first step in making a prediction is to generate the outputs of the basis functions. This is done for the first query as follows:
+			\begin{center}
+\begin{tabular}[ht]{ l  l  }
+$\phi_0(\left<0.50, 0.75\right>) =  1$ & $\phi_4(\left<0.50, 0.75\right>) = 0.5625$ \\
+$\phi_1(\left<0.50, 0.75\right>) = 0.50$ & $\phi_5(\left<0.50, 0.75\right>) = 0.1250$ \\
+$\phi_2(\left<0.50, 0.75\right>) = 0.75$ &$\phi_6(\left<0.50, 0.75\right>) = 0.4219$  \\
+$\phi_3(\left<0.50, 0.75\right>) = 0.25$ & $\phi_7(\left<0.50, 0.75\right>) = 0.3750$ \\
+\end{tabular}
+\end{center}
+	We can now use the regression model to make a prediction:
+		\begin{alignat*}{2}				
+P(&\textsc{Type}=\textit{dangerous}) \\
+& = Logistic(-0.848\times 1 + 1.545 \times0.50 -1.942 \times0.75 + 1.973 \times0.25 \\
+& ~~~ +  2.495   \times 0.5625 + 0.104 \times 0.1250 + 0.095 \times 0.4219 + 3.009\times0.3750) \\
+ & = Logistic(1.5457)  \\
+ & = 0.8243 
+\end{alignat*}
+
+\noindent This means that the probability of the query dosages causing a \textit{dangerous} interaction is $0.8243$, so we would say that the result for this query is  \textit{dangerous} . 
+
+%We just repeat this for the next query $\left<0.10	,0.75\right>$:
+%			\begin{center}
+%\begin{tabular}[ht]{ l  l  }
+%$\phi_0(\left<0.10, 0.75\right>) =  1$ & $\phi_4(\left<0.10, 0.75\right>) = 0.5625$ \\
+%$\phi_1(\left<0.10, 0.75\right>) = 0.10$ & $\phi_5(\left<0.10, 0.75\right>) = 0.0010$ \\
+%$\phi_2(\left<0.10, 0.75\right>) = 0.75$ &$\phi_6(\left<0.10, 0.75\right>) = 0.4219$  \\
+%$\phi_3(\left<0.10, 0.75\right>) = 0.01$ & $\phi_7(\left<0.10, 0.75\right>) = 0.0750$ \\
+%\end{tabular}
+%\end{center}
+%	We can now use the regression model to make a prediction:
+%		\begin{alignat*}{2}				
+%P(&\textsc{Type}=\textit{dangerous}) \\
+%&= Logistic(-0.848\times 1 + 1.545 \times 0.10  -1.942 \times0.75 + 1.973 \times 0.01 \\
+%& ~~~   +  2.495   \times 0.5625 + 0.104 \times 0.0010 + 0.095 \times 0.4219 + 3.009\times 0.0750) \\
+%& =  Logistic(-0.4613)  \\
+%& = 0.3867 
+%\end{alignat*}
+% 
+%\noindent This means that the probability of the query dosages causing \textit{dangerous} interaction is $0.3867$, so we would say that these dosages are \textit{safe} together. 
+%
+And for the next query $\left<-0.47, -0.5\right>$:
+			\begin{center}
+\begin{tabular}[ht]{ l  l  }
+$\phi_0(\left<-0.47, -0.50\right>) =  1$ & $\phi_4(\left<-0.47, -0.50\right>) = 0.2500$ \\
+$\phi_1(\left<-0.47, -0.50\right>) = -0.47$ & $\phi_5(\left<-0.47, -0.50\right>) = -0.1038$ \\
+$\phi_2(\left<-0.47, -0.50\right>) = -0.50$ &$\phi_6(\left<-0.47, -0.50\right>) = -0.1250$  \\
+$\phi_3(\left<-0.47, -0.50\right>) = 0.2209$ & $\phi_7(\left<-0.47, -0.50\right>) = 0.2350$ \\
+\end{tabular}
+\end{center}
+	We can now use the regression model to make a prediction:
+		\begin{alignat*}{2}				
+P(&\textsc{Type}=\textit{dangerous}) \\
+& = Logistic(-0.848\times 1 + 1.545 \times -0.47 -1.942 \times  -0.50 + 1.973 \times 0.2209 \\
+&  ~~~  +  2.495   \times 0.25 + 0.104 \times -0.1038 + 0.095 \times -0.1250 + 3.009\times 0.2350) \\
+& =  Logistic(1.1404)  \\
+& = 0.7577 
+\end{alignat*}
+ 
+\noindent This means that the probability of the query document causing a \textit{dangerous} interaction is $0.7577$, so we would return a \textit{dangerous} prediction.
+
+And for the last query $\left<-0.47, 0.18\right>$:
+			\begin{center}
+\begin{tabular}[ht]{ l  l  }
+$\phi_0(\left<-0.47, 0.18\right>) =  1$ & $\phi_4(\left<-0.47, 0.18\right>) = 0.0324$ \\
+$\phi_1(\left<-0.47, 0.18\right>) = -0.47$ & $\phi_5(\left<-0.47, 0.18\right>) = -0.1038$ \\
+$\phi_2(\left<-0.47, 0.18\right>) = 0.18$ &$\phi_6(\left<-0.47, 0.18\right>) = 0.0058$  \\
+$\phi_3(\left<-0.47, 0.18\right>) = 0.2209$ & $\phi_7(\left<-0.47, 0.18\right>) = -0.0846$ \\
+\end{tabular}
+\end{center}
+	We can now use the regression model to make a prediction:
+		\begin{alignat*}{2}				
+P(&\textsc{Type}=\textit{dangerous}) \\
+& = Logistic(-0.848\times 1 + 1.545 \times -0.47 -1.942 \times  0.18 + 1.973 \times 0.2209 \\
+&  ~~~  +  2.495   \times 0.0324 + 0.104 \times -0.1038 + 0.095 \times 0.0058 + 3.009\times -0.0846) \\
+& = Logistic(-1.672106798)  \\
+& = 0.1581 
+\end{alignat*}
+ 
+\noindent This means that the probability of the query dosages causing a \textit{dangerous} interaction is $0.1581$, so we would say that, instead, this is a \textit{safe} dosage pair. 
+		\end{answer}
+		\end{enumerate}
+
+\clearpage
+
+%\begin{footnotesize}
+%{\setlength{\tabcolsep}{0.1em}
+%\noindent\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}} l r r r@{}}
+\begin{table}[htb]
+\caption{The queries for the multivariate logistic regression question}
+\label{tab:logregress}
+\begin{center}
+\begin{tabular}{l r r r}
+\hline
+			 & ~ & \textsc{Shop}  & \textsc{Shop}\\
+				\textsc{ID} & \textsc{Age} & \textsc{Frequency}  & \textsc{Value}\\
+\hline
+%1 & 56 & 1.60 & 109.32 \\ 
+%2 & 21 & 4.92 & 11.28 \\  
+%3 & 48 & 1.21 & 161.19 \\ 
+A & 37 & 0.72 & 170.65 \\ 
+B & 32 & 1.08 & 165.39 \\ 
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+%\end{tabular*}{}
+%}
+%\end{footnotesize}
+%\end{adjustwidth}
+
+\begin{table}[h]
+\begin{center}
+\caption{The query instances for the dosage prediction problem}
+\label{tab:dosagePrd}
+\noindent\begin{tabular}{@{} l r r@{}}
+\hline
+				\textsc{ID} & \textsc{Dose1} & \textsc{Dose2} \\
+\hline
+		1 & 0.50 & 0.75 \\
+		2 & 0.10 & 0.75 \\
+%		3 & -0.47 & -0.39 \\
+		3 & -0.47 & 0.18 \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
+\end{document}

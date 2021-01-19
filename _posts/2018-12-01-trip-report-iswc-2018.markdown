@@ -33,7 +33,7 @@ This shows as well that Semantic Web technologies have a very high level of usab
 ## Semantic Web is now Knowledge Graphs
 One of the first things I noticed (although this might be just my subjective perception) since my last visit to an ISWC is that people prefer to talk about Knowledge Graphs rather than Semantic Web. Is it because Semantic Web is not nearly as sexy as Machine Learning these days or for other reasons, I don't know. It would be very interesting to read opinons in the comments below though. My humble interpretation is simply that since Semantic Web is in a very advanced stage right now and there are loads of implementations throughout academia and industry, people prefer to refer to specific parts of it rather than the whole field. And knowledge graphs are definitely the most useful result of Semantic Web research from the last couple of years. Even the [program][ISWC Program] itself reflects how practical the field has become and how friendly it is to other disciplines, such as Deep Learning and Natural Language Processing.
 
-## Other Emerging Topcs
+## Other Emerging Topics
 
 
 ## What about Machine Learning?

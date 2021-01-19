@@ -1,0 +1,85 @@
+---
+title: "PSILab  6 Dimension reduction"
+author: "HTML"
+date: "5th November 2018"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+### Preliminaries
+
+```{r}
+
+
+library(psych)
+library(REdaS)
+library(Hmisc)
+library(corrplot)
+library(ggcorrplot)
+library(factoextra)
+library(nFactors)
+library(FactoMineR)
+
+```
+
+
+```{r}
+#We are using the survey dataset - s.dat
+#load data
+survey<-read.delim("sleep5ED.dat", header = TRUE)
+myvars <- c("impact1", "impact2", "impact3", "impact4", "impact5", "impact6", "impact7")
+sData <-na.omit(survey[myvars])
+
+
+#create a correlation matrix 
+smatrix<-cor(sData)
+Hmisc::rcorr(as.matrix(sData))
+#Visualisation
+corrplot::corrplot(smatrix, method="circle")
+
+```
+
+
+###Initial Statistics
+```{r}
+#Bartlett's test
+psych::cortest.bartlett(sData)
+
+#KMO 
+psych::KMO(sData)
+
+#Determinent (execute one of these):
+det(smatrix)
+
+```
+
+##Factor Analysis
+```{r}
+#Factor Analysis
+
+#Use Maximum Likelihood as data is not normal
+famodel <- fa(smatrix, nfactors=7, n.iter=1, rotate="varimax", fm="ml")
+psych::print.psych(famodel,cut=0.3, sort=TRUE)
+plot(famodel$values, type = "b") #scree plot
+
+
+fa.diagram(famodel)#create a diagram showing the factors and how the manifest variables load
+
+famodel$Vaccounted #Look at variance accounted
+
+famodel$values #output eigenvalues
+
+
+```
+##Reliability Analysis
+```{r}
+psych::alpha(sData)
+
+```
+We get two factors emerging. Factor 1 (eigenvalue of 2.80 explaining 40% of variance), impact 5, 6 , 7 and   1  load strongly onto it. Factor 2 (eigenvalue of 1.89) explains 27% of the variance - 67% in combination with factor 1, Impact 3, 4, and 2 load strongly onto it.

@@ -1,0 +1,135 @@
+---
+title: "CarCrime Logistic Regression"
+author: "HTML"
+date: "10 November 2018"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+#Read in the data 
+### The data is from the British Car Crime Survey 2000 from Tarling.
+###The objective is to try to infer from some demographic information the probability 
+### someone will be a victim of car crime.
+```{r}
+#load the libraries needed
+
+library(aod)
+library(ggplot2)
+library(SDMTools)
+library(ModelMetrics)
+
+library(rcompanion)
+
+library(userfriendlyscience)
+library(stargazer)
+
+mydata <- read.table("carcrime.dat")
+
+#Check your proportions for bias - are these representative?
+table(mydata$victcar)
+
+```
+####Need to provide relevant descriptive statistics.
+####Check relationships and differences for dependent within indepdent variables
+```{r}
+#Cross tabs and chi-squared for victim of car crime and gender
+ctest<-chisq.test(xtabs(~victcar+sex, data=mydata), correct=TRUE)
+ctest
+
+#Cross tabs for chi-squared for victim of car crime and ethnicity recoded
+ctest<-chisq.test(xtabs(~victcar+ethnicr, data=mydata), correct=TRUE)
+ctest
+
+#Cross tabs for chi-squared for victim of car crime and tenure of accommodation recoded
+ctest<-chisq.test(xtabs(~victcar+tenurer, data=mydata), correct=TRUE)
+ctest
+
+#Cross tabs for chi-squared for victim of car crime and age group recoded
+ctest<-chisq.test(xtabs(~victcar+agegrpr, data=mydata), correct=TRUE)
+ctest
+
+
+#Number of cars is not normal, so need mann whitney/Wilcoxon test for difference for victim of car crime - not included here
+
+```
+###Build baseline model with gender and ethnicity as predictors
+```{r}
+#Make sure categorical data is used as factors
+mydata$sex<-as.factor(mydata$sex)
+mydata$ethnicr<-as.factor(mydata$ethnicr)
+logmodel1 <- glm(victcar ~ sex+ethnicr, data = mydata, na.action = na.exclude, family = binomial())
+
+
+#Summary of the model with co-efficients
+stargazer(logmodel1, type="text")
+#Full summary of the model
+summary(logmodel1)
+
+#Chi-square plus significance
+lmtest::lrtest(logmodel1)
+
+#Pseudo Rsquared plus Chi-square of the model
+rcompanion::nagelkerke(logmodel1,restrictNobs=TRUE)
+
+#Exponentiate the co-efficients
+exp(coefficients(logmodel1))
+
+
+#Calculate confusion matrix
+predicted_values<-predict(logmodel1, type="response")
+#predicted_values<-na.omit(predicted_values)
+actual_values<-mydata$victcar
+table(actual_values, predicted_values > 0.5)
+                      
+#SDMTools::confusion.matrix(actual_values, predicted_values, threshold=0.5)
+#Calculate sensistivity and specificity
+ModelMetrics::sensitivity(actual_values, predicted_values, cutoff=0.5)
+ModelMetrics::specificity(actual_values, predicted_values, cutoff=0.5)
+#vif(logmodel1)
+
+
+
+
+
+#Chi-square and Pseudo R2 calculation for information
+modelChi <- logmodel1$null.deviance - logmodel1$deviance
+modelChi
+pseudo.R2 <- modelChi / logmodel1$null.deviance
+pseudo.R2
+Chidf <- logmodel1$df.null - logmodel1$df.residual
+chisq.prob <- 1 - pchisq(modelChi, Chidf)
+chisq.prob
+
+
+
+
+
+```
+
+###Build model with additional variables tenurer, agegrpr, numcarr as predictors
+```{r}
+logmodel2 <- glm(victcar ~ sex+ethnicr+agegrpr+tenurer+numcarr,   data = mydata, family = binomial())
+predicted_values<-predict(logmodel2,type="response")
+actual_values<-logmodel2$y
+conf_matrix<-table(na.omit(predicted_values),actual_values)
+conf_matrix
+ModelMetrics::sensitivity(actual_values, predicted_values, cutoff=0.5)
+ModelMetrics::specificity(actual_values, predicted_values, cutoff=0.5)
+
+summary(logmodel2)
+exp(coefficients(logmodel2))
+
+nagelkerke(logmodel2)
+#vif(logmodel2)
+
+#lroc(logmodel2, graph=TRUE)#Will give you plot plus AUC
+#sensitivity(na.omit(mydata$victcar), predicted, threshold = 0.5)
+
+```
+
+
+####Chi-squared is not significant for gender and victim of car crime

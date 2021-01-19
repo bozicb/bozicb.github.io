@@ -1,0 +1,35 @@
+---
+title: "PSI CA PART I EXAMPLE"
+author: "Deirdre Lawless"
+date: "16 October 2018"
+Student Number: <<your student number>>
+Student Name: <<your name>>
+Programme Code: <<programme code>>
+R Version: <<version of R used>>
+R Packages: <<listing of R packages used>
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, include=TRUE)
+```
+
+```{r}
+library(dplyr)
+library(pastecs) #For creating descriptive statistic summaries
+library(ggplot2) #For creating histograms with more detail than plot
+library(psych) # Some useful descriptive functions
+library(semTools) #For skewness and kurtosis
+library(car) # For Levene's test for homogeneity of variance 
+library(coin)# For Wilcox test (non-parametric)
+survey <- read.table("survey.dat")
+#Setting the column names to be that used in the dataset
+colnames(survey) <- tolower(colnames(survey))
+```
+
+## 1. Introduction
+
+This markdown file uses the survey dataset we have used in lectures survey.dat
+

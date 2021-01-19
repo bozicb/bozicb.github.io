@@ -33,7 +33,6 @@ count(salary$gender)
 
 tab<-table(salary$gender, salary$rank)
 addmargins(tab)
-addborders(tab)
 tab #show the table with frequencies
 prop.table(tab) # shows probabilities
 
@@ -84,7 +83,7 @@ range(salary$salary)
 #Quantiles
 
 quantile(salary$salary)
-#to get 1st quantil
+#to get 1st quantile
 x=quantile(salary$salary); x[1] 
 
 

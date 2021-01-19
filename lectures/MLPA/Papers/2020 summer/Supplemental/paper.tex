@@ -1,0 +1,539 @@
+% Filename  : samplepaper.tex
+% Purpose   : A sample exam paper to demonstrate how to use the 'ditpaper'
+%             TeX class.
+% Author    : Emmet Caulfield
+% Revision  : $Id: samplepaper.tex 2 2006-02-19 20:34:45Z emmet $
+% Repository: $HeadURL: http://svn.netrogen.lan/tex-ditpaper/trunk/samplepaper.tex $
+%
+
+% 'nosolution' (default) and 'solution' toggle the inclusion of solutions
+% in the output. The tag --SOLUTION-OPTION--, below, is replaced by 'sed'
+% in the Makefile to cause both the paper and the solutions to be produced.
+\documentclass[--SOLUTION-OPTION--]{ditpaper}
+%\documentclass[solution]{ditpaper}
+%\documentclass[nosolution]{ditpaper}
+
+\usepackage{rotating}
+
+%\usepackage{epsf}
+\usepackage{fleqn}
+%\usepackage{rotating}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{eurosym}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Start newcommand defs taken from aima slides style file %%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\mysum{\begin{Huge}\mbox{$\Sigma$}\end{Huge}}
+\def\myint{\begin{LARGE}\mbox{$\int$}\end{LARGE}}
+\def\myprod{\begin{Huge}\mbox{$\Pi$}\end{Huge}}
+
+\newcommand{\smbf}[1]{\mbox{{\smathbold #1}}}
+\newcommand{\mbf}[1]{\mbox{{\bf #1}}}
+
+\newcommand{\sr}[1]{\mathrel{\raisebox{-0.6ex}{$\stackrel{#1}{\longrightarrow}$}}}
+\newcommand{\srbox}[1]{\sr{\fboxsep=1pt\fbox{$\,{\scriptstyle #1}\,$}}}
+\newcommand{\srboxbox}[1]{\sr{\fboxsep=1pt\fbox{\fbox{$\,{\scriptstyle #1}\,$}}}}
+\newcommand{\keyword}[1]{{\textbf{#1}}\index{#1}}
+
+\newcommand{\featN}[1]{\textsc{#1}}
+\newcommand{\featL}[1]{\textit{`#1'}}
+
+\def\Diff{\mbox{{\it Diff}}}
+
+%%%%%% probability and decision theory
+\newcommand{\pv}{\mbf{P}}
+\newcommand{\qv}{\mbf{Q}}
+\newcommand{\given}{\mid}
+\def\transition#1#2{q(#1\rightarrow #2)}
+\newcommand{\otherthan}{\overline}
+\newcommand{\Parents}{Parents}
+\newcommand{\parents}{parents}
+\newcommand{\Children}{Children}
+\newcommand{\children}{children}
+\newcommand{\MarkovBlanket}{MB}
+\newcommand{\markovBlanket}{mb}
+
+\def\X{\mbf{X}}
+\def\x{\mbf{x}}
+\def\sx{\smbf{x}}
+\def\Y{\mbf{Y}}
+\def\y{\mbf{y}}
+\def\sy{\smbf{y}}
+\def\E{\mbf{E}}
+\def\e{\mbf{e}}
+\def\D{\mbf{D}}
+\def\d{\mbf{d}}
+\def\sbe{\smbf{e}}
+\def\sE{\smbf{E}}
+\def\T{\mbf{T}}
+\def\O{\mbf{O}}
+\def\se{\smbf{e}}
+\def\Z{\mbf{Z}}
+\def\z{\mbf{z}}
+\def\sz{\smbf{z}}
+\def\F{\mbf{F}}
+\def\f{\mbf{f}}
+\def\A{\mbf{A}}
+\def\B{\mbf{B}}
+\def\C{\mbf{C}}
+\def\b{\mbf{b}}
+\def\m{\mbf{m}}
+\def\I{\mbf{I}}
+\def\H{\mbf{H}}
+\def\zeroes{\mbf{0}}
+\def\ones{\mbf{1}}
+\def\ev{\mbf{ev}}
+\def\fv{\mbf{ev}}
+\def\sv{\mbf{sv}}
+
+% These must be set or bizarre defaults will be used:
+\facility{Kevin Street, Dublin 8}
+\course{BSc. (Honours)\\Degree in Information Systems /\\ Information Technology\\(Part-time)}
+% \examcode{R249/R249P/419C}
+\examcode{DT249, DT255}
+\stage{Stage 4}
+\session{Supplemental Examinations 2016/2017}
+\title{Artificial Intelligence II [CMPU4011]}
+\examiners{Mr. Giancarlo Salton\\
+Dr. Deirdre Lillis\\
+Dr. Rem Collier}
+\examdate{Date \& Time TBA.}
+\examtime{Duration: 2 Hours}
+\instructions{Question 1 is \textbf{compulsory}\par{} Answer Question 1 (40 marks) \textbf{and}\par{} any 2 Other Questions (30 marks each).}
+
+\begin{document}
+
+
+%aima chapters 18
+% inductive bias, learning theory - supervised/unsupervised, overfitting, lazy/eager learner, classification v regression, false positive v false negatives, linear separability, consistency, evaluation
+
+\question
+\begin{enumerate}
+
+	% machine learning
+	\item What is \textbf{supervised machine learning}?
+	\marks{5}
+	\begin{answer}
+		Supervised machine learning techniques automatically learn the relationship between a set of \keyword{descriptive features} and a \keyword{target feature} from a set of historical \keyword{instances}. Supervised machine learning is a subfield of machine learning. Machine learning is defined as an automated process that extracts patterns from data. In predictive data analytics applications, we use \keyword{supervised machine learning} to build models that can make predictions based on patterns extracted from historical data.
+	\end{answer}
+
+	% wrong inductive bias
+	\item Explain what can go wrong when a machine learning classifier uses the wrong \textbf{inductive bias}.
+	\marks{5}
+	\begin{answer}
+		\begin{itemize}
+			\item If the inductive bias of the learning algorithm constrains the search to only consider simple hypotheses we may have excluded the real function from the hypothesis space. In other words, the true function is \textbf{unrealizable} in the chosen hypothesis space, (i.e., we are \textbf{underfitting}).
+			\item If the inductive bias of the learning algorithm allows the search to consider complex hypotheses, the model may hone in on irrelevant factors in the training set. In other words the model with \textbf{overfit} the training data.
+		\end{itemize}
+	\end{answer}
+
+	\item Table \ref{tab:testSetPredictions2}, on the next page, shows the predictions made for a categorical target feature by a model for a test dataset. Based on this test set, calculate the evaluation measures listed below.
+	\begin{enumerate}
+
+		\item A \textbf{confusion matrix}
+		\marks{6}
+		\begin{answer}
+			The confusion matrix can be written as
+			\vspace{1em}
+			\noindent
+			\begin{scriptsize}
+			\begin{tabular}{c c c  c }
+			    & &  \multicolumn{2}{c}{Prediction} \\
+			  & &  \featL{true} &  \featL{false} \\
+			  \hline
+			  \multirow{2}{*}{\parbox{1.1cm}{\raggedleft Target}}  & \featL{true} & $8$	&	$1$ \\
+			  & \featL{false} & $0$	&	$11$
+			\end{tabular}
+			\end{scriptsize}
+			\vspace{1em}
+		\end{answer}
+
+		\item The \textbf{misclassification rate}
+		\marks{4}
+		\begin{equation*}
+			misclassification~rate = \frac{\left(FP + FN\right)}{\left(TP + TN + FP + FN\right)}
+		\end{equation*}
+		\begin{answer}
+			Misclassification rate can be calculated as
+			\begin{alignat*}{2}
+			misclassification~rate & = \frac{\left(FP + FN\right)}{\left(TP + TN + FP + FN\right)} \\
+			 & = \frac{\left(0 + 1\right)}{\left(8 + 11 + 0 + 1\right)} \\
+			 & = 0.05
+			\end{alignat*}
+		\end{answer}
+
+		\item The \textbf{precision}, \textbf{recall}, and \textbf{F$_1$ measure}
+		\marks{12}
+		\begin{alignat*}{2}
+			precision & = \frac{TP}{\left(TP + FP\right)} \\
+			recall & = \frac{TP}{\left(TP + FN\right)} \\
+			F_1~measure & = 2 \times \frac{\left(precision \times recall \right)}{\left(precision + recall\right)} \\
+		\end{alignat*}
+		\begin{answer}
+			We can calculate precision and recall as follows (assuming that the \featL{true} target level is the positive level):
+			\begin{alignat*}{2}
+			precision & = \frac{TP}{\left(TP + FP\right)} \\
+			& = \frac{8}{\left(8 + 0\right)} \\
+			& = 1.000 \\
+			recall & = \frac{TP}{\left(TP + FN\right)} \\
+			& = \frac{8}{\left(8 + 1\right)} \\
+			& = 0.889
+			\end{alignat*}
+			Using these figures, we can calculate the F$_1$ measure as
+			\begin{alignat*}{2}
+			F_1~measure & = 2 \times \frac{\left(precision \times recall \right)}{\left(precision + recall\right)} \\
+			& = 2 \times \frac{\left(1.000 \times 0.889 \right)}{\left(1.000 + 0.889\right)} \\
+			& = 0.941
+			\end{alignat*}
+		\end{answer}
+
+		\item The \textbf{average class accuracy (harmonic mean)}. (During this calculation you should round all long floats to 3 places of decimal.)
+		\marks{8}
+		\begin{equation*}
+			average~class~accuracy_{HM} = \displaystyle \frac{1}{\displaystyle \frac{1}{|levels(t)|}\sum_{l \in levels(t)} \frac{1}{recall_l}} \\
+		\end{equation*}
+		\begin{answer}
+			First, we calculate the recall for each target level:
+			\begin{alignat*}{3}
+			recall_{\text{\featL{true}}} & = \frac{8}{9} & = 0.889 \\
+			recall_{\text{\featL{false}}} & = \frac{11}{11} & = 1.000
+			\end{alignat*}
+			Then we can calculate a harmonic mean as
+			\begin{alignat*}{2}
+			average~class~accuracy_{HM} & = \displaystyle \frac{1}{\displaystyle \frac{1}{|levels(t)|}\sum_{l \in levels(t)} \frac{1}{recall_l}} \\
+			& = \displaystyle \frac{1}{\displaystyle \frac{1}{2}\left( \frac{1}{0.889} + \frac{1}{1} \right) } \\
+			& = 0.941
+			\end{alignat*}
+		\end{answer}
+
+	\end{enumerate}
+\end{enumerate}
+
+\begin{table}[htb]
+	\caption{The predictions made by a model for a categorical target on a test set of 20 instances }
+	\label{tab:testSetPredictions2}
+	\begin{center}
+		{\setlength{\tabcolsep}{2em}
+		\begin{tabular}{cc}
+			\hline
+			\begin{minipage}{0.3\textwidth}
+				\raggedright
+					{\setlength{\tabcolsep}{1em}
+				\begin{tabular}{@{\extracolsep{\fill}}c c c@{}}
+					ID	 & Target & Prediction \\
+					\hline
+					1	&	false	&	false \\
+					2	&	false	&	false \\
+					3	&	false	&	false \\
+					4	&	false	&	false \\
+					5	&	true	&	true \\
+					6	&	false	&	false \\
+					7	&	true	&	true \\
+					8	&	true	&	true \\
+					9	&	false	&	false \\
+					10	&	false	&	false \\
+					\hline
+				\end{tabular}
+				}
+			\end{minipage}
+			&
+			\begin{minipage}{0.3\textwidth}
+				\raggedleft
+					{\setlength{\tabcolsep}{1em}
+				\begin{tabular}{@{\extracolsep{\fill}}c c c@{}}
+					ID	 & Target	& Prediction \\
+					\hline
+					11	&	false	&	false \\
+					12	&	true	&	true \\
+					13	&	false	&	false \\
+					14	&	true	&	true \\
+					15	&	false	&	false \\
+					16	&	false	&	false \\
+					17	&	true	&	false \\
+					18	&	true	&	true \\
+					19	&	true	&	true \\
+					20	&	true	&	true \\
+					\hline
+				\end{tabular}
+				}
+			\end{minipage}\\
+		\end{tabular}
+		}
+	\end{center}
+\end{table}
+
+\clearpage
+
+
+\newpage
+
+%Q2
+% knn and CBR
+% information theory, entropy, Decision Trees, Inductive logic programming
+\question
+\begin{enumerate}
+	\item A data analyst building a \emph{k}-nearest neighbour model for a continuous prediction problem is considering appropriate values to use for $k$ on an \emph{imbalanced training set}.
+	\begin{enumerate}
+
+		\item Initially the analyst uses a simple average of the target variables for the $k$ nearest neighbours in order to make a new prediction. After experimenting with small values for $k$ in the range $0 - 5$ it occurs to the analyst that they might get very good results if they keep increasing $k$ to a value closer to the total number of instances in the training set. Do you think the analyst is likely to get good results using these values for $k$?
+		\marks{5}
+		\begin{answer}
+			In answering this question students should realise that with an imbalanced training set, the majority class will dominate the feature space. Therefore, if the analyst set $k$ close to the number of training examples in this imbalanced training set, the model may start using the majority class as the prediction for all queries.
+		\end{answer}
+
+		\item If the analyst was using a distance weighted averaging function rather than a simple average for their predictions would this have made their idea any more useful?
+		\marks{5}
+		\begin{answer}
+			Students should realise that yes, if distance weighted voting is used (particularly if a $\frac{1}{d^2}$ type distance weight is used) then examples that are far away from the query will have very little impact on the result. Again to score well students should mention that when distance weighted voting is used the value of $k$ in $k$-NN classifiers is much less important.
+		\end{answer}
+
+		\item By using a different distance metric than the standard Euclidean Distance, would any of the previous answers change? Provide an explanation to your answer.
+		\marks{5}
+		\begin{answer}
+			Students should realise that no, the distance metrics only indicate the distance between data points in feature space. If the training set is imbalanced, the majority class will start to dominate the feature space and the model will use this majority class as the prediction most of the time, independent of the distance metric in use. By using the a weighted averaging function we still be a good idea to mitigate the problem as by any distance metric a weighted model would put more importance into closer samples and less importance into distant samples.
+		\end{answer}
+
+	\end{enumerate}
+
+
+		% Information theory and Decision Trees
+	\item Table \ref{tab:id3datacensus} on the next page lists a sample of data from a census. There are four descriptive features in this dataset (\textsc{Age}, \textsc{Education}, \textsc{Marital Status}, \textsc{Occupation}) and the target feature \textsc{Annual Income} has 3 levels (\textit{$<$$25K$},  \textit{$25K$--$50K$}, \textit{$>$$50K$}). Note, Table \ref{tab:info-eqs}, also on the next page, lists some equations that you may find useful for this question.
+		\begin{enumerate}
+			\item Calculate the \textsc{entropy} for this dataset.
+			\marks{5}
+			\begin{answer}
+				\begin{equation*}
+					\begin{alignedat}{12}
+						&H\left(\textsc{Annual Income}, \mathcal{D} \right)\\
+								&= - \sum_{l \in \left\{\begin{subarray}{1}\textit{$<$$25K$},\\ \textit{$25K$--$50K$}, \\ \textit{$>$$50K$} \\\end{subarray}\right\}} P(\textsc{An. Inc.}=l) \times log_2 \left(P(\textsc{An. Inc.}=l)\right)\\
+								&= -\left(\left( \frac{2}{8} \times log_2 \left(\frac{2}{8}\right)\right) + \left(\frac{5}{8} \times log_2 \left( \frac{5}{8} \right)\right) + \left(\frac{1}{8} \times log_2 \left( \frac{1}{8} \right)\right)\right)\\
+								&= 1.2988~bits
+					\end{alignedat}
+			\end{equation*}
+			\end{answer}
+
+			\item When building a decision tree, we must partition the data into homogeneous subsets. What is the metric used to decide on the partitions? How it relates to the entropy of the dataset?
+			\marks{5}
+			\begin{answer}
+				The students should realise the information gain is a metric that will give us intuitions about the informativeness of features and therefore be used to create the partitions. Students should also realise that information gain is also used as a measure of the reduction in the overall entropy of a set of instances that is achieved by testing a descriptive feature.
+			\end{answer}
+
+			\item In the case that we have a continuous descriptive feature, what is the procedure to create the partitions using information gain?
+			\marks{5}
+			\begin{answer}
+				The students should realise that a threshold must be created for the continuous descriptive feature. They must realize that a set of thresholds must be created and each of these thresholds must be tested by creating the partitions and measuring the information gain in that partition. The threshold with the highest information gain is then selected to create the partition.
+			\end{answer}
+		\end{enumerate}
+
+\end{enumerate}
+
+\clearpage
+
+
+\begin{table}[htb]
+	\caption{Census data for the ID3 Algorithm Question}
+	\label{tab:id3datacensus}
+	\centerline{
+	{\setlength{\tabcolsep}{0.1em}
+	\noindent\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}cccccc@{}}
+	\hline
+	 &  &  & \textsc{Marital} &  & \textsc{Annual}\\
+	\textsc{ID} & \textsc{Age} & \textsc{Education} & \textsc{Status} & \textsc{Occupation} & \textsc{Income}\\
+	\hline
+	$1$ & $39$ & bachelors & never married & transport & $25K$--$50K$\\
+	$2$ & $50$ & bachelors & married & professional & $25K$--$50K$\\
+	$3$ & $18$ & high school & never married & agriculture & $<$$25K$\\
+	$4$ & $28$ & bachelors & married & professional & $25K$--$50K$\\
+	$5$ & $37$ & high school & married & agriculture & $25K$--$50K$\\
+	$6$ & $24$ & high school & never married & armed forces & $<$$25K$\\
+	$7$ & $52$ & high school & divorced & transport & $25K$--$50K$\\
+	$8$ & $40$ & doctorate & married & professional & $>$$50K$\\
+	\hline
+	\end{tabular*}
+	}
+	}
+\end{table}
+
+\begin{table}[!hb]
+		\renewcommand{\arraystretch}{2}
+	\begin{center}
+		\caption{Equations from information theory.}
+		\label{tab:info-eqs}
+			\begin{tabular}{ll}
+		\hline
+		$H(\mathbf{f}, \mathcal{D})$ & $= -\displaystyle\sum_{l \in levels(f)} P(f=l) \times log_2(P(f=l))$\\
+		$rem(\mathbf{f}, \mathcal{D})$ & $=\displaystyle\sum_{l \in levels(f)} \frac{|\mathcal{D}_{f=l}|}{|\mathcal{D}|} \times H(t, \mathcal{D}_{f=l})$\\
+		$IG(\mathbf{d},\mathcal{D})$ & $=H(\mathbf{t}, \mathcal{D})-rem(\mathbf{d}, \mathcal{D})$\\
+		\hline
+	\end{tabular}
+	\end{center}
+\end{table}
+
+
+\clearpage
+\newpage
+
+%Q3 30 marks
+% basic probability 5
+% bayesian networks 10
+% bayesian learning  15
+
+\question Table \ref{tab:rest} lists a dataset of the previous decision made by a couple regarding whether or not they would wait for a table at a restaurant (i.e., the feature \textsc{Waited} is the target feature in this domain).
+\begin{enumerate}
+
+	%
+	\item Calculate the probabilities (to four places of decimal) that a \textbf{naive Bayes} classifier would use to represent this domain.
+	\marks{18}
+	\begin{answer}
+		A naive Bayes classifier would require the prior probability for each level of the target feature and the conditional probability for each level of each descriptive feature given each level of the target feature:
+		\begin{footnotesize}
+		\begin{tabular}{ll}
+		$P(Waited=Yes)=0.4$ & $P(Waited=No)=0.6$\\
+		$P(Bar=True|Waited=Yes)=0.5 $& $P(Bar=True|Waited=No)=0.5$\\
+		$P(Bar=False|Waited=Yes)=0.5 $& $P(Bar=False|Waited=No)=0.5$\\
+		$P(Patrons=None\mid Waited=Yes)= 0.25$ & $P(Patrons=None\mid Waited=No)=0.1667$\\
+		$P(Patrons=Some\mid Waited=Yes)= 0.5$ & $P(Patrons=Some\mid Waited=No)=0.3333$\\
+		$P(Patrons=Full\mid Waited=Yes)= 0.25$ & $P(Patrons=Full\mid Waited=No)=0.5$\\
+		$P(Price=Cheap\mid Waited=Yes)= 0.5$ & $P(Price=Cheap\mid Waited=No)=0.5$\\
+		$P(Price=Reasonable\mid Waited=Yes)= 0.25$ & $P(Price=Reasonable\mid Waited=No)=0.3333$\\
+		$P(Price=Expensive\mid Waited=Yes)= 0.25$ & $P(Price=Expensive\mid Waited=No)=0.1667$\\
+		\end{tabular}
+		\end{footnotesize}
+	\end{answer}
+
+	%
+	\item Assuming conditional independence between features given the target feature value, calculate the \textbf{probability} of each outcome (\textsc{Waited}=Yes, and \textsc{Waited}=No) for the following restaurant for this couple (marks will be deducted if workings are not shown, round your results to four places of decimal)\\
+	\begin{center}
+	\textsc{Bar}=False, \textsc{Patrons}=None, \textsc{Price}=Expensive
+	\end{center}
+	\marks{10}
+	\begin{answer}
+		The initial score for each outcome is calculated as follows:\\
+		$(Waited=Yes) =  0.5 \times 0.25 \times 0.25 \times 0.4 = 0.0125$\\
+		$(Waited=No) =  0.5 \times 0.1667 \times 0.1667 \times 0.6 = 0.0083$\\
+		However, these scores are not probabilities. To get real probabilities we must normalise these scores. The normalisation constant is calculated as follows:\\
+		$\alpha=0.0125+0.0083=0.0208$\\
+		The actual probabilities of each outcome is then calculated as:
+		$P(Waited=Yes) =  \frac{0.0125}{0.0208}=(0.600961...)=0.6010$ \\
+		$P(Waited=No) =  \frac{0.0083}{0.0208}=(0.399038...)=0.3990$\\
+	\end{answer}
+
+	%
+	\item What prediction would a \textbf{naive Bayes} classifier return for the 	above restaurant?			\marks{2}
+	\begin{answer}
+		A naive Bayes classifier returns outcome with the maximum a posteriori probability as its prediction. In this instance the outcome \textsc{Waited}=Yes is the MAP prediction and will be the outcome returned by a naive Bayes model.
+	\end{answer}
+
+\end{enumerate}
+
+
+\begin{table}[h]
+	%\begin{tiny}
+	\begin{center}
+		\caption{A dataset describing the previous decisions made by an individual about whether to wait for a table at a restaurant.}
+		\label{tab:rest}
+		\vspace{0.5em}
+		\begin{tabular}{lcccc}
+			\hline
+			 ID & \textsc{Bar} & \textsc{Patrons} & \textsc{Price} & \textsc{Waited} \\
+			\hline
+			$1$  & False & Some & Expensive &  Yes\\
+			$2$    & False & Full & Cheap &   No\\
+			$3$    & True & Some & Cheap &   Yes\\
+			$4$    & False & Full & Cheap &   Yes\\
+			$5$    & False & Full & Expensive &   No\\
+			$6$    & True & Some & Reasonable &   No\\
+			$7$    & True & None & Cheap &   No\\
+			$8$    & False & Some & Reasonable &   No\\
+			$9$     & True & Full & Cheap &   No\\
+			$10$ & True & None & Reasonable &   Yes\\
+			\hline
+		\end{tabular}
+	\end{center}
+	%\end{tiny}
+\end{table}
+
+\clearpage
+
+%Q4
+%Linear Regression Neural Nets, SVMs, Ensemble Learning
+
+\question
+\begin{enumerate}
+	\question The following model is commonly used for continuous prediction tasks:
+
+	\begin{center}
+	$y(x)=w_0 + w_1x_1 + \dots + w_Dx_D$
+	\end{center}
+
+	\begin{enumerate}
+
+		\item Provide the name for this model and explain all of the terms that it contains.
+		\marks{4}
+		\begin{answer}
+			Students should explain that this is a simple linear regression model which can be effectively used to make predictions. $x$ is a vector of feature values for a query instance and $w$ is a vector of feature weights. An diagram of a simple one dimensional linear function would help.
+		\end{answer}
+
+		\item Explain how the following model can overcome some of the limitations of the model given above.
+		\marks{8}
+		\begin{center}
+			$\displaystyle y(x)=\sum_{j=0}^{M - 1}w_j{\phi}_j(x)$
+		\end{center}
+		\begin{answer}
+			Students should explain that the simple linear regression model is attractive because it is linear with respect to $w$ but has severe limitations because it is also linear with respect to x. These greatly limits the kinds of predictions that this model will be able to make. However, the introduction of \emph{basis functions}, shown as $\phi$ above, goes some way towards solving this problem. The introduction of a non-linear basis function means that models can be made non-linear functions of input $x$ but remain linear in $w$ which makes them computationally easier to solve.
+
+			Students might give the example of polynomial regression in which ${\phi}_j(x)=x^j$ or some other suitable example.
+		\end{answer}
+	\end{enumerate}
+
+	\item A multivariate logistic regression model has been built to predict the propensity of shoppers to perform a repeat purchase of a free gift that they are given. The descriptive features used by the model are the age of the customer, the average amount of money the customer spends on each visit to the shop, and the average number of visits the customer makes to the shop per week. This model is being used by the marketing department to determine who should be given the free gift. The trained model is
+	\begin{alignat*}{2}
+		\textsc{Repeat~Purchase} = & -3.82398 - 0.02990   \times \textsc{Age} \\
+		& + 0.74572 \times \textsc{Shop~Frequency}\\
+		& + 0.02999 \times \textsc{Shop~Value}
+	\end{alignat*}
+	And, the logistic function is defined as:
+	\begin{equation*}
+		logistic(x)=\frac{1}{1+e^{-x}}
+	\end{equation*}
+	Assuming that the \textit{yes} level is the positive level and the classification threshold is $0.5$, use this model to make predictions for each of the query instances shown in Table \ref{tab:logregress} below.
+	\marks{18}
+
+	\begin{table}[!hb]
+		\caption{The queries for the multivariate logistic regression question}
+		\label{tab:logregress}
+		\begin{center}
+			\begin{tabular}{l r r r}
+				\hline
+							 & ~ & \textsc{Shop}  & \textsc{Shop}\\
+								\textsc{ID} & \textsc{Age} & \textsc{Frequency}  & \textsc{Value}\\
+				\hline
+				1 & 56 & 1.60 & 109.32 \\
+				2 & 21 & 4.92 & 11.28 \\
+				3 & 48 & 1.21 & 161.19 \\
+			\hline
+			\end{tabular}
+		\end{center}
+	\end{table}
+
+	\begin{answer}
+		Calculating the predictions made by the model simply involves inserting the descriptive features from each query instance into the prediction model. With this information, the predictions can be made as follows:
+		\begin{description}
+			\item[1:] $Logistic(-3.82398+-0.0299\times56+0.74572\times1.6+0.02999\times109.32)$ \\
+			$=Logistic(-1.02672) =\frac{1}{1-e^{1.02672}}$\\
+			$=0.26372 \Rightarrow \textit{no}$
+			\item[2:] $Logistic(-3.82398+-0.0299\times21+0.74572\times4.92+0.02999\times11.28)$ \\
+			$=Logistic(-0.44465)  =\frac{1}{1-e^{0.44465}}$ \\
+			$=0.390633 \Rightarrow \textit{no}$
+			\item[3:] $Logistic(-3.82398+-0.0299\times48+0.74572\times1.21+0.02999\times161.19)$ \\
+			$=Logistic(0.477229)   =\frac{1}{1-e^{-0.477229}}$ \\
+			$=0.6205 \Rightarrow \textit{yes}$
+		\end{description}
+	\end{answer}
+\end{enumerate}
+
+\end{document}

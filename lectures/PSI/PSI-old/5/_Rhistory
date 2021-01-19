@@ -1,0 +1,200 @@
+getwd()
+#We need to load the file so that we can use it in R.
+ydata <- read.table("youthcohort.dat")
+#We are using youthcohort.dat (Taken from Quantitative Data Analysis in Education, Paul Connolly)
+#created from the .sav version available at http://cw.routledge.com/textbooks/9780415372985/resources/datasets.asp
+getwd()
+#We need to load the file so that we can use it in R.
+ydata <- read.table("youthcohort.dat")
+#Setting the column names to be that used in the dataset
+colnames(sdata) <- tolower(colnames(ydata))
+#Question:
+#"Are there any differences between pupils of different ethnicity in England and Wales in relation to the grades they achieved in GCSE Maths?"
+#Variables: 'ethsfr' ethnicity, 'gradmath' grade achieved in maths
+#Get some descriptive statistics on the maths grade for each ethnicity
+library(psych)
+psych::describeBy(as.numeric(ydata$gradmath),factor(ydata$ethsfr) )
+#run a kruskal wallis test
+kruskal.test(gradmath~ethsfr,data=ydata)
+#Post hoc testing
+#Need library FSA to run the post-hoc tests
+library(FSA)
+tmp<-FSA::dunnTest(x=as.numeric(ydata$gradmath), g=factor(ydata$ethsfr), method="bonferroni")
+#We need the as.numeric to make sure our gradmath variable is treated as a numeric variable and we are using the numerical categories for ethsfr so we use the factors
+print(tmp, dunn.test.results = TRUE)
+#in the output X=gradmath, g=ethsfr and the test statistic is Z with significance is show underneath
+?kruskal.test
+# Chunk 1: setup
+knitr::opts_chunk$set(echo = TRUE)
+# Chunk 2
+#We are using a .dat file (survey.dat) created from the SPSS file survey.sav  taken from SPSS Survival Manual 6th Edition Julie Pallant
+#http://spss.allenandunwin.com.s3-website-ap-southeast-2.amazonaws.com/data-files.html#.Wb0vvnWP-po
+#Results on a survey on well being
+#We need to load the file so that we can use it in R.
+sdata <- read.table("C:/tempR/survey.dat")
+#Setting the column names to be that used in the dataset
+colnames(sdata) <- tolower(colnames(sdata))
+#Question
+#Is there a difference in optimism scores for young, middle-aged and old participants?
+#One independent variable with three or more levels (age category)
+#One continuous variable (optimism scores)
+#First need to check for homogeneity of variance
+#We use Bartlett's test
+bartlett.test(sdata$toptim, sdata$agegp3)
+#Can be argued that the variances are homogeneous if the p-value > 0.05
+#install the library userfriendlyscience and load it using the library command
+#it has a really nice one-way anova function that provides
+#nice summary output
+# Chunk 3
+#Basic Approach
+# Compute the analysis of variance
+res.aov <- aov(sdata$toptim ~ sdata$agegp3, data = sdata)
+# Summary of the analysis
+summary(res.aov)
+#Tukey pairwise comparison
+TukeyHSD(res.aov)
+#Alternative
+library(userfriendlyscience)
+#run a one-way anova test using the correct post-hoc test Tukey in our case
+#Use Games-Howell for unequal variances
+one.way <- userfriendlyscience::oneway(sdata$agegp3, y = sdata$toptim, posthoc = 'Tukey')
+#printout a summary of the anova
+one.way
+# Chunk 4
+#We are using youthcohort.dat (Taken from Quantitative Data Analysis in Education, Paul Connolly)
+#created from the .sav version available at http://cw.routledge.com/textbooks/9780415372985/resources/datasets.asp
+getwd()
+#We need to load the file so that we can use it in R.
+ydata <- read.table("youthcohort.dat")
+#Setting the column names to be that used in the dataset
+colnames(sdata) <- tolower(colnames(ydata))
+#Question:
+#"Are there any differences between pupils of different ethnicity in England and Wales in relation to the grades they achieved in GCSE Maths?"
+#Variables: 'ethsfr' ethnicity, 'gradmath' grade achieved in maths
+#Get some descriptive statistics on the maths grade for each ethnicity
+library(psych)
+psych::describeBy(as.numeric(ydata$gradmath),factor(ydata$ethsfr) )
+#run a kruskal wallis test
+stats::kruskal.test(gradmath~ethsfr,data=ydata)
+#Post hoc testing
+#Need library FSA to run the post-hoc tests
+library(FSA)
+tmp<-FSA::dunnTest(x=as.numeric(ydata$gradmath), g=factor(ydata$ethsfr), method="bonferroni")
+#We need the as.numeric to make sure our gradmath variable is treated as a numeric variable and we are using the numerical categories for ethsfr so we use the factors
+print(tmp, dunn.test.results = TRUE)
+#in the output X=gradmath, g=ethsfr and the test statistic is Z with significance is show underneath
+# Chunk 5
+#We are using diet.dat (Taken from Discovering Statistics with R, Andy Field)
+#created from the .sav version available at https://studysites.uk.sagepub.com/dsur/study/default.htm
+#adapted to work as a dataframe on load
+#Does the 'andikins' diet work?
+#Variables
+#Outcome: weight (Kg)
+#Time since beginning the diet
+#At Baseline (start)
+#At 1 Month
+#At 2 Months
+#read in the data
+diet <- read.table("diet.dat")
+#treat our data as a matrix
+Responses <- na.omit(with(diet, cbind(month1, month2, start)))
+cat("\nMedians:\n")#display the heading Medians
+#print out the medians of each of our variables
+print(apply(Responses, 2, median))
+#conduct the friedman test
+friedman.test(Responses)
+#Conduct post-hoc tests as needed
+# Chunk 6
+#We are using catsrdata.dat (Taken from Discovering Statistics with R, Andy Field)
+#created from the .sav version available at https://studysites.uk.sagepub.com/dsur/study/default.htm
+#adapted to work as a dataframe on load
+#Can animals be trained to line-dance with different rewards?
+#Participants: 200 cats
+#Variables:
+#Training: The animal was trained using either food or affection, not both
+#Dance: The animal either learnt to line-dance or it did not.
+#Outcome: The number of animals (frequency) that could dance or not in each reward condition.
+#read in the data
+catsData<-read.table("catsrdata.dat")
+#create a frequency table and print it
+mytable<-xtabs(~Dance+Training, data=catsData)
+print(mytable)
+#Using the bullying.dat dataset (Paul Connolly)
+#created from the .sav version available at http://cw.routledge.com/textbooks/9780415372985/resources/datasets.asp
+#Contains the results of national school level survey, subset of this survey which deals with bullying.
+#Question:
+#"Is there a difference between boys and girls in terms of whether they have been bullied at school?"
+#H0:  There is no difference
+#HA: There is a difference
+#Variables:
+#'rsex' {1-Male, 2-Female, 99-not answered};
+#'ubullsch' - Q26. Have you yourself ever been bullied in school? {1- Yes, 2 -No, 99-not answered}
+#import the library gmodels and then load it
+library(gmodels)
+bully<-read.table("bullying.dat")
+#Use the Crosstable function
+#CrossTable(predictor, outcome, fisher = TRUE, chisq = TRUE, expected = TRUE)
+CrossTable(bully$rsex, bully$ubullsch, fisher = TRUE, chisq = TRUE, expected = TRUE, sresid = TRUE, format = "SPSS")
+#more simplistic way of doing Chi-Square
+bully<-read.table("bullying.dat")
+#Create your contingency table
+mytable<-xtabs(~ubullsch+rsex, data=bully)
+ctest<-chisq.test(mytable, correct=TRUE)#chi square test
+#correct=TRUE to get Yates correction needed for 2x2 table
+ctest#will give you the details of the test statistic and p-value
+ctest$expected#expected frequencies
+ctest$observed#observed frequencies
+ctest$p.value
+install.packages("gmodels")
+#We are using catsrdata.dat (Taken from Discovering Statistics with R, Andy Field)
+#created from the .sav version available at https://studysites.uk.sagepub.com/dsur/study/default.htm
+#adapted to work as a dataframe on load
+#Can animals be trained to line-dance with different rewards?
+#Participants: 200 cats
+#Variables:
+#Training: The animal was trained using either food or affection, not both
+#Dance: The animal either learnt to line-dance or it did not.
+#Outcome: The number of animals (frequency) that could dance or not in each reward condition.
+#read in the data
+catsData<-read.table("catsrdata.dat")
+#create a frequency table and print it
+mytable<-xtabs(~Dance+Training, data=catsData)
+print(mytable)
+#Using the bullying.dat dataset (Paul Connolly)
+#created from the .sav version available at http://cw.routledge.com/textbooks/9780415372985/resources/datasets.asp
+#Contains the results of national school level survey, subset of this survey which deals with bullying.
+#Question:
+#"Is there a difference between boys and girls in terms of whether they have been bullied at school?"
+#H0:  There is no difference
+#HA: There is a difference
+#Variables:
+#'rsex' {1-Male, 2-Female, 99-not answered};
+#'ubullsch' - Q26. Have you yourself ever been bullied in school? {1- Yes, 2 -No, 99-not answered}
+#import the library gmodels and then load it
+library(gmodels)
+bully<-read.table("bullying.dat")
+#Use the Crosstable function
+#CrossTable(predictor, outcome, fisher = TRUE, chisq = TRUE, expected = TRUE)
+CrossTable(bully$rsex, bully$ubullsch, fisher = TRUE, chisq = TRUE, expected = TRUE, sresid = TRUE, format = "SPSS")
+#more simplistic way of doing Chi-Square
+bully<-read.table("bullying.dat")
+#Create your contingency table
+mytable<-xtabs(~ubullsch+rsex, data=bully)
+ctest<-chisq.test(mytable, correct=TRUE)#chi square test
+#correct=TRUE to get Yates correction needed for 2x2 table
+ctest#will give you the details of the test statistic and p-value
+ctest$expected#expected frequencies
+ctest$observed#observed frequencies
+ctest$p.value
+survey <- read.table("C:/tempR/survey.dat")
+#Setting the column names to be that used in the dataset
+colnames(survey) <- tolower(colnames(survey))
+CrossTable(survey$sex,survey$toptim)
+CrossTable(survey$sex,survey$toptim, format="SPSS")
+colnames(survet)
+colnames(survey)
+CrossTable(survey$sex,survey$agegp3, format="SPSS")
+CrossTable(survey$sex,survey$agegp3, fisher=false, chisq=false, expected=false, sresid=false format="SPSS")
+CrossTable(survey$sex,survey$agegp3, fisher=false, chisq=false, expected=false, sresid=false, format="SPSS")
+CrossTable(survey$sex,survey$agegp3, fisher=FALSE, chisq=FALSE, expected=FALSE, sresid=FALSE, format="SPSS")
+CrossTable(survey$sex,survey$toptim, fisher=FALSE, chisq=FALSE, expected=FALSE, sresid=FALSE, format="SPSS")

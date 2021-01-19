@@ -1,0 +1,512 @@
+#Columns are actuals, rows are predicted
+confusionMatrix(na.omit(mydata$victcar), predicted, threshold = 0.5)
+predicted <- predict(logmodel1, myData, type="response")
+?predict
+predicted <- predict(logmodel1, myData, type="response")
+predicted <- predict(logmodel1, mydata, type="response")
+#Columns are actuals, rows are predicted
+confusionMatrix(na.omit(mydata$victcar), predicted, threshold = 0.5)
+sensitivity(na.omit(mydata$victcar), predicted, threshold = 0.5)
+specificity(mydata$victcar, predicted, threshold = optCutOff)
+predicted <- plogis(predict(logmodel2, mydata))  # predicted scores
+sensitivity(na.omit(mydata$victcar), predicted, threshold = 0.5)
+logmodel1
+threshold=0.5
+predicted_values<-ifelse(predict(logmodel1,type="response")>threshold,1,0)
+actual_values<-logmodel1$victcar
+conf_matrix<-table(predicted_values,actual_values)
+logmodel1$y
+actual_values<-logmodel1$y
+conf_matrix<-table(predicted_values,actual_values)
+actual_values<-na.omit(logmodel1$y)
+conf_matrix<-table(predicted_values,actual_values)
+length(logmodel1$y)
+length(predicted_values
+)
+?predict
+logmodel1 <- glm(victcar ~ sex+ethnicr, data = mydata,  family = binomial())
+predicted_values<-ifelse(predict(logmodel1,type="response")>threshold,1,0)
+actual_values<-na.omit(logmodel1$y)
+conf_matrix<-table(predicted_values,actual_values)
+conf_matrix
+#Pseudo Rsquared plus Chi-square of the model
+rcompanion::nagelkerke(logmodel1,restrictNobs=TRUE)
+#Chi-square plus significance
+lmtest::lrtest(logmodel1)
+exp(coefficients(logmodel1))
+sensitivity(na.omit(mydata$victcar), predicted, threshold = 0.5)
+sensitivity(na.omit(mydata$victcar), predicted_values, threshold = 0.5)
+sensitivity(mydata$victcar, predicted_values, threshold = 0.5)
+length(mydata$victcar)
+length(predicted_values)
+sensitivity(logmodel1$y, predicted_values, threshold = 0.5)
+specificity(logmodel1$y, predicted, threshold = optCutOff)
+specificity(logmodel1$y, predicted_values, threshold = optCutOff)
+#using logistic.display from epiDisplay
+logistic.display(logmodel2)
+install.packages("epiDislay")
+library(epiDisplay)
+lroc(logmodel2, graph=TRUE)#Will give you plot plus AUC
+install.packages("caret")
+library(caret)
+caret::sensitivity(conf_matrix)
+conf_matrix<-table(predicted_values,actual_values)
+conf_matrix
+caret::sensitivity(conf_matrix)
+sensitivity(conf_matrix)
+?sensitivity.matrix
+sensitivity.matrix(conf_matrix)
+library(caret)
+sensitivity(conf_matrix)
+logmodel1 <- glm(victcar ~ sex+ethnicr, data = mydata,  family = binomial())
+threshold=0.5
+predicted_values<-ifelse(predict(logmodel1,type="response")>threshold,1,0)
+actual_values<-na.omit(logmodel1$y)
+conf_matrix<-table(predicted_values,actual_values)
+conf_matrix
+sensitivity(conf_matrix)
+?sensitivity
+?sensitivity
+library(ModelMetrics)
+ModelMetrics::sensitivity(actual_values, predicted_values, cutoff=0.5)
+ModelMetrics::specificity(actual_values, predicted_values, cutoff=0.5)
+logmodel2 <- glm(victcar ~ sex+ethnicr+agegrpr+tenurer+numcarr, data = mydata, family = binomial())
+threshold=0.5
+predicted_values<-ifelse(predict(logmodel2,type="response")>threshold,1,0)
+actual_values<-na.omit(logmodel2$y)
+actual_values<-na.omit(logmodel2$y)
+conf_matrix<-table(predicted_values,actual_values)
+conf_matrix
+ModelMetrics::sensitivity(actual_values, predicted_values, cutoff=0.5)
+ModelMetrics::specificity(actual_values, predicted_values, cutoff=0.5)
+nagelkerke(logmodel2)
+library(ROCR)
+lroc(logmodel2, graph=TRUE)#Will give you plot plus AUC
+install.packages("ROC")
+library(ROC)
+mydata$sex<-as.factor(mydata$sex)
+logmodel1 <- glm(victcar ~ sex+ethnicr, data = mydata,  family = binomial())
+threshold=0.5
+predicted_values<-ifelse(predict(logmodel1,type="response")>threshold,1,0)
+actual_values<-na.omit(logmodel1$y)
+conf_matrix<-table(predicted_values,actual_values)
+conf_matrix
+#Summary of the model with co-efficients
+stargazer(logmodel1, type="text")
+summary(logmodel1)
+contrasts(mydata$sex)
+contrasts(mydata$ethnicity)
+contrasts(mydata$ethnicr)
+logmodel2 <- glm(victcar ~ sex+ethnicr+agegrpr+tenurer+numcarr, data = mydata, family = binomial())
+predicted_values<-ifelse(predict(logmodel2,type="response")>threshold,1,0)
+conf_matrix<-table(predicted_values,actual_values)
+conf_matrix
+ModelMetrics::sensitivity(actual_values, predicted_values, cutoff=0.5)
+ModelMetrics::specificity(actual_values, predicted_values, cutoff=0.5)
+summary(logmodel2)
+predicted_values<-ifelse(predict(logmodel2,type="response")>threshold,1,0)
+predicted_values
+actual_values<-na.omit(logmodel2$y)
+conf_matrix<-table(predicted_values,actual_values)
+conf_matrix
+logmodel2 <- glm(victcar ~ sex+ethnicr+agegrpr+tenurer+numcarr, na.action=na.exclude, data = mydata, family = binomial())
+threshold=0.5
+predicted_values<-ifelse(predict(logmodel2,type="response")>threshold,1,0)
+actual_values<-na.omit(logmodel2$y)
+conf_matrix<-table(predicted_values,actual_values)
+logmodel2 <- glm(victcar ~ sex+ethnicr+agegrpr+tenurer+numcarr,  data = mydata, family = binomial())
+predicted_values<-ifelse(predict(logmodel2,type="response")>threshold,1,0)
+actual_values<-na.omit(logmodel2$y)
+conf_matrix<-table(predicted_values,actual_values)
+conf_matrix
+actual_values<-logmodel$y)
+actual_values<-logmodel1$y
+conf_matrix<-table(predicted_values,actual_values)
+conf_matrix
+ModelMetrics::sensitivity(actual_values, predicted_values, cutoff=0.5)
+ModelMetrics::specificity(actual_values, predicted_values, cutoff=0.5)
+summary(logmodel1)
+threshold=0.5
+predicted_values<-ifelse(predict(logmodel1,type="response")>threshold,1,0)
+actual_values<-na.omit(logmodel1$y)
+conf_matrix<-table(predicted_values,actual_values)
+conf_matrix
+actual_values<-na.omit(logmodel1$y)
+conf_matrix<-table(predicted_values,actual_values)
+conf_matrix
+logmodel2 <- glm(victcar ~ sex+ethnicr+agegrpr+tenurer+numcarr,  data = mydata, family = binomial())
+threshold=0.5
+predicted_values<-ifelse(predict(logmodel2,type="response")>threshold,1,0)
+actual_values<-na.omit(logmodel1$y)
+conf_matrix<-table(predicted_values,actual_values)
+logmodel2 <- glm(victcar ~ sex+ethnicr+agegrpr+tenurer+numcarr,  na.action=na.exclude, data = mydata, family = binomial())
+threshold=0.5
+predicted_values<-ifelse(predict(logmodel2,type="response")>threshold,1,0)
+actual_values<-na.omit(logmodel1$y)
+conf_matrix<-table(predicted_values,actual_values)
+confusionMatrix(predicted_values, logmodel2$y)
+library(caret)
+confusionMatrix(predicted_values, logmodel2$y)
+confusionMatrix(predicted_values$y, logmodel2$y)
+actual_values<-logmodel2$y
+conf_matrix<-table(predicted_values,actual_values)
+logmodel2 <- glm(victcar ~ sex+ethnicr+agegrpr+tenurer+numcarr,   data = mydata, family = binomial())
+threshold=0.5
+actual_values<-logmodel2$y
+actual_values<-logmodel2$y
+conf_matrix<-table(predicted_values,actual_values)
+length(predicted_values)
+length(actual_values)
+lenght(na.mit(predicted_valuse))
+lenght(na.mit(predicted_values))
+length(na.mit(predicted_values))
+length(na.omit(predicted_values))
+conf_matrix<-table(na.omit(predicted_values),actual_values)
+conf_matrix
+confusionMatrix(na.omit(predicted_values), logmodel2$y)
+confusionMatrix(na.omit(predicted_values), na.omit(logmodel2$y))
+conf_matrix<-table(predicted_values,actual_values)
+threshold=0.5
+predicted_values<-ifelse(predict(logmodel1,type="response")>threshold,1,0)
+predicted_values<-na.omit(predicted_values)
+actual_values<-na.omit(logmodel1$y)
+conf_matrix<-table(predicted_values,actual_values)
+conf_matrix
+confusionMatrix(predicted_values, actual_values)
+length(predicted_values)
+length(actual_values)
+?confusionMatrix
+ModelMetrics::confusionMatrix(actual_values, predicted_values, cutoff=0.5)
+caret::confusionMatrix(predicted_values,actual_values, cutoff=0.5)
+caret::confusionMatrix(as.factor(predicted_values),as.factor(actual_values), cutoff=0.5)
+logmodel1 <- glm(victcar ~ sex+ethnicr, data = mydata,  family = binomial())
+mydata$ethnicr<-as.factor(mydata$ethnicr)
+logmodel1 <- glm(victcar ~ sex+ethnicr, data = mydata,  family = binomial())
+threshold=0.5
+predicted_values<-ifelse(predict(logmodel1,type="response")>threshold,1,0)
+predicted_values<-na.omit(predicted_values)
+actual_values<-na.omit(logmodel1$y)
+conf_matrix<-table(predicted_values,actual_values)
+conf_matrix
+#Chi-square plus significance
+lmtest::lrtest(logmodel1)
+?exp
+?predict
+#Calculate confusion matrix
+threshold=0.5
+predicted_values<-ifelse(predict(logmodel1,type="response")>threshold,1,0)
+predicted_values<-na.omit(predicted_values)
+actual_values<-na.omit(logmodel1$y)
+conf_matrix<-table(predicted_values,actual_values)
+conf_matrix
+install.packages("SDMTools")
+library(SDMTools)
+SDMTools::confusion.matrix(actual_values, predicted_values, threshold=0.5)
+predicted_values<predict(logmodel1, type="response")
+conf_matrix<-table(predicted_values,actual_values)
+conf_matrix
+SDMTools::confusion.matrix(actual_values, predicted_values, threshold=0.5)
+conf_matrix
+SDMTools::confusion.matrix(actual_values, predicted_values, threshold=0.5)
+#Calculate confusion matrix
+predicted_values<predict(logmodel1, type="response")
+predicted_values<-na.omit(predicted_values)
+actual_values<-na.omit(logmodel1$y)
+SDMTools::confusion.matrix(actual_values, predicted_values, threshold=0.5)
+conf_matrix<-table(na.omit(predicted_values),actual_values)
+#Calculate confusion matrix
+predicted_values<-predict(logmodel1, type="response")
+#Calculate confusion matrix
+predicted_values<-predict(logmodel1, type="response")
+SDMTools::confusion.matrix(actual_values, predicted_values, threshold=0.5)
+#Calculate sensistivity and specificity
+ModelMetrics::sensitivity(actual_values, predicted_values, cutoff=0.5)
+ModelMetrics::specificity(actual_values, predicted_values, cutoff=0.5)
+vif(logmodel1)
+?pred.logit
+library(caret)
+?pred.logit
+caret::confusionMatrix(predicted_values, actual_values)
+caret::confusionMatrix(predicted_values$y, actual_values$y)
+table(predicted_values, actual_values)
+?predict
+table(mydata$victcar, predicted_values > 0.5)
+actual_values<-logmodel2$y
+predicted_values<-na.omit(predicted_values)
+#Calculate confusion matrix
+predicted_values<-predict(logmodel1, type="response")
+predicted_values<-na.omit(predicted_values)
+table(actual_values, predicted_values > 0.5)
+length(actual_values)
+length(predicted_values)
+actual_values<-na.omit(logmodel2$y)
+length(actual_values)
+actual_values<-na.omit(logmodel2$y)
+table(actual_values, predicted_values > 0.5)
+length(actual_values)
+length(predicted_values)
+length(na.omit(predicted_values))
+actual_values<-logmodel2$y
+length(actual_values)
+actual_values<-mydate$victcar
+actual_values<-mydata$victcar
+length(actual_values)
+length(na.omit(actual_values))
+logmodel1 <- glm(victcar ~ sex+ethnicr, data = mydata, na.action = na.exclude, family = binomial())
+#Calculate confusion matrix
+predicted_values<-predict(logmodel1, type="response")
+actual_values<-logmodel2$y
+length(actual_values)
+length(predicted_values)
+length(na.omit(predicted_values)
+)
+actual_values<-mydata$victcar
+length(actual_values)
+#Calculate confusion matrix
+predicted_values<-predict(logmodel1, type="response")
+actual_values<-mydata$victcar
+)
+table(actual_values, predicted_values > 0.5)
+predicted <- predict(logmodel1, myata, type="response")
+predicted <- predict(logmodel1, mydata, type="response")
+confusionMatrix(mydata$victcar, predicted, threshold = 0.5
+)
+length(predicted)
+length(mydata$victcar)
+confusionMatrix(mydata$victcar, predicted, threshold = 0.5)
+confusionMatrix(as.factor(mydata$victcar), predicted, threshold = 0.5)
+predicted
+predicted <- plogis(predict(logmodel1, mydata))
+confusionMatrix(as.factor(mydata$victcar), predicted, threshold = 0.5)
+confusionMatrix(mydata$victcar, predicted, threshold = 0.5)
+trn_pred <- ifelse(predict(logmodel1, type = "response") > 0.5, "Yes", "No")
+confusionMatrix(mydata$victcar, trn_pred, threshold = 0.5)
+trn_pred <- ifelse(predict(logmodel1, type = "response") > 0.5, 1, 0)
+confusionMatrix(mydata$victcar, trn_pred, threshold = 0.5)
+mydata$victcar
+confusionMatrix(as,numeric(mydata$victcar), trn_pred, threshold = 0.5)
+confusionMatrix(as.numeric(mydata$victcar), trn_pred, threshold = 0.5)
+confusionMatrix(as.factor(mydata$victcar), trn_pred, threshold = 0.5)
+#Summary of the model with co-efficients
+stargazer(logmodel1, type="text")
+confusionMatrix(as.factor(mydata$victcar), trn_pred, threshold = 0.5)
+head(trn_pred)
+trn_pred
+tail(trn_pred)
+mydata$victcar
+trn_pred <- ifelse(predict(logmodel1, type = "response") > 0.5, "victim car crime", "not victim car crime")
+trn_pred
+confusionMatrix(as.factor(mydata$victcar), trn_pred, threshold = 0.5)
+confusionMatrix(mydata$victcar, trn_pred, threshold = 0.5)
+trn_pred <- ifelse(predict(logmodel1, type = "response") > 0.5, 1, 0)
+as.factor(mydata$victcar)
+as.numeric(mydata$victcar)
+trn_pred <- ifelse(predict(logmodel1, type = "response") > 0.5, 2, 1)
+confusionMatrix(mydata$victcar, trn_pred, threshold = 0.5)
+trn_pred
+library(foreign)
+mydata <- read.spss("carcrime.dat")
+mydata <- read.spss("carcrime.sav")
+#Check your proportions for bias - are these representative?
+table(mydata$victcar)
+mydata$victcar
+as.factor(mydata$victcar)
+as.numeric(mydata$victcar)
+confusionMatrix(mydata$victcar, trn_pred, threshold = 0.5)
+summary(trn_pred)
+trn_pred <- ifelse(predict(logmodel1, type = "response") > 0.5, 0, 1)
+summary(trn_pred)
+#predicted_values<-na.omit(predicted_values)
+actual_values<-mydata$victcar
+#Calculate confusion matrix
+predicted_values<-predict(logmodel1, type="response")
+#SDMTools::confusion.matrix(actual_values, predicted_values, threshold=0.5)
+#Calculate sensistivity and specificity
+ModelMetrics::sensitivity(actual_values, predicted_values, cutoff=0.5)
+ModelMetrics::specificity(actual_values, predicted_values, cutoff=0.5)
+mydata <- read.spss("youthcohort.sav")
+#Check your proportions for bias - are these representative?
+table(mydata$satmath)
+#Make sure categorical data is used as factors
+mydata$gender<-as.factor(mydata$gender)
+logmodel1 <- glm(satmath ~ gender+ethsfr, data = mydata, na.action = na.exclude, family = binomial())
+mydata$gender
+"
+)
+!
+""
+mydata <- read.spss("youthcorhort.sav")
+#load the libraries needed
+library(aod)
+library(ggplot2)
+library(SDMTools)
+library(ModelMetrics)
+library(rcompanion)
+library(userfriendlyscience)
+library(stargazer)
+library(foreign)
+mydata <- read.spss("youthcorhort.sav")
+#Check your proportions for bias - are these representative?
+table(mydata$victcar)
+mydata <- read.spss("youthcorhort.sav")
+setwd("G:/My Drive/Teaching/Semester 1/Probability and Statistics/1819/9")
+mydata <- read.spss("youthcorhort.sav")
+mydata <- read.spss("youthcohort.sav")
+#Check your proportions for bias - are these representative?
+table(mydata$satmath)
+logmodel1 <- glm(satmath ~ gender+ethsfr, data = mydata, na.action = na.exclude, family = binomial())
+logmodel1 <- glm(satmath ~ s1gender+ethsfr, data = mydata, na.action = na.exclude, family = binomial())
+#Summary of the model with co-efficients
+stargazer(logmodel1, type="text")
+predicted <- predict(logmodel1, mydata, type="response")
+confusionMatrix(mydata$satmath, predicted, threshold = 0.5)
+confusionMatrix(mydata$satmath, predicted)
+caret::confusionMatrix(mydata$satmath, predicted)
+confusionMatrix(mydata$satmath, predicted)
+confusionMatrix(?)
+?confusionMatrix
+ModelMetrics::confusionMatrix(mydata$satmath, predicted)
+caret::confusionMatrix(mydata$satmath, trn_pred, threshold = 0.5)
+trn_pred <- ifelse(predict(logmodel1, type = "response") > 0.5, 0, 1)
+caret::confusionMatrix(mydata$satmath, trn_pred, threshold = 0.5)
+table(mydata$satmath, trn_pred)
+xtabs(~ predicted + satmath, data = mydata)
+predicted = round(fitted(logmodel1),0)
+xtabs(~ predicted + satmath, data = mydata)
+ModelMetrics::confusionMatrix(mydata$satmath, predicted)
+caret::confusionMatrix(mydata$satmath, trn_pred, threshold = 0.5)
+caret::confusionMatrix(mydata$satmath, predicted, threshold = 0.5)
+predicted
+predicted = round(fitted(logmodel1),0)
+?logit
+fitted(logmodel1)
+S=predict(logmodel1,type="response")
+S
+S=round(predict(logmodel1,type="response"))
+S
+roc.curve=function(s,print=FALSE){
++ Ps=(S>s)*1
++ FP=sum((Ps==1)*(Y==0))/sum(Y==0)
++ TP=sum((Ps==1)*(Y==1))/sum(Y==1)
++ if(print==TRUE){
++ print(table(Observed=Y,Predicted=Ps))
++ }
++ vect=c(FP,TP)
++ names(vect)=c("FPR","TPR")
++ return(vect)
++ }
+roc.curve=function(s,print=FALSE){
++ Ps=(S>s)*1
++ FP=sum((Ps==1)*(Y==0))/sum(Y==0)
++ TP=sum((Ps==1)*(Y==1))/sum(Y==1)
++ if(print==TRUE){
++ print(table(Observed=Y,Predicted=Ps))
++ }
++ vect=c(FP,TP)
++ names(vect)=c("FPR","TPR")
++ return(vect)
++ }
+roc.curve=function(s,print=FALSE){
+Ps=(S>s)*1
+FP=sum((Ps==1)*(Y==0))/sum(Y==0)
+TP=sum((Ps==1)*(Y==1))/sum(Y==1)
+if(print==TRUE){
+print(table(Observed=Y,Predicted=Ps))
+}
+)
+library(AutoModel)
+classification_table(mydata$satmath, predicted)
+classification_table(logmodel1$y, mydata$satmath)
+classification_table(logmodel1, mydata$satmath)
+AutoModel::classification_table(logmodel1, mydata$satmath)
+stargazer(logmodel1, type="text")
+#Full summary of the model
+summary(logmodel1)
+logmodel1 <- glm(satmath ~ s1gender+s1pared data = mydata, na.action = na.exclude, family = binomial())
+logmodel1 <- glm(satmath ~ s1gender+s1pared, data = mydata, na.action = na.exclude, family = binomial())
+AutoModel::classification_table(logmodel1, mydata$satmath)
+stargazer(logmodel1, type="text")
+#Full summary of the model
+summary(logmodel1)
+#Chi-square plus significance
+lmtest::lrtest(logmodel1)
+#Chi-square plus significance
+lmtest::lrtest(logmodel1)
+#Full summary of the model
+summary(logmodel1)
+#Exponentiate the co-efficients
+exp(coefficients(logmodel1))
+#Pseudo Rsquared plus Chi-square of the model
+rcompanion::nagelkerke(logmodel1,restrictNobs=TRUE)
+#SDMTools::confusion.matrix(actual_values, predicted_values, threshold=0.5)
+#Calculate sensistivity and specificity
+ModelMetrics::confusionMatrix(mydata$satmath, predicted_values)
+#Calculate confusion matrix
+predicted_values<-predict(logmodel1, type="response")
+#predicted_values<-na.omit(predicted_values)
+actual_values<-mydata$satmath
+table(actual_values, predicted_values > 0.5)
+SDMTools::confusion.matrix(actual_values, predicted_values, threshold=0.5)
+#Calculate sensistivity and specificity
+ModelMetrics::confusionMatrix(mydata$satmath, predicted_values)
+ModelMetrics::sensitivity(actual_values, predicted_values, cutoff=0.5)
+ModelMetrics::specificity(actual_values, predicted_values, cutoff=0.5)
+ModelMetrics::sensitivity(mydata$satmath, predicted_values, cutoff=0.5)
+ModelMetrics::specificity(mydata$satmath, predicted_values, cutoff=0.5)
+AutoModel::classification_table(logmodel1, mydata$satmath)
+?sensitivity
+negPredValues(predicted_values, mydata$satmath
+)
+negPredValue(predicted_values, mydata$satmath)
+load(caret)
+library(caret)
+negPredValue(predicted_values, mydata$satmath)
+predicted_values<-predict(logmodel1, type="response")
+negPredValue(predicted_values, mydata$satmath)
+negPredValue(predicted_values, as.factor(mydata$satmath)
+)
+threshold=0.5
+predicted_values<-ifelse(predict(logmodel1,type="response")>threshold,1,0)
+actual_values<-logmodel1$y
+conf_matrix<-table(predicted_values,actual_values)
+conf_matrix
+caret::sensitivity(conf_matrix)
+actual_values<-mydata$satmath
+conf_matrix<-table(predicted_values,actual_values)
+conf_matrix
+actual_values<-as.factor(mydata$satmath)
+conf_matrix<-table(predicted_values,actual_values)
+conf_matrix
+predicted_values<-predict(logmodel1, type="response")
+predicted_values<-ifelse(predict(logmodel1,type="response")>threshold,1,0)
+actual_values<-as.factor(mydata$satmath)
+conf_matrix<-table(predicted_values,actual_values)
+conf_matrix
+caret::sensitivity(conf_matrix)
+accuracy(mydata$satmath, predicted, threshold = 0.5)
+library(InformationValue)
+?sensitivity
+sensitivity(mydata$satmath, predicted_values)
+library(caret)
+caret::sensitivity(conf_matrix)
+predicted_values<-ifelse(predict(logmodel1,type="response")>threshold,1,0)
+actual_values<-as.factor(mydata$satmath)
+conf_matrix<-table(predicted_values,actual_values)
+conf_matrix
+caret::sensitivity(conf_matrix)
+#Calculate sensistivity and specificity
+ModelMetrics::confusionMatrix(mydata$satmath, predicted_values)
+ModelMetrics::sensitivity(mydata$satmath, predicted_values, cutoff=0.5)
+ModelMetrics::specificity(mydata$satmath, predicted_values, cutoff=0.5)
+install.packages("Epi")
+library(Epi)
+?ROC
+ROC(form=mydata$satmath ~ mydata$s1gender+mydata$s1pared, plot="ROC")
+EPI::ROC(form=mydata$satmath ~ mydata$s1gender+mydata$s1pared, plot="ROC")
+Epi::ROC(form=mydata$satmath ~ mydata$s1gender+mydata$s1pared, plot="ROC")
+#Full summary of the model
+summary(logmodel1)
+#Pseudo Rsquared plus Chi-square of the model
+rcompanion::nagelkerke(logmodel1,restrictNobs=TRUE)
+#Full summary of the model
+summary(logmodel1)

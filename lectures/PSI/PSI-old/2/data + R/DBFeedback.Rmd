@@ -1,0 +1,41 @@
+---
+title: "Untitled"
+author: "Deirdre Lawless"
+date: "26 October 2018"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+
+
+
+```{r }
+library(ggplot2)
+dbData <- read.csv("feedbackdb.csv",  header = TRUE)
+gg <- ggplot(dbData, aes(x=dbData$Total))
+gg <- gg + labs(x="Lab Test Total")
+gg <- gg + geom_histogram(binwidth=4, colour="black", aes(y=..density.., fill=..count..))
+gg <- gg + scale_fill_gradient("Count", low="#DCDCDC", high="#7C7C7C")
+gg <- gg + stat_function(fun=dnorm, color="red",args=list(mean=mean(dbData$Total, na.rm=TRUE), sd=sd(dbData$Total, na.rm=TRUE)))
+gg <- gg + stat_function(fun=dnorm, color="red",args=list(mean=mean(dbData$Total, na.rm=TRUE), sd=sd(dbData$Total, na.rm=TRUE)))
+gg <- gg + stat_function(fun=dnorm, color="red",args=list(mean=mean(dbData$Total, na.rm=TRUE), sd=sd(dbData$Total, na.rm=TRUE)))
+gg
+```
+
+```{r}
+db228<-subset(dbData, Total=="DT228")
+gg <- ggplot(db228, aes(x=db228$Total))
+gg <- gg + labs(x="Lab Test Total (DT228)")
+gg <- gg + geom_histogram(binwidth=4, colour="black", aes(y=..density.., fill=..count..))
+gg <- gg + scale_fill_gradient("Count", low="#DCDCDC", high="#7C7C7C")
+gg <- gg + stat_function(fun=dnorm, color="red",args=list(mean=mean(db228$Total, na.rm=TRUE), sd=sd(db228$Total, na.rm=TRUE)))
+gg <- gg + stat_function(fun=dnorm, color="red",args=list(mean=mean(db228$Total na.rm=TRUE), sd=sd(db228$Total, na.rm=TRUE)))
+gg <- gg + stat_function(fun=dnorm, color="red",args=list(mean=mean(db228$Total, na.rm=TRUE), sd=sd(db228$Total, na.rm=TRUE)))
+gg

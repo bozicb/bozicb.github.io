@@ -1,0 +1,193 @@
+% Filename  : samplepaper.tex
+% Purpose   : A sample exam paper to demonstrate how to use the 'ditpaper'
+%             TeX class.
+% Author    : Emmet Caulfield
+% Revision  : $Id: samplepaper.tex 2 2006-02-19 20:34:45Z emmet $
+% Repository: $HeadURL: http://svn.netrogen.lan/tex-ditpaper/trunk/samplepaper.tex $
+%
+
+% 'nosolution' (default) and 'solution' toggle the inclusion of solutions
+% in the output. The tag --SOLUTION-OPTION--, below, is replaced by 'sed' 
+% in the Makefile to cause both the paper and the solutions to be produced.
+\documentclass[--SOLUTION-OPTION--]{ditpaper}
+
+\usepackage{graphicx}
+
+% These must be set or bizarre defaults will be used:
+\facility{Kevin Street, Dublin 8}
+\course{BSc (Hons) in Computer Science}
+\examcode{W228/902}
+\stage{Stage 4}
+\session{Semester 1 Examinations 2007}
+\title{Artificial Intelligence 1}
+\examiners{Dr. John Kelleher\\
+Prof. B. O'Shea\\
+Dr. I. Arena}
+\examdate{}
+\examtime{Duration: 2 Hours}
+\instructions{Answer Question 1 (40 marks) \textbf{and}\par{} 2 Other Questions (30 marks each).}
+
+\begin{document}
+
+% definitions from across the course
+\question
+Define: 
+\begin{enumerate}
+	\item rationality
+	\marks{8}
+		\begin{answer}
+		Rationality is an idealised concept of intelligence. A system is rational if it does the right thing, given what it knows.
+		\end{answer}
+	\item agent
+	\marks{8}
+		\begin{answer}
+		 an entity that perceives and acts; or, one that can be viewed as perceiving and 
+acting. Essentially any object qualifies; the key point is the way the object implements 
+an agent function. 
+		\end{answer}
+	\item{state space}
+	\marks{8}
+	\begin{answer}
+A state space is a graph whose nodes are the set of all states, and whose links are 
+actions that transform one state into another. 
+		\end{answer}
+	\item{constraint}
+	\marks{8}
+		\begin{answer}
+A constraint is a restriction on the possible values of two or more variabl es. For exam- 
+ple, a constraint might say that A = a is not allowed in conjunction with B = b. 
+		\end{answer}
+	\item{zero sum game}
+	\marks{8}
+		\begin{answer}
+		A game in which the utility values of the players sum to zero.
+		\end{answer}
+	\end{enumerate}
+
+%Q2 30 marks: 3 parts 10 marks each
+% chapters 1 & 2
+% What is AI?
+% Types of Agents
+% Complexity
+\question
+	\begin{enumerate}
+	\item There are well-known classes of problems that are intractably difficult for computers and other classes that are provably undecidable. Does this mean that AI is impossible?
+	\marks{10}
+\begin{answer}
+No. It means that AI systems should avoid trying to solve intractable problems. Usually, 
+this means they can only approximate optimal behavior. Notice that humans dont solve NP- 
+complete problems either. Sometimes they are good at solving specific instances with a lot of 
+structure, perhaps with the aid of background knowledge. AI systems should attempt to do 
+the same. 
+\end{answer}
+	
+	\item  Both the \emph{performance measure} and the \emph{utility function} measure how well an agent is doing. Explain the difference between them.
+	\marks{10}
+		\begin{answer}
+		A performance measure is used by an outside observer to evaluate how successful an 
+agent is. It is a function from histories to a real number. A utility function is used by an agent 
+itself to evaluate how desirable states or histories are. In our framework, the utility function 
+may not be the same as the performance measure; furthermore, an agent may have no explicit 
+utility function at all, whereas there is always a performance measure. 
+		\end{answer}
+
+	\item Using a lines of code executed metric, what is the $O()$ notation complexity of the summation algorithm listed in Figure 1 below.
+	\marks{10}
+\begin{figure}[h]
+\includegraphics[width=3.5in]{./images/summationprogram.png}
+\label{fig:summation}
+\caption{Summation Algorithm}
+\end{figure}
+	\begin{answer}
+The SUMMATION algorithm is O(n), meaning that its complexity is at most a constant times $n$ (the length of the input), with the possible exception of a few small values of $n$.
+	\end{answer}
+	\end{enumerate}
+
+
+
+%chapter 3 & 4
+%Solving Problems by Searching
+%Informed Exploration
+\question
+\begin{enumerate}
+%uninformed search
+	\item Consider a state space where the start state is the number 1 and the successor function for state \textit{n} returns two states, numbers \textit{2n} and \textit{2n+1}.
+	\begin{enumerate}
+		\item Draw the portion of the state space for states 1 to 15.
+		\marks{5}
+		\begin{answer}
+			\includegraphics[width=6.5cm]{./images/statespace1to15.png}
+		\end{answer}
+		\item Suppose the goal state is 11. List the order in which the nodes will be visited using breadth-first search, depth-limited search with limit 3, and iterative deepening search.
+		\marks{5}
+		\begin{answer}	
+			\begin{itemize}
+				\item Breadth-first: 1 2 3 4 5 6 7 8 9 10 11 
+				\item Depth-limited: 1 2 4 8 9 5 10 11 
+				\item Iterative deepening: 1; 1 2 3; 1 2 4 5 3 6 7; 1 2 4 8 9 5 10 11
+			\end{itemize}
+		\end{answer}
+	\end{enumerate}
+%heuristic search
+	\item Assuming all step costs are equal, prove that the set of states expanded by the $A^{*}$ algorithm using an admissible heuristic $h_{A^{*}}(n)>0$ is a subset of those examined by breadth-first search.
+	\marks{10}
+		\begin{answer}
+With all steps costs equal, BFS is equivalent to $A^{*}$ with a heuristic $h_{BFS}(n)=0$. \\
+So we must prove that the set of nodes expanded by $A^{*}$ using a heuristic $h_{A^{*}>0}$ is a subset of those examined by $A^{*}$ using a heuristic $h_{BFS}(n)=0$.\\
+Let $C^{*}$ be the cost of the optimal solution. Then, with $A^{*}$:
+every node with $f(n) < C^{*}$ will be expanded\\
+every node with $h(n) + g(n) < C^{*}$ will be expanded
+every node with $h(n) < C^{*} - g(n)$ will be expanded\\
+But as $h_{A*}(n)$ is at least as big as $h_{BFS}(n)=0$ for all nodes, so every node that is expanded by $A^{*}$ using $h_{A*}(n)$ will also be expanded by $h_{BFS}(n)$, and $h_{BFS}(n)$ might also cause other nodes to be expanded as well. QED.
+	\end{answer}
+%local search
+	\item A hill-climbing algorithm that never makes downhill moves
+       towards states with lower value (or higher cost) is guaranteed
+       to be incomplete, because it can get stuck on a local
+       maximum. Describe in your own words how simulated annealing
+       addresses this issue.
+       \marks{10}
+    	\begin{answer}
+	 The idea behind simulated annealing is to escape local maxima
+	 by allowing some bad moves but gradually decrease their
+	 frequency, using temperature as a control.
+     	\end{answer}
+\end{enumerate}
+
+ 
+ 
+%chapters 5 & 6
+%Adversarial Search
+%CSP
+\question 
+\begin{enumerate}
+	\item Explain why choosing the variable that is most constrained, but the value that is least constrained is a good heuristic in a constraint satisfaction problem?
+	\marks{10}
+	\begin{answer}
+The most constrained variable makes sense because it chooses a variable that is (all 
+other things being equal) likely to cause a failure, and it is more efficient to fail as early 
+as possible (thereby pruning large parts of the search space ). The least constraining value 
+heuristic makes sense because it allows the most chances for future assignments to avoid 
+conflict. 
+	\end{answer}
+	\item Using tic-tac-toe as our game domain we define    $X_{n}$ as the number of rows, columns, or diagonals with exactly $n$ $X$s and no $O$s. Similarly, $O_{n}$ is the number of rows, columns, or diagonals with just $n$ $O$s. The utility function assigns +1 to any position with $X_{3}=1$ and -1 to any position $O_{3}=1$. All other terminal positions have utility 0. For nonterminal states we use a linear evaluation function defined as $Eval(s)=3X_{2}(s)+X_{1}(s)-(3O_{2}(s)+O_{1}(s))$.
+		\begin{enumerate}
+			\item Draw the whole game tree starting from an empty board down to depth 2 (i.e., one X and one O on the board), taking symmetry into account (i.e. you do not need to draw states that are symmetrically equal to states already illustrated in your diagram).
+			\marks{5}
+			\item Mark on your tree the evaluation of all the positions at depth 2.
+			\marks{5}
+			\item Using the minimax algorithm, mark on your tree the back-up values for the positions at depth 1 and 0, and use those values to choose the best starting move.
+			\marks{5}
+			\item Circle the nodes at depth 2 that would \textit{not} be evaluated if alpha-beta pruning was applied, assume the nodes are generated \textit{in the optimal order for alpha-beta pruning}.
+			\marks{5}
+			\begin{answer}
+The figure below shows the game tree, with the evaluation function values below the terminal 
+nodes and the backed-up values to the right of the non-terminal nodes. The values imply that 
+the best starting move for X is to take the center. The termina l nodes with a bold outline are 
+the ones that do not need to be evaluated, assuming the optimal ordering.\\
+\includegraphics[width=4in]{./images/tictactoegametree.png}
+			\end{answer}
+		\end{enumerate}
+\end{enumerate}
+
+\end{document}

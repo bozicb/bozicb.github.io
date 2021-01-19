@@ -1,0 +1,248 @@
+---
+title: "Linear Regression"
+author: "HTML"
+date: "6 November 2018"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#This is an accompaniment to Lecture 8. More on Linear Regression.
+```{r}
+library(foreign) #To work with SPSS data
+library(lmSupport)#Extra functions for linear model (may require install of nloptr also)
+library(lm.beta)
+library(stargazer)#pretty print regression output
+library(dplyr)
+library(ppcor)
+library(car)
+```
+
+```{r}
+#We are using our exam result dataset - regression.sav
+#Read in the file
+regression<- read.spss("regression.sav", use.value.labels=TRUE, max.value.labels=Inf, to.data.frame=TRUE)
+```
+
+###First Model NormExam predicted by StandLRT
+```{r}
+model1<-lm(regression$normexam~regression$standlrt)
+anova(model1)
+summary(model1)
+lm.beta(model1)
+stargazer(model1, type="text") #Tidy output of all the required stats
+```
+##Second model including dummy variable for gender
+```{r}
+model2<-lm(regression$normexam~regression$standlrt+regression$girl)
+anova(model2)
+summary(model2)
+stargazer(model2, type="text") #Tidy output of all the required stats
+stargazer(model1, model2, type="text") #Quick model comparison
+
+```
+##Third model including interaction term (gender by standlrt)
+```{r}
+model3<-lm(regression$normexam~regression$standlrt+regression$girl+regression$interaction)
+stargazer(model3, type="text") #Tidy output of all the required stats
+stargazer(model2, model3, type="text") #Quick model comparison
+```
+
+#Fourth model including dummy variables for school gender
+```{r}
+model4<-lm(regression$normexam~regression$standlrt+regression$girl+regression$boys_sch+regression$girls_sch)
+stargazer(model4, type="text") #Tidy output of all the required stats
+
+```
+#FULL Example from SURVEY.dat
+
+
+```{r}
+library(userfriendlyscience)
+library(ppcor)
+library(olsrr)
+```
+
+```{r}
+#We are using a .dat file (survey.dat) created from the SPSS file survey.sav  taken from SPSS Survival Manual 6th Edition Julie Pallant
+#http://spss.allenandunwin.com.s3-website-ap-southeast-2.amazonaws.com/data-files.html#.Wb0vvnWP-po
+#Results on a survey on well being
+#We need to load the file so that we can use it in R.
+sdata <- read.table("survey.dat")
+#Setting the column names to be that used in the dataset
+colnames(sdata) <- tolower(colnames(sdata))
+
+
+
+
+
+
+#Look first at partial correlation
+#First fiter out variables of interest and filter out na
+myvars <- c("tpcoiss", "tpstress", "toptim", "tmarlow")
+ydata <-na.omit(sdata[myvars])
+
+
+#perception of control and stress controlling for social desirability
+ppcor::spcor.test(ydata$tpcoiss, ydata$tpstress, ydata$tmarlow)
+#perception of control and optimism controlling for social desirability
+ppcor::spcor.test(ydata$tpcoiss, ydata$toptim, ydata$tmarlow)
+#stress and optimism controlling for social desirability
+ppcor::spcor.test(ydata$tpstress, ydata$toptim, ydata$tmarlow)
+
+#Get zero order correlations as well to fully explore the effect 
+cor.test(ydata$tpcoiss, ydata$tpstress)
+cor.test(ydata$tpcoiss, ydata$toptim)
+cor.test(ydata$tpstress, ydata$toptim)
+
+#Look at differences in scores for gender
+#Conduct Levene's test for homogeneity of variance in library car
+leveneTest(tpstress ~ sex, data=sdata)
+#Conduct the t-test
+#You can use the var.equal = TRUE option to specify equal variances and a pooled variance estimate
+t.test(tpstress~sex,var.equal=FALSE,data=sdata)#Variances are not equal
+
+
+#Conduct Levene's test for homogeneity of variance in library car
+leveneTest(tpcoiss ~ sex, data=sdata)
+
+#Conduct the t-test
+#You can use the var.equal = TRUE option to specify equal variances and a pooled variance estimate
+t.test(tpcoiss~sex,var.equal=FALSE,data=sdata)
+
+#Conduct Levene's test for homogeneity of variance in library car
+leveneTest(toptim ~ sex, data=sdata)
+#Conduct the t-test
+#You can use the var.equal = TRUE option to specify equal variances and a pooled variance estimate
+t.test(toptim~sex,var.equal=TRUE,data=sdata)
+
+#Conduct Levene's test for homogeneity of variance in library car
+leveneTest(tmarlow ~ sex, data=sdata)
+#Conduct the t-test
+#You can use the var.equal = TRUE option to specify equal variances and a pooled variance estimate
+t.test(tmarlow~sex,var.equal=FALSE,data=sdata)
+
+
+#install the library userfriendlyscience and load it using the library command
+#it has a really nice one-way anova function that provides
+#nice summary output
+
+
+#run a one-way anova test using the correct post-hoc test Tukey in our case
+#Use Games-Howell for unequal variances
+one.way <- oneway(sdata$agegp3, y = sdata$toptim, posthoc = 'Tukey') 
+#printout a summary of the anova 
+one.way 
+one.way <- oneway(sdata$agegp3, y = sdata$tpstress, posthoc = 'Tukey') 
+#printout a summary of the anova 
+one.way
+one.way <- oneway(sdata$agegp3, y = sdata$tpcoiss, posthoc = 'Tukey') 
+#printout a summary of the anova 
+one.way
+one.way <- oneway(sdata$agegp3, y = sdata$tmarlow, posthoc = 'Tukey') 
+#printout a summary of the anova 
+one.way
+```
+
+#Build the linear regression models
+```{r}
+#Baseline model optimism and social desirability as predictors
+model1=lm(sdata$tpcoiss~sdata$toptim+sdata$tmarlow)
+stargazer(model1, type="text")
+
+
+
+#Check assumptions
+#Cooks distance
+cooks.distance(model1)
+#Plot Cooks distance
+plot(cooks.distance(model1), ylab="Cook's statistic")
+
+#Create histogram
+#A density plot of the residuals
+plot(density(resid(model1))) 
+
+#Create a QQ plotqqPlot(model, main="QQ Plot") #qq plot for studentized resid 
+leveragePlots(model1) # leverage plots
+#Collinearity
+vifmodel<-vif(model1)
+#Calculate tolerance
+1/vifmodel
+
+
+
+#Second model adding in stress
+model2=lm(sdata$tpcoiss~sdata$toptim+sdata$tmarlow+sdata$tpstress)
+summary(model2)
+
+
+#Check assumptions
+#Cooks distance
+cooks.distance(model2)
+
+
+#Create histogram
+ 
+#A density plot of the residuals
+plot(density(resid(model2))) 
+
+#Create a QQ plot qPlot(model, main="QQ Plot") #qq plot for studentized resid 
+leveragePlots(model2) # leverage plots
+#Collinearity
+vif(model2)
+sqrt(vif(model2)) 
+
+#Model 3 adding in gender 
+#dummycode
+sdata$gender=recode(sdata$sex,'0=1;1=2')
+model3=lm(sdata$tpcoiss~sdata$toptim+sdata$tmarlow+sdata$tpstress+sdata$sex)
+summary(model3)
+plot(model3)
+
+#Check assumptions
+#Cooks distance
+cooks.distance(model3)
+
+
+#Create histogram
+ 
+#A density plot of the residuals
+plot(density(resid(model3))) 
+
+#Create a QQ plot qqPlot(model, main="QQ Plot") #qq plot for studentized resid 
+leveragePlots(model3) # leverage plots
+#Collinearity
+vif(model3)
+sqrt(vif(model3)) 
+
+
+#Model 4 adding in interaction term gender*stress
+#create interaction term
+sdata$intgenstress=as.numeric(sdata$gender)*sdata$tpstress
+model4=lm(sdata$tpcoiss~sdata$toptim+sdata$tmarlow+sdata$tpstress+sdata$gender+sdata$intgenstress)
+summary(model4)
+plot(model4)
+
+#Check assumptions
+#Cooks distance
+cooks.distance(model4)
+
+
+#Create histogram
+ 
+#A density plot of the residuals
+plot(density(resid(model4))) 
+
+#Create a QQ plot qqPlot(model, main="QQ Plot") #qq plot for studentized resid 
+leveragePlots(model4) # leverage plots
+#Collinearity
+vif(model4)
+sqrt(vif(model4)) 
+
+```
+
+

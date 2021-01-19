@@ -1,0 +1,909 @@
+---
+title: "Example"
+output: html_document
+source: http://www.css.cornell.edu/faculty/dgr2/teach/R/R_corregr.pdf
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+This is an example for an environmental dataset. The process is as follows:
+
+1. Combining statistical analysis with research questions.
+2. Exploration and selection of modelling approaches.
+3. Visualisation.
+4. Inferece.
+5. Statistical computation and visualisation.
+
+## The Dataset
+
+This data set contains 147 soil profile observations from the research area of the Tropenbos Cameroon Programme (TCP), representative of the humid forest region of southwestern Cameroon and adjacent areas of Equatorial Guinea and Gabon.
+
+For this exercise, we have selected three soil properties:
+
+1. Clay content (code Clay), weight % of the mineral fine earth (< 2 mm); 
+2. Cation exchange capacity (code CEC), cmol+ (kg soil)-1
+3. Organic carbon (code OC), volume % of the fine earth.
+
+The CEC is important for soil management, since it controls how much added artificial or natural fertiliser or liming materials will be retained by the soil for a long-lasting effect on crop growth. Heavy doses of fertiliser on soils with low CEC will be wasted, since the extra nutrients will leach.
+
+In addition, for each observation the following site information was recorded:
+
+* East and North Coordinates, UTM Zone 32N, WGS84 datum, in meters (codes e and n)
+* Elevation in meters above sea level (code elev) 
+* Agro-ecological zone, arbitrary code (code zone) 
+* Reference soil group, arbitrary code (code wrb1) 
+* Land cover type (code LC)
+
+### Loading the dataset
+We are examining the contents of the csv file. Load the dataset into R using the read.csv method and examine its structure. Identify each variable from the list above. Note its data type and (if applicable) numerical precision.
+
+```{r obs, echo=TRUE}
+obs <- read.csv("obs.csv")
+str(obs)
+row.names(obs)
+```
+
+Each variable has a name, which the import method read.csv reads from the first line of the CSV file; by default the first field (here, the observation number) is used as the row name (which can be accessed with the row.names method) and is not listed as a variable.
+
+Each variable also has a data type. The import method attempts to infer the data type from the format of the data. In this case it correctly found that LC is a factor, i.e. has fixed set of codes. But it identified zone and wrb1 as integers, when in fact these are coded factors. That is, the ‘numbers’ 1, 2, . . . are just codes. R should be informed of their correct data type, which is important in linear models and analysis of variance. In the case of the soils, we can also change the uninformative integers to more meaningful abbrevations, namely the first letter of the Reference Group name:
+
+```{r factors, echo=TRUE}
+obs$zone <- as.factor(obs$zone)
+obs$wrb1 <- factor(obs$wrb1, labels=c("a", "c", "f"))
+```
+
+### A normalized database structure
+
+We first need to assign an observation ID to each record in the original table to use as the primary key. Here we can just use the row number:
+
+```{r id, echo=TRUE}
+plot.id <- 1:dim(obs)[1]
+```
+
+Now we make the first table from those attributes of the observations that do not vary with layer:
+```{r id2, echo=TRUE}
+t.obs <- cbind(plot.id, obs[, 1:6])
+str(t.obs)
+```
+
+Now we reshape the remainder of the fields into “long” format, beginning the plot ID (which is repeated three times, once for each layer), and dropping the fields that do not apply to the layers:
+
+```{r layers, echo=TRUE}
+t.layers <- cbind(plot.id = rep(plot.id, 3), reshape(obs, direction="long", drop=c("e", "n", "elev", "zone", "wrb1", "LC"), varying=list(c("Clay1","Clay2","Clay5"), c("CEC1", "CEC2", "CEC5"), c("OC1", "OC2", "OC5")), times=c("1", "2", "5")))
+names(t.layers)[2:5] <- c("layer", "Clay", "CEC", "OC")
+t.layers$layer <- as.factor(t.layers$layer)
+str(t.layers)
+```
+
+The reshape method automatically created a new field id to uniquely identify the sample in the “long” format; there are 441 of these. It also created a field times to identify the vector from which each sample originated; this name due to reshape’s primary use with time series data. We renamed this field layer.
+
+We now have a relational database structure, from which we can build temporary dataframes for a variety of queries.
+
+Finally, we remove the temporary variable, and save the normalized data to a file as an R object:
+
+```{r rm, echo=TRUE}
+rm(plot.id)
+save(t.obs, t.layers, file="t.RData")
+```
+
+## Research Questions
+
+1. What are the values of soil properties important for agricultural production and soil ecology in the study area? In particular, the organic matter content (OM), proportion of clay vs. sand and silt (Clay), and the cation exchange capacity (CEC) in the upper 50 cm of the soil.
+
+2. What is the inter-relation (association, correlation) between these three variables? How much total information do they provide?
+
+3. How well can CEC be predicted by OM, Clay, or both?
+
+4. What is the depth profile of these variables? Are they constant over the
+first 50 cm depth; if not, how do they vary with depth?
+
+5. Four agro-ecological zones and three major soil groups have been identified by previous mapping. Do the soil properties differ among these? If so, how much? Can the zones or soils groups be grouped or are they all different?
+
+6. Each observation is located geographically. Is there a trend in any of the properties across the region? If so, how much variation does it explain, in which direction is it, and how rapidly does the property vary with distance?
+
+7. Before or after taking any trend into account, is there any local spatial dependence in any of the variables?
+
+These statistical question can then be used with knowledge of processes and causes to answer another set of research questions, more closely related to practical concerns or scientific knowledge:
+
+8. Is it necessary to do the (expensive) lab. procedure for CEC, or can it be predicted satisfactorily from the cheaper determinations for Clay and OM (or just one of these)?
+
+9. Is it necessary to sample at depth, or can the values at depth be calculated from the values in the surface layer? If so, the cost of soil sampling could be greatly reduced.
+
+10. Are the agro-ecological zones and/or soil maps a useful basis for predicting soil behaviour, and therefore a useful stratification for recommendations?
+
+11. What soil-forming factor explains any regional trend?
+
+12. What soil-forming factor explains any local spatial dependence?
+
+Finally, the statistical questions can be used to predict:
+
+13. How well can CEC be predicted by OM, Clay, or both?
+
+14. What are the expected values of the soil properties, and the uncertainties of these predictions, at unvisited locations in the study area?
+
+## Univariarte Analysis
+
+To save typing, we first attach the obs data frame; this makes the field names in the data frame visible in the outer R environment.
+
+```{r attach}
+attach(obs)
+summary(Clay1); summary(Clay2); summary(Clay5)
+```
+
+Visualise the distribution of the topsoil clay content with a stem-and-leaf plot and a histogram.
+
+```{r stem-and-leaf}
+stem(Clay1); hist(Clay1)
+hist(Clay1, breaks=seq(0, 96, by=8), col="darkgray", border="black", main="Clay proportion in surface soil, weight %")
+rug(Clay1)
+```
+
+Finally, we display a histogram with the actual counts.
+
+```{r hist}
+h <- hist(Clay1, breaks=seq(0, 96, by=8), plot=F)
+str(h)
+```
+
+```{r hist2}
+plot(h, col = heat.colors(length(h$mids))[length(h$count)-rank(h$count)+1], ylim = c(0, max(h$count)+5), main="Clay proportion in surface soil, weight %", sub="Counts shown above bar, actual values shown with rug plot")
+rug(Clay1)
+text(h$mids, h$count, h$count, pos=3)
+rm(h)
+```
+
+We can see that there are a few unusually high values. The record for these should be examined to see if there is anything unusual about it.
+
+Display the entire record for observations with clay content of the topsoil over 65%. 
+
+There are (at least) two ways to do this. First we show the easy way, with a condition to select rows:
+
+```{r rec}
+obs[Clay1 > 65, ]
+```
+
+We can get the same effect by identifying the rows and then using these as row indices:
+
+```{r indices}
+(ix <- which(Clay1 > 65)); obs[ix, ]
+```
+
+**Other exploratory graphics**
+
+There are several other ways to view the distribution of a single variable in a histogram:
+
+1. We can specify the number of histogram bins and their limits.
+
+2. We can view the histogram as a probability density rather than a frequency (actual number of cases); this makes it easier to compare histograms with different numbers of observations.
+
+3. We can compare the actual distribution of a variable to a theoretical distribution with a quantile-quantile plot.
+
+4. We can fit empirical kernel density estimator curves, which give a more-or-less smoothed continuous approximation to the histogram.
+
+Show the distribution as a boxplot. Plot the histogram with bins of 5% clay, with kernel density estimators. Make a quantile-quantile plot for both the normal and lognormal distributions.
+
+```{r boxplot}
+par(mfrow=c(2,2))
+boxplot(Clay1, notch=T, horizontal=T, main="Boxplot of Clay 0-10cm")
+hist(Clay1, freq=F, breaks=seq(0,100,5), main="Probability density for Clay 0-10cm")
+lines(density(Clay1),lwd=2)
+lines(density(Clay1, adj=.5),lwd=1)
+lines(density(Clay1, adj=2),lwd=1.5)
+qqnorm(Clay1, main="QQ plot for Clay 0-10cm vs Normal distribution", ylab="Clay %, 0-10cm")
+qqline(Clay1, col=4)
+qqnorm(log(Clay1), main="QQ plot for Clay 0-10cm vs lognormal distribution", ylab="log(Clay %), 0-10cm")
+qqline(log(Clay1), col=4)
+par(mfrow=c(1,1))
+```
+
+The boxplot (upper-left) matches the histogram: the distribution is right-skewed. The three largest observations are shown as boxplot outliers, i.e. they are more than 1.5 times the inter-quartile range (width of the box) larger than the 3rd quartile. This is just a technical measure: they are boxplot outliers, but this does not necessarily mean that they are part of a different population. In particular, a few boxplot outliers are expected in the direction of skew.
+
+### Point estimation; inference of the mean
+
+When computing summary statistics, we calculated a sample mean; this is simply a descriptive statistic for that sample. If we go one step further, we can ask what is the best estimate of the population mean, given this sample from that population; this is an example of point estimation. We may also make inferences about the true (but unknown) mean of the population: is it equal to a known value, or perhaps higher or lower?
+
+For small samples, inference must be based on the t-distribution. The null hypothesis can be a value known from theory, literature, or previous studies.
+
+Compute the best estimate of the population mean of topsoil clay content from this sample, its 99% confidence interval, and the probability that it is not equal to 30% clay.
+
+```{r estimate}
+t.test(Clay1, mu=30, conf.level=.99)
+```
+
+## Bivariate correlation and regression
+
+Now we consider the relation between two variables. This is the cause of much confusion and incorrect analysis.
+
+### Conceptual issues in correlation and regression
+
+Description vs. prediction, relation vs. causation Regression analysis can be
+used for two main purposes:
+
+1. To describe a relation between two or more variables;
+
+2. To predict the value of a variable (the predictand, sometimes called the dependent variable or response), based on one or more other variables (the predictors, sometimes called independent variables.
+
+So the analyst must first decide whether the results of the analysis will be used predict or not. These can lead to different mathematical procedures.
+
+Another pair of concepts which are sometimes confused with the above are related to the philosophical issues of knowledge:
+
+1. The relation between two or more variables, often described mathematically as the correlation (‘co-relation’);
+
+2. The causation of one variable by another.
+
+This second pair is a much stronger distinction than the first. The issue of causation must also involve some conceptual model of how the two phenomena are related. Statistics can never prove causation; it can only provide evidence for the strength of a causative relation supported by other evidence.
+
+### Bivariate Exploratory Data Analysis
+
+
+The first question in the analysis is the relation between clay content in the three layers. We could have several specific questions:
+
+1. Are the clay contents between layers positively, negatively, or not related? E.g. if the topsoil is high in clay, does that imply that the subsoil is high also? low? or that we can’t tell.
+
+2. How can we explain this relation? I.e., what does it imply for soil formation in this area?
+
+3. How well can we predict the subsoil clay from the topsoil? If we can do this, it would save fieldwork (having to auger half a meter from the surface) and laboratory work (having to analyse another sample).
+
+4. What is the predictive equation?
+
+Here are two ways to show the same scatterplot; in the second we specify the plotting limits of each axis. We also show the inverted plots. In all graphs we show the 1:1 line and the means of both variables. We plot these all in the same figure, using the mfrow argument to the par (“graphics parameters”) method on the open graphics device.
+
+```{r par}
+par(mfrow=c(2,2)) # 2x2 matrix of plots in one figure >#
+plot(Clay1,Clay2); abline(0,1,lty=2);
+title("default axes, subsoil vs. topsoil")
+abline(h=mean(Clay2)); abline(v=mean(Clay1))
+plot(Clay1,Clay2,xlim=c(0,100),ylim=c(0,100),pch=20); abline(0,1,lty=2) > title("axes 0..100, subsoil vs. topsoil")
+abline(h=mean(Clay2)); abline(v=mean(Clay1))
+plot(Clay2,Clay1); abline(0,1,lty=2)
+title("default axes, topsoil vs. subsoil")
+abline(h=mean(Clay1)); abline(v=mean(Clay2))
+plot(Clay2,Clay1,xlim=c(0,100),ylim=c(0,100),pch=20); abline(0,1,lty=2) > title("axes 0..100, topsoil vs. subsoil")
+abline(h=mean(Clay1)); abline(v=mean(Clay2))
+par(mfrow=c(1,1)) # reset to 1 plot per figure
+```
+
+### Bivariate Correlation Analysis
+
+If the two variables to be correlated are numeric and relatively symmetric, we use the standard Pearson’s product-moment correlation.
+
+Compute the Pearson’s correlation between the clay contents of the topsoil and subsoil. Test whether this correlation is significant. 
+
+First we compute the correlation from the sample covariance (computed with the cov method) and standard deviations (computed with the sd method), to show how the definition works, then we use the cor.test method to compute a confidence interval.
+
+```{r pearson}
+sum((Clay2-mean(Clay2))*(Clay1-mean(Clay1)))/(length(Clay2)-1)
+cov(Clay1,Clay2)
+sd(Clay1); sd(Clay2)
+cov(Clay1,Clay2)/(sd(Clay1)*sd(Clay2))
+cor(Clay1,Clay2)
+cor.test(Clay1,Clay2)
+```
+
+### Fitting a regression line
+
+When we decide to consider one of the variables as as a response and the other as a predictor, we attempt to fit a line that best describes this relation. There are three types of lines we can fit, usually in this order:
+
+1. Exploratory, non-parametric 
+2. Parametric
+3. Robust
+
+The first kind just gives a “smooth” impression of the relation. The second fits according to some optimality criterion; the classic least-squares estimate is in this class. The third is also parametric but optimises some criterion that protects against a few unusual data values in favour of the majority of the data.
+
+A common non-parametric fit is the LOWESS (“locally weighted regression and smoothing scatterplots”) computed by R method lowess. This has a user-adjustable parameter, the smoother’s “span”, which is the proportion of points in the plot which influence the smooth at each value; larger values result in a smoother plot. This allows us to visualise the relation either up close (low value of parameter) or more generally (high). The default is 2/3.
+
+Plot subsoil vs. surface soil clay with the default smooth line. Show the soil type of each point by its colour. For comparison, plot the least-squares fit with a thin dashed line.
+
+```{r soil}
+plot(Clay2 ~ Clay1, pch=20,col=as.numeric(wrb1))
+legend(60, 20, legend=levels(wrb1), pch=20, col=1:nlevels(wrb1), bty="n")
+lines(lowess(Clay1, Clay2), lwd=2, col="blue")
+abline(lm(Clay2 ~ Clay1), lty=2)
+```
+
+Plot subsoil vs. surface soil clay with the default smooth line and with 1/10, 1/2, and all the points contributing to the fit.
+
+```{r soil2}
+plot(Clay1,Clay2,pch=20,col=as.numeric(wrb1))
+legend(60, 20, legend=levels(wrb1),pch=20, col=1:3,bty="n")
+for (f in c(0.1, .5, 2/3, 1)) {
+  lines(lowess(Clay1, Clay2, f=f), lwd=2) }
+abline(lm(Clay2 ~ Clay1), lty=2)
+```
+
+### Bivariate Linear Regression
+
+Both subsoil and topsoil clay are measured with the same error, so the bivariate normal model is appropriate. That means we can compute the regression in both directions.
+
+*Subsoil as predicted by topsoil* 
+We may want to predict subsoil clay from topsoil clay. If we can establish this relation, we wouldn’t have to sample the subsoil, just the topsoil; this is easier and also saves laboratory analysis.
+
+Compute the ordinary least-squares (OLS) linear regression of subsoil clay on surface soil clay.
+
+The lm method by default computes the OLS solution:
+
+```{r lm}
+lm21<-lm(Clay2 ~ Clay1)
+summary(lm21)
+```
+
+*Visualising the regression*
+Here we show what the regression line looks like, and visualise the sense it which it is the “best” possible line.
+
+Plot the least-squares regression line on the scatterplot of subsoil vs. topsoil clay, showing the residuals (distance to best-fit line).
+
+```{r least-squares}
+plot(Clay1, Clay2, pch=20)
+title("Ordinary least-squares regression, subsoil vs. topsoil clay")
+abline(lm21)
+segments(Clay1, Clay2, Clay1, fitted(lm21), lty=2)
+```
+
+Reversing the regression: topsoil as predicted by subsoil. As explained above, mathematically we can compute the regression in either direction.
+
+Compute the regression of topsoil on subsoil clay. This is the inverse of the previous regression.
+
+```{r inverse}
+lm12<-lm(Clay1 ~ Clay2) ; summary(lm12)
+```
+
+### Regression Diagnostics
+
+The lm method will usually compute a fit, i.e. give us the mathematical answer to the question “What is the best linear model to explain the observations?”. The model’s adjusted R2 tells us how well it fits the observations overall; this is the highest-possible R2 with the given predictor.
+
+However, the model may not be statistically adequate:
+
+􏰀 The fit may not be equally-good over the whole range of observations, i.e. the error may not be independent of the predictor;􏰀 The assumptions underlying least-squares regression may not be met, in particular, that the residuals are normally-distributed.
+
+So for any regression, we should examine some diagnostics of its success and validity. Here we look at (1) the fit to observed data; (2) unusually large residuals; (3) distribution of residuals; (4) points with unusual leverage.
+
+#### Fit to observed data
+
+The first diagnostic is how well the model fits the data; this is the success of the model conditional on the sample data; this does not yet say how well the model is expected to fit the entire population.
+
+The fitted method applied to a linear model object returns values predicted by a model at the observation values of the predictor. This is applied to an object saved from the lm method. Similarly, the resid method returns the residuals, defined as the fitted values less the actual values.
+
+Compute the predicted subsoil clay content for each observation, and compare it graphically with the observed subsoil clay content.
+
+```{r predicted}
+plot(fitted(lm21),Clay2,pch=20,xlab="Fitted",ylab="Observed", xlim=c(5,85),ylim=c(5,85),main="Observed vs. Fitted Clay %, 0-10cm")
+abline(0,1)
+segments(fitted(lm21),Clay2,fitted(lm21),fitted(lm21))
+```
+
+#### Large residuals
+
+Prepare a plot showing the residuals plotted against predicted val- ues, along with horizontal lines showing ±3,±2,±1 standard deviations of the residuals.
+
+The plot produced by the following code also gives the observation number (index in the data frame) of each observations with unusual residuals; we find these with the which method. For each of these, we then display their observation number, actual topsoil and subsoil clay, fitted (predicted) subsoil clay, and the residual.
+
+Note also the use of the col graphics parameter to draw the error lines in different colours depending on the number of standard deviations (abs method).
+
+```{r residuals}
+plot(fitted(lm21), resid(lm21), pch=20, xlab="Fitted", ylab="Residual", main="Regression Residuals vs. Fitted Values, subsoil clay %")
+sdres <- sd(residuals(lm21))
+for (j in -3:3) abline(h=j*sqrt(var(resid(lm21))), col=abs(j)+1)
+ix<-which(abs(resid(lm21))>2*sdres)
+text(fitted(lm21)[ix], resid(lm21)[ix], ix, pos=4)
+cbind(obs[ix,c("Clay1","Clay2")], fit=round(fitted(lm21)[ix],1), resid=round(resid(lm21)[ix],1))
+rm(sdres, ix)
+```
+
+#### Distribution of residuals
+
+Regression residuals should be approximately normally-distributed; that is, the regression should explain the structure and whatever is left over (the “residue”) should just be noise, caused by measurement errors or many small uncorrelated factors. This is precisely the theory of the normal distribution. The normality of residuals can be checked graphically and numerically.
+
+A simple way to see the distribution of residuals is with a stem plot or histogram, using the stem function:
+
+Make a stem plot of the residuals.
+
+```{r stem-residuals}
+stem(residuals(lm21), scale=2)
+```
+
+The most useful graphical tool to examine the normality of the residuals is the normal quantile-quantile (“Q-Q”) plot of the regression residuals; this shows how quantiles of the residuals match to what they would be if they were taken from a normal distribution with mean 0 (by definition of “residual”) and standard deviation calculated from the sample residuals.
+
+Make a normal quantile-quantile (“Q-Q”) plot of the regression residuals.
+
+```{r qq}
+qqnorm(residuals(lm21))
+qqline(residuals(lm21))
+```
+
+Use the Shapiro-Wilk normality test of the hypothesis that the residuals are normally-distributed. 
+
+The R function is named shapiro.test:
+
+```{r shapiro}
+shapiro.test(residuals(lm21))
+```
+
+This test computes a statistic (“W”) and then compares it against a theoretical value for a normal distribution. The item in the output that can be interpreted is the p-value that rejecting the null hypothesis of normality is a Type I error.
+
+### Prediction
+
+As we saw above, the best predictive equation of subsoil clay, given topsoil clay was Clay2 = 6.04 + 0.98 · Clay1, and the proportion of the variation in subsoil clay not explained by this equation was 1 − 0.8749 = 0.1251. But what does that mean for a given prediction?
+There are two sources of prediction error:
+
+1. The uncertainty of fitting the best regression line from the available data;
+2. The uncertainty in the prediction, even with a perfect regression line, be- cause of uncertainty in the process which is revealed by the regression (i.e. the inherent noise in the process)
+
+These correspond to the confidence interval and the prediction inteveral, respectively. Clearly, the second must be wider than the first.
+
+Compute the subsoil clay predicted by the model if surface soil clay is measured as 55%, along with the confidence interval for this prediction.
+
+We can calculate this directly from the regression equation:
+
+```{r subsoil}
+round(6.0354+0.9821*55,0)
+```
+
+To compute the confidence interval, we could use the regression equations directly. But it is easier to use the predict method on the fitted model object, because this method can also compute the standard error of a fit, which can then be used to construct a confidence interval for that fit using the t distribution:
+
+```{r confidence}
+pred <- predict(lm21,data.frame(Clay1 = 55),se.fit=T); str(pred)
+round(pred$fit + qt(c(.025,.975), pred$df) * pred$se.fit, 1)
+```
+
+To predict many values (or even one), we call the predict method on the fitted model object with a list of values of the predictor at which to predict in a data frame with a predictor variable named the same as in the model.
+
+This method also computes the confidence interval for the specific prediction (using the standard error of the fit and the t value computed with the model degrees of freedom), as well as the prediction interval, both to any confidence (default 0.95).
+
+Using the data.frame method, make a prediction data frame from the minimum to the maximum of the data set, at 1% increments.
+
+Using the predict method on the prediction data frame, compute the predicted values and the 95% confidence interval of the best regression, for all clay contents from the minimum to the maximum of the data set, at 1% increments. Examine the structure of the resulting object.
+
+Using the predict method on the prediction data frame, compute the predicted values and the 95% prediction interval of the best regression, for all clay contents from the minimum to the maximum of the data set, at 1% increments. Examine the structure of the resulting object.
+
+```{r interval}
+pframe <- data.frame(Clay1=seq(min(Clay1), max(Clay1), by=1))
+pred.c <- predict(lm21, pframe, interval="confidence", level=.95)
+str(pred.c)
+pred.p <- predict(lm21, pframe, interval="prediction", level=.95)
+str(pred.p)
+```
+
+Graph the best-fit line predicted values and the 95% confidence interval of the best regression for the prediction frame. Also show the 95% prediction interval, i.e. the band in which 95% of the predicted values are expected to be. For comparison, also plot the observed values.
+
+```{r best-fit}
+plot(pframe$Clay1,type="n",pred.c[,"fit"],xlab="Clay 0-10cm", ylab="Clay 20-30cm",xlim=c(0,80),ylim=c(0,80))
+lines(pframe$Clay1,pred.c[,"fit"],lwd=2)
+lines(pframe$Clay1,pred.c[,"lwr"],col=2,lwd=1.5)
+lines(pframe$Clay1,pred.c[,"upr"],col=2,lwd=1.5)
+lines(pframe$Clay1,pred.p[,"lwr"],col=4,lwd=1.5)
+lines(pframe$Clay1,pred.p[,"upr"],col=4,lwd=1.5)
+points(Clay1,Clay2)
+```
+
+### Non-parametric correlation
+
+Clearly, the relation between topsoil CEC and clay is not bivariate normal, so the parametric (Pearson’s) correlation computed above is not a valid measure of their association. So, the Pearson’s coefficient should not be reported.
+
+The alternative is a non-parametric measure of bivariate association. The most common is a rank correlation, and the most common of these is Spearman’s ρ, where the ranks of the two variables are correlated as with the Pearson’s test.
+
+The rank function returns the ranks of each observation:
+
+```{r head}
+head(CEC1, n=10)
+head(rank(CEC1), n=10)
+head(Clay1, n=10)
+head(rank(Clay1), n=10)
+```
+
+The first paired observation is (CEC, clay) = (13.6,72); these have ranks (115,147) respectively of the 147 observations.
+
+The Pearson’s correlation of the ranks is the Spearman’s ρ:
+
+```{r spearman}
+cor(rank(CEC1),rank(Clay1))
+cor(CEC1,Clay1, method="spearman")
+```
+
+## One-way Analysis of Variance (ANOVA)
+
+Analysis of Variance (ANOVA) is used to determine how much of the variability in some property is explained by one or more categorical factors. As with regression, this does not necessarily imply a causal relation from the factors to the response. However, it does supply evidence to support a theory of causation that can be justified with a conceptual model.
+
+The simplest ANOVA is one-way, where the total variance of the data set is compared to the residual variance after each observation’s value is adjusted for the mean for the one factor.
+
+In the current data set, we can ask how much the clay content varies among the four zones (variable zone). Clearly, the zone itself doesn’t cause clay to vary, but it is certainly reasonable that some other factor associated with the zone could be at least a partial cause. Here the zones are defined by elevation and relief, with limits corresponding to differences in parent rock and also with orographic rainfall.
+
+Because the surface soil is more subject to human disturbance and local erosion, we will model the clay in the lower subsoil (30-50 cm).
+
+### Exploratory Data Analysis
+
+Visualise the clay content of the lower subsoil by zone.
+
+It is always a good idea to look first at the data values themselves, and then summarise or graph them. So first we sort the observations by their clay content and see which zones seem to be associated with lower or higher values. The sort method sorts one vector. The order method lists the indices (row or observation numbers in the data frame) that would produce this order, and these indices can be used as subscripts for another variable or the entire data frame.
+
+```{r values}
+sort(Clay5)
+order(Clay5)
+Clay5[order(Clay5)]
+zone[order(Clay5)]
+```
+
+We can use the by method to compute any statistic for each level of a factor. Here we do it for the range. The second example illustrates the use of an anonymous function to compute the width of the range. The function(x) will be called with the vector of clay contents for each zone in turn, so that max(x) and min(x) will operate on this vector.
+
+```{r method}
+by(Clay5,zone,range)
+by(Clay5,zone,function(x) max(x)-min(x))
+```
+
+Second, we can visualise this with the boxplot method, dividing the response variable (here, Clay5) by a factor (here, zone), using the same syntax as lm. In addition, if we select the notch=T option, this method will show whether the class medians are significantly different.
+
+```{r clay5}
+boxplot(Clay5~zone, notch=T, horizontal=T, xlab="Clay %, 30-50cm", ylab="zone")
+```
+
+Compare the data summaries for clay contents of the lower subsoil by zone; this is the numerical confirmation of the boxplots.
+
+```{r data-summaries}
+by(Clay5, zone, summary)
+```
+
+### One-way ANOVA
+
+Based on the boxplots and descriptive statistics, it seems that the zone “explains” some of the variation in clay content over the study area. The technique for deter- mining how much is explained by a factor is the Analysis of Variance (ANOVA). R’s lm method is used for ANOVA as well as for regression; in fact it is just another form of the same linear modelling.
+
+Calculate the one-way ANOVA of subsoil clay on zone, and display the ANOVA table.
+
+```{r anova}
+lmz<-lm(Clay5~zone); summary(lmz)
+```
+
+The summary for a categorical model shows the class means: 
+
+The estimate on the first line, here labelled (Intercept) with value 55.0, is the mean for the first-listed class, here zone 1. 
+
+The estimate on the second line, here labelled zone2 with value 0.95, is the difference between the mean of the second-listed class; in this example the mean for zone 2 is 55.0 + 0.95 = 55.95.
+
+The remaining classes are computed as for the second-listed class.
+
+We can also see this result as a classical ANOVA table, by using the aov method:
+
+```{r classical-anova}
+summary(aov(lmz))
+coefficients(aov(lmz))
+```
+
+## Multivariate correlation and regression
+
+In many datasets we measure several variables. We may ask, first, how are they inter-related? This is multiple correlation analysis. We may also be interested in predicting one variable from several others; this is multiple regression analysis.
+
+### Multiple Correlation Analysis
+
+The aim here is to see how a set of variables are inter-related. This will be dealt with in a more sophisticated manner in Principal Components Analysis and factor analysis. 
+
+#### Pairwise simple correlations
+
+For two variables, we used bivariate correlation analysis. For more variables, a natural extension is to compute their pairwise correlations of all variables. As explained in the next section, we expect correlations between soil cation exchange capacity (CEC), clay content, and organic carbon content.
+
+Display all the bivariate relations between the three variables CEC, clay content, and organic carbon content of the 0-10cm (topsoil) layer.
+
+```{r bivariate-relations}
+pairs( ~ Clay1 + OC1 + CEC1, data=obs)
+```
+
+The numeric strength of association is computed as for any pair of variables with a correlation coefficient such as Pearson’s. Since these only consider two variables at a time, they are called simple coefficients.
+
+Compute the covariances and the Pearson’s correlation coefficients for all pairs of variables CEC, clay, and OC in the topsoil.
+
+We first must find the index number of the variables we want to plot, then we present these as a list of indices to the cov method:
+
+```{r list-of-indices}
+names(obs)
+cov(obs[c(10,7,13)])
+cor(obs[c(10,7,13)])
+```
+
+#### Pairwise partial correlations
+
+The simple correlations show how two variables are related, but this leaves open the question as to whether there are any underlying relations between the entire set. For example, could an observed strong simple correlation between variables X and Y be because both are in fact correlated to some underlying variable Z? One way to examine this is by partial correlations, which show the correlation between two variables after correcting for all others.
+
+What do we mean by “correcting for the others”? This is just the correlation between the residuals of linear regressions between the two variables to be corre- lated and all the other variables. If the residuals left over after the regression are correlated, this can’t be explained by the variables considered so far, so must be a true correlation between the two variables of interest.
+
+For example, consider the relation between Clay1 and CEC1as shown in the scatterplot and by the correlation coefficient (r = 0.55). These show a moderate positive correlation. But, both of these are positively correlated to OC1 (r = 0.56 and 0.74, respectively). Is some of the apparent correlation between clay and CEC actually due to the fact that soils with higher clay tend (in this sample) to have higher OC, and that this higher OC also contributes to CEC? This is an- swered by the partial correlation between clay and CEC, in both cases correcting for OC.
+
+We can compute partial correlations directly from the definition, which is easy in this case with only three variables. We also recompute the simple correlations, computed above but repeated here for comparison. It’s not logical (although mathematically possible) to compute the partial correlation of Clay and OC, since the “lurking” variable CEC is a result of these two, not a cause of either. So, we only consider the correlation of CEC with OC and Clay separately.
+
+```{r partial-correlations}
+cor(residuals(lm(CEC1 ~ Clay1)), residuals(lm(OC1 ~ Clay1)))
+cor(residuals(lm(CEC1 ~ OC1)), residuals(lm(Clay1 ~ OC1)))
+cor(CEC1, OC1)
+cor(CEC1, Clay1)
+```
+
+This shows that CEC is only weakly positively correlated (r = 0.21) to Clay after controlling for OC; compare this to the much higher simple correlation (r = 0.56). In other words, much of the apparent correlation between Clay and CEC can be explained by their mutual positive correlation with OC.
+
+We can visualize the reduction in correlation by comparing the scatterplots be- tween Clay and CEC with and without correction for OC:
+
+```{r reduction}
+par(mfrow=c(1,2))
+par(adj=0.5)
+plot(CEC1 ~ Clay1, pch=20, cex=1.5, xlim=c(0,100), xlab="Clay %", ylab="CEC, cmol+ (kg soil)-1")
+abline(h=mean(CEC1), lty=2); abline(v=mean(Clay1), lty=2)
+title("Simple Correlation, Clay vs. CEC 0-10 cm")
+text(80, 4, cex=1.5, paste("r =",round(cor(Clay1, CEC1), 3)))
+mr.1 <- residuals(lm(CEC1 ~ OC1)); mr.2 <-residuals(lm(Clay1 ~ OC1))
+plot(mr.1 ~ mr.2, pch=20, cex=1.5, xlim=c(-50, 50), xlab="Residuals, Clay vs. OC, %", ylab="Residuals, CEC vs. OC, cmol+ (kg soil)-1")
+abline(h=mean(mr.1), lty=2); abline(v=mean(mr.2), lty=2)
+title("Partial Correlation, Clay vs. CEC, correcting for OC 0-10 cm")
+text(25, -6, cex=1.5, paste("r =",round(cor(mr.1, mr.2), 3)))
+par(adj=0)
+rm(mr.1, mr.2)
+par(mfrow=c(1,1))
+```
+
+The two scatterplots show that much of the apparent pattern in the simple correlation plot (left) has been removed in the partial correlation plot (right); the points form a more diffuse cloud around the centroid.
+
+By contrast, CEC is highly positively correlated (r = 0.62) to OC, even after controlling for Clay (the simple correlation was a bit higher, r = 0.74). This suggests that OC should be the best single predictor of CEC in the topsoil; we will verify this in the next section.
+
+The partial correlations are all smaller than the simple ones; this is because all three variables are inter-correlated. Note especially that the correlation between OC and clay remains the highest while the others are considerably diminished; this relation will be highlighted in the principal components analysis.
+
+Simultaneous computation of partial correlations Computing partial correlations from regression residuals gets tedious for a large number of variables. For- tunately, the partial correlation can also be obtained from either the variance–covariance or simple correlation matrix of all the variables by inverting it and then standardising this inverse so that the diagonals are all 1; the off-diagonals are then the negative of the partial correlation coefficients.
+
+Here is a small R function to do this (and give the off-diagonals the correct sign), applied to the three topsoil variables:
+
+```{r sfunc}
+p.cor <- function(x){
+  inv <- solve(var(x))
+  sdi <- diag(1/sqrt(diag(inv)))
+  p.cor.mat <- -(sdi %*% inv %*% sdi)
+  diag(p.cor.mat) <- 1
+  rownames(p.cor.mat) <- colnames(p.cor.mat) <- colnames(x)
+  return(p.cor.mat) }
+p.cor(obs[c(10,7,13)])
+```
+
+### Multiple Regression Analysis
+
+The aim here is to develop the best predictive equation for some predictand, given several possible predictors.
+
+In the present example, we know that the CEC depends on reactive sites on clay colloids and humus. So it should be possible to establish a good predictive relation for CEC (the predictand) from one or both of clay and organic carbon (the predictors); we could then use this relation at sites where CEC itself has not been measured.
+
+Note that the type of clay mineral and, in some cases, the soil reaction are also important in modelling soil CEC; but these are similar in the sample set, so we will not consider them further.
+
+First, we visualise the relation between these to see if the theory seems plausible in this case. This was already done in the previous section, §7.1. We saw that both predictors do indeed have some positive relation with the predictand.
+
+To develop a predictive regression equation, we have three choices of predictors: �
+- Clay content
+- Organic matter content
+- Both Clay content and Organic matter content
+
+The simple regressions are computed as before; the multiple regression with more than one predictor also uses the lm method, with both predictors named in the formula.
+
+Compute the two simple regressions and the one multiple regression and display the summaries. Compare these with the null regression, i.e. where every value is predicted by the mean.
+
+```{r two-regs}
+lmcec.null<-lm(CEC1 ~ 1); summary(lmcec.null)
+lmcec.oc<-lm(CEC1 ~ OC1); summary(lmcec.oc)
+lmcec.clay<-lm(CEC1 ~ Clay1); summary(lmcec.clay)
+lmcec.oc.cl<-lm(CEC1 ~ OC1 + Clay1); summary(lmcec.oc.cl)
+```
+
+### Comparing regression models
+
+Which of these models is “best”? The aim is to explain as much of the variation in the dataset as possible with as few predictive factors as possible, i.e. a parsimonious model.
+
+#### Comparing regression models with the adjusted R2
+
+We can see these in the model summaries (above); they can also be extracted
+from the model summary:
+
+```{r adjusted-r2}
+summary(lmcec.null)$adj.r.squared
+summary(lmcec.oc)$adj.r.squared
+summary(lmcec.clay)$adj.r.squared
+summary(lmcec.oc.cl)$adj.r.squared
+```
+
+#### Comparing regression models with the AIC
+
+A more general measure, which can be applied to almost any model type, is Akaike’s Information Criterion, abbreviated AIC. The lower value is better.
+
+```{r aic}
+AIC(lmcec.null); AIC(lmcec.oc); AIC(lmcec.clay); AIC(lmcec.oc.cl)
+```
+
+#### Comparing regression models with ANOVA
+
+A traditional way to evaluate nested models (where one is a more complex version of the other) is to compare them in an ANOVA table, normally with the more complex model listed first. We also compute the proportional reduction in the Residual Sum of Squares (RSS):
+
+```{r ftest}
+(a <- anova(lmcec.oc.cl, lmcec.clay))
+diff(a$RSS)/a$RSS[2]
+```
+
+The ANOVA table shows that the second model (clay only) has one more degree of freedom (i.e. one fewer predictor), but a much higher RSS (i.e. the variability not explained by the model); the reduction is about 38% compared to the simpler model. These two estimates of residual variance can be compared with an F-test. In this case the probability that they are equal is approximately zero, so it’s clear the more complex model is justified (adds information).
+
+However, when we compare the combined model with the prediction from organic matter only, we see a different result:
+
+```{r anova-table}
+(a <- anova(lmcec.oc.cl, lmcec.oc))
+diff(a$RSS)/a$RSS[2]
+```
+
+Display two diagnostic plots for the best model: (1) a normal quantile- quantile (“Q-Q”) plot of the residuals. Identify badly-fitted observations and examine the relevant fields in the dataset, (1) predicted vs. actual topsoil CEC.
+
+```{r diagnostics}
+par(mfrow=c(1,2))
+tmp <- qqnorm(residuals(lmcec.oc.cl), pch=20, main="Normal Q-Q plot, residuals from lm(CEC1 ~ OC1 + Clay1)") 
+qqline(residuals(lmcec.oc.cl))
+diff <- (tmp$x - tmp$y)
+### label the residuals that deviate too far from the line
+text(tmp$x, tmp$y, ifelse((abs(diff) > 3), names(diff), ""), pos=2) > rm(tmp,diff)
+### observed vs. fitted
+plot(CEC1 ~ fitted(lmcec.oc.cl), pch=20, xlim=c(0,30), ylim=c(0,30), xlab="Fitted",ylab="Observed", main="Observed vs. Fitted CEC, 0-10cm")
+abline(0,1); grid(col="black")
+par(mfrow=c(1,1))
+```
+
+### Combining discrete and continuous predictors
+
+In many datasets, including this one, we have both discrete factors (e.g. soil type, agro-ecological zone) and continuous variables (e.g. topsoil clay) which we show in one-way ANOVA and univariate regression, respectively, to be useful predictors of some continuous variable (e.g. subsoil clay). The discussion of the design matrix and linear models showed that both one-way ANOVA on a factor and univariate regression on a continuous predictor are just a cases of linear modelling. Thus, they can be combined in a multiple regression.
+
+Model the clay content of the 20-50 cm layer from the agro-ecological zone and measured clay in the topsoil (0-10 cm layer), first separately and then as an additive model.
+
+```{r clay-content}
+lm5z <- lm(Clay5 ~ zone);  summary(lm5z)
+lm51 <- lm(Clay5 ~ Clay1); summary(lm51)
+lm5z1 <- lm(Clay5 ~ zone + Clay1);  summary(lm5z1)
+```
+
+Make a stem plot of the residuals.
+
+```{r stem-residuals2}
+stem(residuals(lm5z1))
+```
+
+Clearly there are some points that are less well-modelled.
+
+Display the records for these poorly-modelled points and compare their subsoil clay to the prediction.
+
+```{r poorly}
+res.lo <- which(residuals(lm5z1) < -12)
+res.hi <- which(residuals(lm5z1) > 9)
+obs[res.lo, ]
+predict(lm5z1)[res.lo]
+obs[res.hi, ]
+predict(lm5z1)[res.hi]
+```
+
+### Diagnosing multi-colinearity
+
+Another approach to reducing a regression equation to its most parsiminious form is to examine the relation between the predictor variables and the predictand for multi-collinearity, that is, the degree to which they are themselves linearly related in the multiple regression. In the extreme, clearly if two variables are perfectly related, one can be eliminated, as it can not add information as a predictor.
+
+This was discussed to some extent in “Multiple correlation”, but it was not clear which of the correlated variables to discard, because the predictand was not included in the analysis. For this we use the Variance Inflation Factor (VIF), which measures the effect of a set of explanatory variables (predictors) on the variance of the coefficient of another predictor, in the multiple regression equation including all predictors, i.e. how much the variance of an estimated regression coefficient is increased because of collinearity. The square root of the VIF gives the increase in the standard error of the coefficient in the full model, compared with what it would be if the target predictor were uncorrelated with the other predictors. 
+
+The VIF is computed with the vif function of John Fox’s car package.
+
+Load the car package and compute the VIF of the six predictors.
+
+```{r vif}
+require(car)
+vif(lm(Clay5 ~ Clay1 + CEC1 + OC1 + Clay2 + CEC2 + OC2, data=obs))
+```
+
+There is no test of significance or hard-and-fast rule for the VIF: however many authors consider VIF ≥ 5 as a caution and VIF ≥ 10 as a definite indication of multicolinearity. Note that this test does not tell which variables, of the set, each variable with a high VIF is correlated with. It could be with just one or with several taken together.
+
+Re-compute the VIF for the multiple regression without these variables, each taken out separately.
+
+```{r vif2}
+vif(lm(Clay5 ~ Clay1 + CEC1 + OC1 + CEC2 + OC2, data=obs))
+vif(lm(Clay5 ~ Clay2 + CEC1 + OC1 + CEC2 + OC2, data=obs))
+```
+
+Since either Clay1 or Clay2 can be taken out of the equation, we compare the models, starting from a reduced model with each one taken out, both as full models and models reduced by backwards stepwise elimination:
+
+First, eliminating Clay2:
+
+```{r eliminating-clay2}
+AIC(lm(Clay5 ~ Clay1 + CEC1 + OC1 + CEC2 + OC2, data=obs))
+AIC(step(lm(Clay5 ~ Clay1 + CEC1 + OC1 + CEC2 + OC2, data=obs), trace=0))
+```
+
+Second, eliminating Clay1:
+
+```{r eliminating-clay1}
+AIC(lm(Clay5 ~ Clay2 + CEC1 + OC1 + CEC2 + OC2, data=obs))
+AIC(step(lm(Clay5 ~ Clay2 + CEC1 + OC1 + CEC2 + OC2, data=obs) , trace=0))
+```
+
+Compute a reduced model by backwards stepwise elimination, starting from the full model with this variable eliminated.
+
+```{r backwards-stepwise}
+(lms.2 <- step(lm(Clay5 ~ Clay2 + CEC1 + OC1 + CEC2 + OC2, data=obs)))
+```
+
+Another approach is to compute the stepwise model starting from a full model, and then see the VIF of the variables retained in that model.
+
+Compute the VIF for the full stepwise model.
+
+The vif function can be applied to a model object; in this case lms, computed
+above:
+
+```{r vif-stepwise}
+lms <- step(lm(Clay2 ~ Clay1 + CEC1 + OC1))
+vif(lms)
+```
+
+This again indicates that the two “clay” variables are highly redundant, and that eliminating one of them results in a more parsimonious model. Which to eliminate is evaluated by computing both reduced models and comparing their AIC.
+
+Compute the AIC of this model, with each of the highly-correlated variables removed.
+
+We specify the new model with the very useful update function. This takes a model object and adjusts it according to a new formula, where existing terms are indicated by a period (‘.’).
+
+```{r update}
+AIC(lms)
+AIC(update(lms, . ~ . - Clay1))
+AIC(update(lms, . ~ . - Clay2))
+```
+
+In parallel regression (additive effects of a continuous and discrete predictor) there is only one regression line, which is displaced up or down for each class of the discrete predictor. Even though there are two predictors, we can visualize this in a 2D plot by showing the displaced lines.
+
+Plot subsoil vs. topsoil clay, with the observations coloured by zone. Add the parallel regression lines from the combined model, in the appropriate colours, and the univariate regression line.
+
+```{r regressions}
+# scatterplot, coloured by zone
+plot(Clay5 ~ Clay1, col=as.numeric(zone), pch=20)
+# zone 1
+abline(coefficients(lm5z1)["(Intercept)"] , coefficients(lm5z1)["Clay1"])
+# zone 2
+for (iz in 2:4) {
+  abline(coefficients(lm5z1)["(Intercept)"]
+  +  coefficients(lm5z1)[iz]
+  , coefficients(lm5z1)["Clay1"], col=iz) }
+# univariate line
+abline(lm51, lty=2, lwd=1.5)
+# legend
+text(70, 30, pos=2, paste("Slopes: parallel:", round(coefficients(lm5z1)["Clay1"],3), "; univariate:", round(coefficients(lm51)["Clay1"],3)));
+text(70, 26, pos=2, paste("   AIC: parallel:", floor(AIC(lm5z1)), "; univariate:", floor(AIC(lm51))));
+text(70, 22, pos=2, paste("Pr(>F) parallel is not better:", round(anova(lm5z1,lm51)$"Pr(>F)"[2],)))
+for (iz in 1:4) { text(65, 50-(3*iz), paste("zone",iz), col=iz) }
+```
+
+## Factor Analysis
+
+Sometimes we are interested in the inter-relations between a set of variables, not just their individual (partial) correlations. That is, we want to investigate the structure of the multivariate feature space covered by a set of variables.; this is factor analysis. This can also be used to diagnose multi-collinearity and select representative variables.
+
+The basic idea is that the vector space made up of the original variables may be projected onto another space, where the new synthetic variables are orthogonal to each other, i.e. completely uncorrelated. These synthetic variables can often be interpreted by the analyst, that is, they represent some composite attribute of the objects of study.
+
+### Principal components analysis
+
+The first such technique is Principal components analysis. This is a multivariate data reduction technique. It finds a new set of variables, equal in number to the original set, where these synthetic variables are uncorrelated (i.e. orthogonal to each other in the space formed by the principal components). In addition, the first synthetic variable represents as much of the common variation of the origi- nal variables as possible, the second variable represents as much of the residual variation as possible, and so forth.
+
+
+In the present example, we investigate the structure of the feature space defined by the three variables (CEC, Clay, and OC) in a single horizon. A summary of the components reveals how much redundancy there is in this space.
+
+Compute the unstandardized principal components of three variables: topsoil clay, CEC, and organic carbon.
+
+To compute the PCs we use the prcomp method; this produces an object of class prcomp which contains information about the components. The relevant columns are extracted from the data frame.
+
+```{r prcomp}
+pc <- prcomp(obs[,c("CEC1","Clay1","OC1")])
+class(pc)
+str(pc)
+summary(pc)
+```
+
+Compute the standardized principal components of three variables: topsoil clay, CEC, and organic carbon.
+
+This option is specified by setting the scale optional argument to TRUE.
+
+```{r std-pca}
+pc.s <- prcomp(obs[c(10,7,13)], scale=T)
+summary(pc.s)
+```
+
+We can see which original variables are associated with which synthetic variables by examining the loadings, also called the factor rotations. These are the eigen- vectors (in the columns) which multiply the original variables to produce the synthetic variables (principal components).
+
+```{r pc-rotation}
+pc.s$rotation
+```
+
+These show the amount that each original (standardised) original variable con- tributes to each synthetic variable. Here, the first PC is an almost equal mixture of CEC, Clay, and OC; this can be interpreted as an overall intensity of soil ac- tivity; we’ve seen that CEC, Clay and OC are generally all positively-correlated and this strong relation comes out in the first PC. This represents 76% of the overall variability. The second PC has a large contribution from Clay opposed to the two other variables; this component can be interpreted as high CEC without high Clay, i.e. high CEC due mostly to OC. This represents 16% of the overall variability. The third PC represents CEC that is higher than expected by the OC content. The interpretation here is more difficult. It could just represent lack of precision in the laboratory (i.e. experimental error). Or it could represent a different compostion of the organic matter. This represents 8% of the overall variability.
+

@@ -1,0 +1,97 @@
+---
+title: "R Notebook Template for Probability and statistical Inference CA Part I <<you can change this title if you wish>>"
+output: html_notebook
+author: include your student number, name and programme code (TU059 or TU060)
+---
+# Abstract
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. It is an indicative template for you to use for the CA Part I.
+
+Include at the start of your file a code chunk that makes all your library calls and reads in your dataset.  
+NOTE: If you change names or formats of the variables from the original dataset or from the renamed dataset provided to you in Brightspace then you need to include the file with your submission.  
+
+You can replace this section with a short abstract of your intent and findings.
+
+```{r setup}
+#Code chunk for setup
+#Here you can include all your library calls and say what you intend to use them for
+
+#You can also include the read of your data file. 
+#Note: if you change names or formats of variables from the original you need to include the actual file you used as part of your submission.
+
+```
+# 1. Introduction
+## 1.1 Background
+Inclcude here your introduction to your assignment.
+Set the scene.   
+Identify the concepts in which you are interested and why they are relevant.
+
+## 1.2 Dataset description
+Here you can include a series of code chunks surrounded by text for the variables you intend to use.  
+You can break this up into as many chunks as you want and you can include discussion about normality etc.  
+```{r datadesc1}
+#Code chunks for data descriptions - surround by text/conduct in separate sections/chunks if you want to
+```
+```{r datadesc2}
+```
+```{r datadesc3}
+```
+## 1.3 Hypotheses
+Introduce and state your hypotheses here.  
+At least one involving correlation;  
+At least two involving difference one of which must involve a categorical variable with more than 2 values.  
+Your choice of hypotheses should make sense based on your introduction.
+
+
+# 2. Results
+In this section you will present your findings from the test.  
+It probably makes sense to have a sub-section for each hypothesis and include a separate code chunk for each.  
+Note1: Remember you need to report according to APA guidelines.
+Note2: Your choice of test should be informed by your discussion about normality etc in section 1.2.  
+
+## 2.1 Hypothesis 1 - Concept X and Concept Y
+Start the section by introducing the hypothesis.   
+State what tests you intend to use and justify this based on the discussion in part 1.2.  
+```{r hypo1}
+#Code chunk for hypothesis 1
+```
+Report your findings for hypothesis 1.
+
+## 2.2 Hypothesis 2 - Concept X and Concept Y
+Start the section by introducing the hypothesis.   
+State what tests you intend to use and justify this based on the discussion in part 1.2.  
+```{r hypo2}
+#Code chunk for hypothesis 2
+```
+Report your findings for hypothesis 2.
+
+## 2.3 Hypothesis 3 - Concept X and Concept Y
+Start the section by introducing the hypothesis.   
+State what tests you intend to use and justify this based on the discussion in part 1.2.  
+```{r hypo3}
+#Code chunk for hypothesis 3
+```
+Report your findings for hypothesis 3.
+
+## 2.4 Hypothesis 4 - Concept X and Concept Y
+Start the section by introducing the hypothesis.   
+State what tests you intend to use and justify this based on the discussion in part 1.2.  
+```{r hypo4}
+#Code chunk for hypothesis 4
+```
+Report your findings for hypothesis 4.
+
+## 2.5 Hypothesis 5 - Concept X and Concept Y
+Start the section by introducing the hypothesis.   
+State what tests you intend to use and justify this based on the discussion in part 1.2.  
+```{r hypo5}
+#Code chunk for hypothesis 5
+```
+Report your findings for hypothesis 5.
+
+# 3. Discussion
+In this section you can summarise what you have found out based on your findings.   
+Here you will be analysing the level of evidence your have.  
+Here you will indicating which of the variables you have looked at could be potentially included in a predictive model.  
+Your discussion must be consistent with your findings and should be consistent with your introduction.  
+
+# References

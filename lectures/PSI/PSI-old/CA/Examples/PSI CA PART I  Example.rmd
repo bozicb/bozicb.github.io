@@ -1,0 +1,162 @@
+---
+title: "PSI CA Part I"
+Student Number: <<your student number>>
+Student Name: <<your name>>
+Programme Code: <<programme code>>
+R Version: <<version of R used>>
+R Packages: <<listing of R packages used>
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, include=TRUE)
+```
+
+```{r}
+library(dplyr)
+library(pastecs) #For creating descriptive statistic summaries
+library(ggplot2) #For creating histograms with more detail than plot
+library(psych) # Some useful descriptive functions
+library(semTools) #For skewness and kurtosis
+library(car) # For Levene's test for homogeneity of variance 
+library(coin)# For Wilcox test (non-parametric)
+survey <- read.table("survey.dat")
+#Setting the column names to be that used in the dataset
+colnames(survey) <- tolower(colnames(survey))
+```
+
+# 1. INTRODUCTION
+
+ I'm using for this example is the survey dataset we have used in lectures survey.dat
+
+
+#1.1 Research Question
+
+The research question is what factors can be considered to influences a persons self-esteem, in particular their perceived sense of control,  and whether there are differences based on gender and age group. 
+
+**Note:** You will need a more extended reserch question.
+
+##1.1 Hypotheses
+
+The particular hypotheses to be investigated are:
+
+Hypothesis 1:
+H0  There is no correlation between a respondent's Total Perceived Control of Internal States  and their level of self esteem
+HA  There is a correlation between a respondent's Total Perceived Control of Internal States  and their level of self esteem
+
+
+Hypothesis 2:
+H0:There is no correlation between a respondent's Total Perceived Control of Internal States  and their level of self esteem
+HA:There is a correlation between a respondent's Total Perceived Control of Internal States  and their level of self esteem
+
+
+Hypothesis 3:
+H0:There is no correlation between a respondent's Total Perceived Control of Internal States  and their level of self esteem
+HA:There is a correlation between a respondent's Total Perceived Control of Internal States  and their level of self esteem
+
+##1.3 Notes
+
+**Note:** For your assignment you need to include TWO more hypotheses.
+
+**PhD Students: Include background research to justify your question.**
+
+#2. METHODOLOGY
+
+##2.1 Variables of interest
+
+```{r}
+grpdbygender<- group_by(survey,sex)
+summarise(grpdbygender, mean=mean(scale(tpcoiss), na.rm=TRUE), sd=sd(scale(tpcoiss),na.rm=TRUE),max=max(scale(tpcoiss),na.rm=TRUE),min=min(scale(tpcoiss),na.rm=TRUE))
+```
+
+
+
+
+The variables of interest used in this research are shown below:
+
+```{r table-simple, echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
+require(pander)
+panderOptions('table.split.table', Inf)
+set.caption("Variables of Interest")
+my.data <- " 
+  Variable                      | Variable Name     | Statistical Type        | Possible Values
+  Self Esteem                   | tlfsest           | Scale                   | Range from 10 to 40
+  Perceived Sense of Control    | tpcoiss           | Scale                   | Range from 18 to 90
+  
+  Gender                        | sex               | Nominal                 | 1= male; 2=female
+  Age Group                     | agegp3            | Nominal                 | 1=18-29yrs, 2=30-44yrs, 3=45+yrs "
+df <- read.delim(textConnection(my.data),header=FALSE,sep="|",strip.white=TRUE,stringsAsFactors=FALSE)
+names(df) <- unname(as.list(df[1,])) # put headers on
+df <- df[-1,] # remove first row
+row.names(df)<-NULL
+pander(df, style = 'rmarkdown')
+```
+**Note: You will have more variables than this **
+Each of the variables of interest were inspected. The scale variables of interest, those representing total perceived control of internal states and total self-esteem, were inspected for normality by creating histograms and QQ plots, inspecting standardised scores for skewness and kurtosis as well as considering the percentage of standardised scores for the variables fell outside of expected boundaries. Decisions on skewness and kurtosis were guided by the advice of Mallory(2000) which categorises a distribution as normal if the relevant standardised scores for skewness and kurtosis fall in the range +/- 2 and the advice of Field, Miles and Field (2016) which categorises a distribution as normal if 95% of the standardised scores for the variable fall within the bounds of +/-3.29 for a dataset larger than 80 cases.
+
+
+##2.2 TOTAL PERCEIVED CONTROL OF INTERNAL STATES
+Total perceived control of internal states is respresented by a scale variable in the dataset which was calculated from....
+
+
+
+Inspection of the histogram and normality plot (see figure 1 and figure 2) shows the distribution not to conform exactly to a normal distribution. Inspection of standardized normal scores for skewness () and kurtosis indicated that while skewness was not an issue, falling with an acceptable range of +/-2, kurtosis was outside acceptable bounds. An inspection of standardized scores for the variable showed that only 2.5% of scores were outside acceptable ranges of +/3.29. Total perceived control of internal stats can therefore be considered to follow a normal distribtion (m=`r mean(survey$tpcoiss, na.rm=TRUE)`, sd=`r sd(survey$tpcoiss, na.rm=TRUE`, n=`r tally(survey, tpcoiss)-sum(is.na(survey$tpcoiss))`);
+
+####Histogram and QQplot
+```{r}
+
+```
+
+####Standardised Scores for Skewness and Kurtosis
+```{r}
+
+```
+####Descriptive statistics
+```{r}
+
+```
+
+
+##2.3 Total Self-esteem
+An assessment of the normality of this variable was conducted. A histogram and normality plot were created (see figure 1 and figure 2). Inspection of the plots showed some issues with normality. An inspection of standardized normal scores for skewness () and kurtosis indicated that while skewness was not an issue, falling with an acceptable range of +/-2, kurtosis was outside acceptable bounds. An inspection of standardized scores for the variable showed that only 2.5% of scores were outside acceptable ranges of +/3.29 and therefore a decision was made to treat this variable as normal.
+
+##2.4 Gender
+##2.5 Age Group
+Address representativeness. If you don't have specific information try to extrapolate from relevant other statistics (e.g. EU stats, indexmundi)
+
+If you are dealing with outliers, missing data, normality for the dataset as a whole discuss it here.
+
+State the statistical significance level you will be using as a cut-off.
+
+Cite any sources for handling missing data, normality etc.
+
+#3. RESULTS
+##3.1 Hypothesis 1
+H0:There is no correlation between a respondent's Total Perceived Control of Internal States  and their level of self esteem
+HA:There is a correlation between a respondent's Total Perceived Control of Internal States  and their level of self esteem.
+
+As both variables can be considered normal, a Pearson correlation wil be used. 
+
+```{r}
+cor.test(survey$tpcoiss,survey$tslfest, method='Pearson')
+```
+
+
+For each hypothesis:
+
+*	State the hypothesis
+*	Justify your tests based on your analysis
+*	Include the code
+*	Present the findings using APA guidelines.
+*	Include and comment on the effect.
+
+#4.0 DISCUSSION
+Interpret your findings in the context of the research question.
+
+**PhD Students: Compare with relevant statistical research if you have it (compare effects, coefficients, differences etc.) or if no relevant statistical research exists compare with relevant qualitative research. Consider how you could extend your work in the future.**
+
+#References
+
+

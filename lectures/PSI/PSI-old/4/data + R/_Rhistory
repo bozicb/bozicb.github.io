@@ -1,0 +1,169 @@
+#Inspecting the data
+#Remember to install these packages if you haven't already done so
+library(foreign)
+library(pastecs) #For creating descriptive statistic summaries
+library(ggplot2) #For creating histograms with more detail than plot
+library(psych) # Some useful descriptive functions
+library(semTools) #For skewness and kurtosis
+library(car) # For Levene's test for homogeneity of variance
+library(coin) #for Wilcoxon test
+#Read in the file
+regression <- read.spss("Regression.sav", use.value.labels=TRUE, max.value.labels=Inf, to.data.frame=TRUE)
+#Setting the column names to be that used in the dataset
+colnames(regression) <- tolower(colnames(regression))
+#Get descriptive stastitics by group
+#describeBy is part of the psych package so you need to use it
+describeBy(regression$normexam,group=regression$girl)
+#Conduct Levene's test for homogeneity of variance in library car
+#The original regression.sav did not have labels for girl so to get the leveneTest to work
+#We need to include a factoring of giorl to make sure the tests works
+#leveneTest(normexam~factor(girl), data=regression)
+#I've uploaded a corrected version with labels
+leveneTest(normexam~girl, data=regression)
+#Test is significant so we can't assume homogeneity of variance
+#Conduct the t-test
+#You can use the var.equal = TRUE option to specify equal variances and a pooled variance estimate
+t.test(normexam~girl,data=regression)
+#We get a statistically significant result
+#We are using a .dat file (survey.dat) created from the SPSS file survey.sav  taken from SPSS Survival Manual 6th Edition Julie Pallant
+#http://spss.allenandunwin.com.s3-website-ap-southeast-2.amazonaws.com/data-files.html#.Wb0vvnWP-po
+#Results on a survey on well being
+#We need to load the file so that we can use it in R.
+survey <- read.table("C:/tempR/survey.dat")
+#We are using a .dat file (survey.dat) created from the SPSS file survey.sav  taken from SPSS Survival Manual 6th Edition Julie Pallant
+#http://spss.allenandunwin.com.s3-website-ap-southeast-2.amazonaws.com/data-files.html#.Wb0vvnWP-po
+#Results on a survey on well being
+#We need to load the file so that we can use it in R.
+survey <- read.table("C:/tempR/survey.dat")
+#Get descriptive stastitics by group
+#describeBy is part of the psych package so you need to use it
+describeBy(survey$tposaff,group=survey$sex)
+#Conduct Levene's test for homogeneity of variance in library car
+leveneTest(tposaff~sex, data=survey)
+#Test is not significant so we can assume homogeneity of variance
+#Conduct the t-test
+t.test(tposaff~sex, var.equal = TRUE,data=survey)
+#describeBy is part of the psych package so you need to use it
+describeBy(survey$tnegaff,group=survey$sex)
+#Conduct Levene's test for homogeneity of variance in library car
+leveneTest(tnegaff~sex, data=survey)
+#Test is not significant so we can assume homogeneity of variance
+#Conduct the t-test
+t.test(tnegaff~sex, var.equal = TRUE,data=survey)
+#Test statistic is not statistically significant
+#describeBy is part of the psych package so you need to use it
+describeBy(survey$tlifesat,group=survey$sex)
+#Conduct Levene's test for homogeneity of variance in library car
+leveneTest(tlifesat~sex, data=survey)
+#Test is not significant so we can assume homogeneity of variance
+#Conduct the t-test
+t.test(tlifesat~sex, var.equal = TRUE,data=survey)
+#Test Statistic is not statistically sinigicant
+library(dplyr)
+count(sex)
+count(survey$sex)
+#We need to load the file so that we can use it in R.
+survey <- read.table("C:/tempR/survey.dat")
+count(survey$sex)
+count(as.numeric(survey$sex)
+)
+install.library('plyr')
+ls("package:plyr")
+ls("package:dplyr")
+dplyr::count(survey$sex)
+?count()
+tally(survey$sex)
+tally(as.numeric(survey$sex))
+mtcars %>% count(survey$sex)
+table(survey$sex)
+prob.table(table(survey$tlifesat,survey$sex))
+prop.table(table(survey$tlifesat,survey$sex))
+fisher.test(table(survey$tlifesat,survey$sex))
+?fisher.test()
+prop.table(table(survey$tlifesat,survey$sex),1)
+prop.table(table(survey$tlifesat,survey$sex),2)
+fisher.test(table(survey$tlifesat,survey$sex))
+freq(survey$sex)
+install.packages("DescTools")
+library(DescTools)
+freq(survey$sex)
+freq(as.numeric(survey$sex))
+df<-survey$sex
+df$freq
+df<-as.numeric(survey$sex)
+df$freq
+install.packages("raster")
+library(raster)
+freq(surve$sex)
+freq(survey$sex)
+freq(as.numeric(survey$sex))
+?freq
+freq(surve$sex, digits=0, value=NULL, useNA='ifany', progress='', ...)
+freq(surve$sex, digits=0, value=NULL, useNA='ifany', progress='')
+freq(survey$sex, digits=0, value=NULL, useNA='ifany', progress='')
+library::freq(surve$sex, digits=0, value=NULL, useNA='ifany', progress='')
+raster::freq(surve$sex, digits=0, value=NULL, useNA='ifany', progress='')
+raster::freq(survey$sex, digits=0, value=NULL, useNA='ifany', progress='')
+# Chunk 1: setup
+knitr::opts_chunk$set(echo = TRUE)
+# Chunk 2
+#Inspecting the data
+#Remember to install these packages if you haven't already done so
+library(foreign)
+library(pastecs) #For creating descriptive statistic summaries
+library(ggplot2) #For creating histograms with more detail than plot
+library(psych) # Some useful descriptive functions
+library(semTools) #For skewness and kurtosis
+library(car) # For Levene's test for homogeneity of variance
+library(coin) #for Wilcoxon test
+#Read in the file
+regression <- read.spss("Regression.sav", use.value.labels=TRUE, max.value.labels=Inf, to.data.frame=TRUE)
+#Setting the column names to be that used in the dataset
+colnames(regression) <- tolower(colnames(regression))
+# Chunk 3
+#Get descriptive stastitics by group
+#describeBy is part of the psych package so you need to use it
+describeBy(regression$normexam,group=regression$girl)
+#Conduct Levene's test for homogeneity of variance in library car
+#The original regression.sav did not have labels for girl so to get the leveneTest to work
+#We need to include a factoring of giorl to make sure the tests works
+#leveneTest(normexam~factor(girl), data=regression)
+#I've uploaded a corrected version with labels
+leveneTest(normexam~girl, data=regression)
+#Test is significant so we can't assume homogeneity of variance
+#Conduct the t-test
+#You can use the var.equal = TRUE option to specify equal variances and a pooled variance estimate
+t.test(normexam~girl,data=regression)
+#We get a statistically significant result
+# Chunk 4
+#We are using a .dat file (survey.dat) created from the SPSS file survey.sav  taken from SPSS Survival Manual 6th Edition Julie Pallant
+#http://spss.allenandunwin.com.s3-website-ap-southeast-2.amazonaws.com/data-files.html#.Wb0vvnWP-po
+#Results on a survey on well being
+#We need to load the file so that we can use it in R.
+survey <- read.table("C:/tempR/survey.dat")
+# Chunk 5
+#Get descriptive stastitics by group
+#describeBy is part of the psych package so you need to use it
+describeBy(survey$tposaff,group=survey$sex)
+#Conduct Levene's test for homogeneity of variance in library car
+leveneTest(tposaff~sex, data=survey)
+#Test is not significant so we can assume homogeneity of variance
+#Conduct the t-test
+t.test(tposaff~sex, var.equal = TRUE,data=survey)
+#Test statistic is not statistically significant
+#describeBy is part of the psych package so you need to use it
+describeBy(survey$tnegaff,group=survey$sex)
+#Conduct Levene's test for homogeneity of variance in library car
+leveneTest(tnegaff~sex, data=survey)
+#Test is not significant so we can assume homogeneity of variance
+#Conduct the t-test
+t.test(tnegaff~sex, var.equal = TRUE,data=survey)
+#Test statistic is not statistically significant
+#describeBy is part of the psych package so you need to use it
+describeBy(survey$tlifesat,group=survey$sex)
+#Conduct Levene's test for homogeneity of variance in library car
+leveneTest(tlifesat~sex, data=survey)
+#Test is not significant so we can assume homogeneity of variance
+#Conduct the t-test
+t.test(tlifesat~sex, var.equal = TRUE,data=survey)
+#Test Statistic is not statistically sinigicant

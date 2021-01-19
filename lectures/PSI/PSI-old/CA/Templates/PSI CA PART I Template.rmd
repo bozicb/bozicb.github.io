@@ -1,0 +1,68 @@
+---
+title: "PSI CA Part I"
+Student Number: <<your student number>>
+Student Name: <<your name>>
+Programme Code: <<programme code>>
+R Version: <<version of R used>>
+R Packages: <<listing of R packages used>
+output: html_document
+#Change output if creating a pdf
+---
+
+#Change yur knitr options to suit what you want
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, include=TRUE)
+```
+
+# R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+### ``` indicates start/end of the chunk
+
+#Template
+The following indicates suggested headings and content for your assignment part I.
+
+#Introduction
+State your research question. This should be such that it is clear what concepts are of interest to you.
+State your hypotheses.
+
+**PhD Students: Include background research to justify your question.**
+
+#Methodology
+(You can include subsections if you want to)
+
+Describe how the dataset. Cover issues relevant to its representativeness and other issues that impact the statistical analysis.
+
+For each of the variables of interest, what statistical type are they, what are potential values (if relevant)
+
+Address representativeness. If you don't have specific information try to extrapolate from relevant other statistics (e.g. EU stats, indexmundi)
+
+If you are dealing with outliers, missing data, normality for the dataset as a whole discuss it here.
+
+State the statistical significance level you will be using as a cut-off.
+
+Cite any sources for handling missing data, normality etc.
+
+#Results
+For each hypothesis:
+
+*	State the hypothesis
+*	Justify your tests based on your analysis
+*	Include the code
+*	Present the findings using APA guidelines.
+*	Include and comment on the effect.
+
+#Discussion
+Interpret your findings in the context of the research question.
+
+**PhD Students: Compare with relevant statistical research if you have it (compare effects, coefficients, differences etc.) or if no relevant statistical research exists compare with relevant qualitative research. Consider how you could extend your work in the future.**
+
+#References
+
+

@@ -1,0 +1,322 @@
+install.packages("dplyr")
+install.packages("pastecs")
+install.packages("psych")
+install.packages("ggplot2")
+install.packages("car")
+install.packages("coin")
+install.packages("semTools")
+install.packages("ollsr")
+install.packages("olssr")
+library(olssr)
+install.packages("olsrr")
+library(olsrr)
+lmSupport::modelAssumptions(model1)
+#We are using a .dat file (survey.dat) created from the SPSS file survey.sav  taken from SPSS Survival Manual 6th Edition Julie Pallant
+#http://spss.allenandunwin.com.s3-website-ap-southeast-2.amazonaws.com/data-files.html#.Wb0vvnWP-po
+#Results on a survey on well being
+#We need to load the file so that we can use it in R.
+sdata <- read.table("survey.dat")
+#Setting the column names to be that used in the dataset
+colnames(sdata) <- tolower(colnames(sdata))
+#Filter out the variables of interest removing missing data coded as na
+ydata<- filter(sdata,!is.na(sdata$tpcoiss), !is.na(sdata$tpstress), !is.na(sdata$toptim),!is.na(sdata$tmarlow))
+#Look first at partial correlation
+#perception of control and stress controlling for social desirability
+ppcor::spcor.test(ydata$tpcoiss, ydata$tpstress, ydata$tmarlow)
+#perception of control and optimism controlling for social desirability
+ppcor::spcor.test(ydata$tpcoiss, ydata$toptim, ydata$tmarlow)
+#stress and optimism controlling for social desirability
+ppcor::spcor.test(ydata$tpstress, ydata$toptim, ydata$tmarlow)
+#Get zero order correlations as well to fully explore the effect
+cor.test(ydata$tpcoiss, ydata$tpstress)
+cor.test(ydata$tpcoiss, ydata$toptim)
+cor.test(ydata$tpstress, ydata$toptim)
+#Look at differences in scores for gender
+#Conduct Levene's test for homogeneity of variance in library car
+leveneTest(tpstress ~ sex, data=ydata)
+#Conduct the t-test
+#You can use the var.equal = TRUE option to specify equal variances and a pooled variance estimate
+t.test(tpstress~sex,var.equal=FALSE,data=ydata)#Variances are not equal
+#Conduct Levene's test for homogeneity of variance in library car
+leveneTest(tpcoiss ~ sex, data=ydata)
+#Conduct the t-test
+#You can use the var.equal = TRUE option to specify equal variances and a pooled variance estimate
+t.test(tpcoiss~sex,var.equal=FALSE,data=ydata)
+#Conduct Levene's test for homogeneity of variance in library car
+leveneTest(toptim ~ sex, data=ydata)
+#Conduct the t-test
+#You can use the var.equal = TRUE option to specify equal variances and a pooled variance estimate
+t.test(toptim~sex,var.equal=TRUE,data=ydata)
+#Conduct Levene's test for homogeneity of variance in library car
+leveneTest(tmarlow ~ sex, data=sdata)
+#Conduct the t-test
+#You can use the var.equal = TRUE option to specify equal variances and a pooled variance estimate
+t.test(tmarlow~sex,var.equal=FALSE,data=ydata)
+#install the library userfriendlyscience and load it using the library command
+#it has a really nice one-way anova function that provides
+#nice summary output
+#run a one-way anova test using the correct post-hoc test Tukey in our case
+#Use Games-Howell for unequal variances
+one.way <- oneway(ydata$agegp3, y = ydata$toptim, posthoc = 'Tukey')
+#printout a summary of the anova
+one.way
+one.way <- oneway(ydata$agegp3, y = ydata$tpstress, posthoc = 'Tukey')
+#printout a summary of the anova
+one.way
+one.way <- oneway(ydata$agegp3, y = ydata$tpcoiss, posthoc = 'Tukey')
+#printout a summary of the anova
+one.way
+one.way <- oneway(ydata$agegp3, y = ydata$tmarlow, posthoc = 'Tukey')
+#printout a summary of the anova
+one.way
+library(userfriendlyscience)
+library(ppcor)
+library(olsrr)
+#We are using a .dat file (survey.dat) created from the SPSS file survey.sav  taken from SPSS Survival Manual 6th Edition Julie Pallant
+#http://spss.allenandunwin.com.s3-website-ap-southeast-2.amazonaws.com/data-files.html#.Wb0vvnWP-po
+#Results on a survey on well being
+#We need to load the file so that we can use it in R.
+sdata <- read.table("survey.dat")
+#Setting the column names to be that used in the dataset
+colnames(sdata) <- tolower(colnames(sdata))
+#Filter out the variables of interest removing missing data coded as na
+ydata<- filter(sdata,!is.na(sdata$tpcoiss), !is.na(sdata$tpstress), !is.na(sdata$toptim),!is.na(sdata$tmarlow))
+#Look first at partial correlation
+#perception of control and stress controlling for social desirability
+ppcor::spcor.test(ydata$tpcoiss, ydata$tpstress, ydata$tmarlow)
+#perception of control and optimism controlling for social desirability
+ppcor::spcor.test(ydata$tpcoiss, ydata$toptim, ydata$tmarlow)
+#stress and optimism controlling for social desirability
+ppcor::spcor.test(ydata$tpstress, ydata$toptim, ydata$tmarlow)
+#Get zero order correlations as well to fully explore the effect
+cor.test(ydata$tpcoiss, ydata$tpstress)
+cor.test(ydata$tpcoiss, ydata$toptim)
+cor.test(ydata$tpstress, ydata$toptim)
+#Look at differences in scores for gender
+#Conduct Levene's test for homogeneity of variance in library car
+leveneTest(tpstress ~ sex, data=ydata)
+#Conduct the t-test
+#You can use the var.equal = TRUE option to specify equal variances and a pooled variance estimate
+t.test(tpstress~sex,var.equal=FALSE,data=ydata)#Variances are not equal
+#Conduct Levene's test for homogeneity of variance in library car
+leveneTest(tpcoiss ~ sex, data=ydata)
+#Conduct the t-test
+#You can use the var.equal = TRUE option to specify equal variances and a pooled variance estimate
+t.test(tpcoiss~sex,var.equal=FALSE,data=ydata)
+#Conduct Levene's test for homogeneity of variance in library car
+leveneTest(toptim ~ sex, data=ydata)
+#Conduct the t-test
+#You can use the var.equal = TRUE option to specify equal variances and a pooled variance estimate
+t.test(toptim~sex,var.equal=TRUE,data=ydata)
+#Conduct Levene's test for homogeneity of variance in library car
+leveneTest(tmarlow ~ sex, data=sdata)
+#Conduct the t-test
+#You can use the var.equal = TRUE option to specify equal variances and a pooled variance estimate
+t.test(tmarlow~sex,var.equal=FALSE,data=ydata)
+#install the library userfriendlyscience and load it using the library command
+#it has a really nice one-way anova function that provides
+#nice summary output
+#run a one-way anova test using the correct post-hoc test Tukey in our case
+#Use Games-Howell for unequal variances
+one.way <- oneway(ydata$agegp3, y = ydata$toptim, posthoc = 'Tukey')
+#printout a summary of the anova
+one.way
+one.way <- oneway(ydata$agegp3, y = ydata$tpstress, posthoc = 'Tukey')
+#printout a summary of the anova
+one.way
+one.way <- oneway(ydata$agegp3, y = ydata$tpcoiss, posthoc = 'Tukey')
+#printout a summary of the anova
+one.way
+one.way <- oneway(ydata$agegp3, y = ydata$tmarlow, posthoc = 'Tukey')
+#printout a summary of the anova
+one.way
+library(userfriendlyscience)
+#We are using a .dat file (survey.dat) created from the SPSS file survey.sav  taken from SPSS Survival Manual 6th Edition Julie Pallant
+#http://spss.allenandunwin.com.s3-website-ap-southeast-2.amazonaws.com/data-files.html#.Wb0vvnWP-po
+#Results on a survey on well being
+#We need to load the file so that we can use it in R.
+sdata <- read.table("survey.dat")
+#Setting the column names to be that used in the dataset
+colnames(sdata) <- tolower(colnames(sdata))
+#Filter out the variables of interest removing missing data coded as na
+ydata<- filter(sdata,!is.na(sdata$tpcoiss), !is.na(sdata$tpstress), !is.na(sdata$toptim),!is.na(sdata$tmarlow))
+#Look first at partial correlation
+#perception of control and stress controlling for social desirability
+ppcor::spcor.test(ydata$tpcoiss, ydata$tpstress, ydata$tmarlow)
+#perception of control and optimism controlling for social desirability
+ppcor::spcor.test(ydata$tpcoiss, ydata$toptim, ydata$tmarlow)
+#stress and optimism controlling for social desirability
+ppcor::spcor.test(ydata$tpstress, ydata$toptim, ydata$tmarlow)
+#Get zero order correlations as well to fully explore the effect
+cor.test(ydata$tpcoiss, ydata$tpstress)
+cor.test(ydata$tpcoiss, ydata$toptim)
+cor.test(ydata$tpstress, ydata$toptim)
+#Look at differences in scores for gender
+#Conduct Levene's test for homogeneity of variance in library car
+leveneTest(tpstress ~ sex, data=ydata)
+#Conduct the t-test
+#You can use the var.equal = TRUE option to specify equal variances and a pooled variance estimate
+t.test(tpstress~sex,var.equal=FALSE,data=ydata)#Variances are not equal
+#Conduct Levene's test for homogeneity of variance in library car
+leveneTest(tpcoiss ~ sex, data=ydata)
+#Conduct the t-test
+#You can use the var.equal = TRUE option to specify equal variances and a pooled variance estimate
+t.test(tpcoiss~sex,var.equal=FALSE,data=ydata)
+#Conduct Levene's test for homogeneity of variance in library car
+leveneTest(toptim ~ sex, data=ydata)
+#Conduct the t-test
+#You can use the var.equal = TRUE option to specify equal variances and a pooled variance estimate
+t.test(toptim~sex,var.equal=TRUE,data=ydata)
+#Conduct Levene's test for homogeneity of variance in library car
+leveneTest(tmarlow ~ sex, data=sdata)
+#Conduct the t-test
+#You can use the var.equal = TRUE option to specify equal variances and a pooled variance estimate
+t.test(tmarlow~sex,var.equal=FALSE,data=ydata)
+#install the library userfriendlyscience and load it using the library command
+#it has a really nice one-way anova function that provides
+#nice summary output
+#run a one-way anova test using the correct post-hoc test Tukey in our case
+#Use Games-Howell for unequal variances
+one.way <- oneway(ydata$agegp3, y = ydata$toptim, posthoc = 'Tukey')
+#printout a summary of the anova
+one.way
+one.way <- oneway(ydata$agegp3, y = ydata$tpstress, posthoc = 'Tukey')
+#printout a summary of the anova
+one.way
+one.way <- oneway(ydata$agegp3, y = ydata$tpcoiss, posthoc = 'Tukey')
+#printout a summary of the anova
+one.way
+one.way <- oneway(ydata$agegp3, y = ydata$tmarlow, posthoc = 'Tukey')
+#printout a summary of the anova
+one.way
+#run a one-way anova test using the correct post-hoc test Tukey in our case
+#Use Games-Howell for unequal variances
+one.way <- oneway(ydata$agegp3, y = ydata$toptim, posthoc = 'Tukey')
+sdata <- read.table("survey.dat")
+#Setting the column names to be that used in the dataset
+colnames(sdata) <- tolower(colnames(sdata))
+#Filter out the variables of interest removing missing data coded as na
+ydata<- filter(sdata,!is.na(sdata$tpcoiss), !is.na(sdata$tpstress), !is.na(sdata$toptim),!is.na(sdata$tmarlow))
+#We are using a .dat file (survey.dat) created from the SPSS file survey.sav  taken from SPSS Survival Manual 6th Edition Julie Pallant
+#http://spss.allenandunwin.com.s3-website-ap-southeast-2.amazonaws.com/data-files.html#.Wb0vvnWP-po
+#Results on a survey on well being
+#We need to load the file so that we can use it in R.
+sdata <- read.table("survey.dat")
+setwd("G:/My Drive/Teaching/Semester 1/Probability and Statistics/1819/8")
+#We are using a .dat file (survey.dat) created from the SPSS file survey.sav  taken from SPSS Survival Manual 6th Edition Julie Pallant
+#http://spss.allenandunwin.com.s3-website-ap-southeast-2.amazonaws.com/data-files.html#.Wb0vvnWP-po
+#Results on a survey on well being
+#We need to load the file so that we can use it in R.
+sdata <- read.table("survey.dat")
+#Setting the column names to be that used in the dataset
+colnames(sdata) <- tolower(colnames(sdata))
+#Filter out the variables of interest removing missing data coded as na
+ydata<- filter(sdata,!is.na(sdata$tpcoiss), !is.na(sdata$tpstress), !is.na(sdata$toptim),!is.na(sdata$tmarlow))
+#Setting the column names to be that used in the dataset
+colnames(sdata) <- tolower(colnames(sdata))
+#Filter out the variables of interest removing missing data coded as na
+ydata<- filter(sdata,!is.na(sdata$tpcoiss), !is.na(sdata$tpstress), !is.na(sdata$toptim),!is.na(sdata$tmarlow))
+#Filter out the variables of interest removing missing data coded as na
+ydata<- filter(sdata,!is.na(sdata$tpcoiss), !is.na(sdata$tpstress), !is.na(sdata$toptim),!is.na(sdata$tmarlow))
+#Filter out the variables of interest removing missing data coded as na
+ydata<- filter(sdata,!is.na(tpcoiss), !is.na(tpstress), !is.na(toptim),!is.na(tmarlow))
+names(sdata)
+#Filter out the variables of interest removing missing data coded as na
+ydata<- filter(sdata,!is.na(tpcoiss))
+#Filter out the variables of interest removing missing data coded as na
+ydata<- filter(sdata,!is.na(sdata$tpcoiss))
+#Filter out the variables of interest removing missing data coded as na
+ydata<- filter(sdata,!is.na(sdata$tpcoiss), !is.na(sdata$tpstress))
+myvars <- c("tpcoiss", "tpstress", "toptim", "tmarlow")
+yData <-na.omit(survey[myvars])
+yData <-na.omit(sdata[myvars])
+#perception of control and stress controlling for social desirability
+ppcor::spcor.test(ydata$tpcoiss, ydata$tpstress, ydata$tmarlow)
+ydata <-na.omit(sdata[myvars])
+names(ydata)
+#perception of control and stress controlling for social desirability
+ppcor::spcor.test(ydata$tpcoiss, ydata$tpstress, ydata$tmarlow)
+#run a one-way anova test using the correct post-hoc test Tukey in our case
+#Use Games-Howell for unequal variances
+one.way <- oneway(ydata$agegp3, y = ydata$toptim, posthoc = 'Tukey')
+#run a one-way anova test using the correct post-hoc test Tukey in our case
+#Use Games-Howell for unequal variances
+one.way <- oneway(sdata$agegp3, y = sdata$toptim, posthoc = 'Tukey')
+#perception of control and stress controlling for social desirability
+ppcor::spcor.test(y=sdata$tpcoiss, sdata$tpstress, sdata$tmarlow)
+?spcor.test
+#perception of control and stress controlling for social desirability
+ppcor::spcor.test(y=sdata$tpcoiss, sdata$tpstress, sdata$tmarlow, method="pearson")
+#perception of control and stress controlling for social desirability
+ppcor::spcor.test(y=ydata$tpcoiss, ydata$tpstress, ydata$tmarlow, method="pearson")
+#perception of control and stress controlling for social desirability
+ppcor::spcor.test(y=na.omit(sdata$tpcoiss), ydata$tpstress, ydata$tmarlow, method="pearson")
+#perception of control and stress controlling for social desirability
+ppcor::spcor.test(y=na.omit(sdata$tpcoiss), na.omit(data$tpstress), na.omit(data$tmarlow), method="pearson")
+#perception of control and stress controlling for social desirability
+ppcor::spcor.test(y=na.omit(sdata$tpcoiss), na.omit(data$tpstress), na.omit(data$tmarlow))
+#perception of control and stress controlling for social desirability
+ppcor::spcor.test(y=na.omit(sdata$tpcoiss), na.omit(data$tpstress), na.omit(sdata$tmarlow))
+#perception of control and stress controlling for social desirability
+ppcor::spcor.test(y=na.omit(sdata$tpcoiss), na.omit(sdata$tpstress), na.omit(sdata$tmarlow))
+#perception of control and stress controlling for social desirability
+ppcor::spcor.test(y=ydata$tpcoiss), ydata$tpstress), ydata$tmarlow)
+#perception of control and stress controlling for social desirability
+ppcor::spcor.test(ydata$tpcoiss), ydata$tpstress), ydata$tmarlow)
+#perception of control and optimism controlling for social desirability
+ppcor::spcor.test(ydata$tpcoiss, ydata$toptim, ydata$tmarlow)
+#perception of control and stress controlling for social desirability
+ppcor::spcor.test(ydata$tpcoiss), ydata$tpstress, ydata$tmarlow)
+#perception of control and stress controlling for social desirability
+ppcor::spcor.test(ydata$tpcoiss, ydata$tpstress, ydata$tmarlow)
+#run a one-way anova test using the correct post-hoc test Tukey in our case
+#Use Games-Howell for unequal variances
+one.way <- oneway(sdata$agegp3, y = sdata$toptim, posthoc = 'Tukey')
+#printout a summary of the anova
+one.way
+#Baseline model optimism and social desirability as predictors
+model1=lm(sdata$tpcoiss~sdata$toptim+sdata$tmarlow)
+summary(model1)
+stargazer(model1)
+library(foreign) #To work with SPSS data
+library(lmSupport)#Extra functions for linear model (may require install of nloptr also)
+library(lm.beta)
+library(stargazer)#pretty print regression output
+library(dplyr)
+library(ppcor)
+library(car)
+stargazer(model1)
+stargazer(model1)
+knitr::opts_chunk$set(echo = TRUE)
+stargazer(model1)
+stargazer(model1, type="text")
+names(sdata)
+lmSupport::modelAssumptions(model1)
+plot(model1)
+plot(model1)
+plot(model1)
+#Create a QQ plotqqPlot(model, main="QQ Plot") #qq plot for studentized resid
+leveragePlots(model1) # leverage plots
+#Baseline model optimism and social desirability as predictors
+model1=lm(sdata$tpcoiss~sdata$toptim+sdata$tmarlow)
+ols_coll_diag(model1)
+#Collinearity
+vif(model1)
+ols_coll_diag(model1)
+#Baseline model optimism and social desirability as predictors
+model1=lm(sdata$tpcoiss~sdata$toptim+sdata$tmarlow)
+stargazer(model1, type="text")
+ols_coll_diag(model1)
+model3=lm(sdata$tpcoiss~sdata$toptim+sdata$tmarlow+sdata$tpstress+sdata$sex)
+ols_coll_diag(model3)
+#Collinearity
+vif(model1)
+1/vifmodel[1]
+#Collinearity
+vifmodel<-vif(model1)
+1/vifmodel[1]
+sqrt(vif(model1))
+1/vifmodel
+# identify D values > 4/(n-k-1)
+cutoff <- 4/((nrow(sdata)-length(model1$coefficients)-2))
+plot(model1, which=4, cook.levels=cutoff)

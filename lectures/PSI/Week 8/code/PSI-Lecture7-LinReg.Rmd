@@ -1,0 +1,53 @@
+---
+title: "PSILecture7"
+author: "HTML"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#  This is an accompaniment to the lecture 7.
+## It addresses linear regression
+##  It includes all the examples used in the lecture
+
+### Preliminaries
+```{r}
+
+library(foreign) #To work with SPSS data
+library(lmSupport)#Extra functions for linear model (may require install of nloptr also)
+library(lm.beta)
+library(stargazer)#For formatting outputs/tables
+
+```
+
+
+```{r}
+#We are using our exam result dataset - regression.sav
+#Read in the file
+regression <- read.spss("../data/Regression.sav", use.value.labels=TRUE, max.value.labels=Inf, to.data.frame=TRUE)
+
+```
+
+###First Model NormExam predicted by StandLRT
+```{r }
+model1<-lm(regression$normexam~regression$standlrt)
+anova(model1)
+summary(model1)
+lm.beta(model1)
+stargazer(model1, type="text") #Tidy output of all the required stats
+```
+##Second model including dummy variable for gender
+```{r}
+model2<-lm(regression$normexam~regression$standlrt+regression$girl)
+anova(model2)
+summary(model2)
+stargazer(model2, type="text") #Tidy output of all the required stats
+lm.beta(model2)
+stargazer(model1, model2, type="text") #Quick model comparison
+
+```
+

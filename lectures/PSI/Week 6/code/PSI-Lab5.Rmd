@@ -1,0 +1,205 @@
+---
+title: "PSILab5"
+author: "HTML"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}
+library(psych)
+library(semTools)
+library(stats)
+library(ggplot2)
+library(FSA)
+library(userfriendlyscience) 
+library(gmodels)
+```
+
+
+
+##Using Survey.dat
+###1.	Are there differences in total percevied stress scores (tpstress) for participants with different education levels (educ)?
+
+```{r}
+
+#We need to load the file so that we can use it in R.
+sdata <- read.table("survey.dat")
+#Setting the column names to be that used in the dataset
+colnames(sdata) <- tolower(colnames(sdata))
+
+
+#Check the variable
+#Descriptive statistics by group describeBy is part of the psych package so you need to use it
+describeBy(sdata$tposaff,group=sdata$sex)
+#check the numbers in each group - verify that this mirrors what you expect
+table(sdata$sex)
+
+#skewness and kurtosis from semTools with standard error 
+skew<-semTools::skew(sdata$tpstress)
+kurt<-semTools::kurtosis(sdata$tpstress)
+#We divide the skew statistic by the standard error to get the standardised score
+skew[1]/skew[2]
+kurt[1]/kurt[2]
+#Falling within acceptable ranges
+
+#First need to check for homogeneity of variance
+#We use Bartlett's test 
+bartlett.test(sdata$tpstress, sdata$educ)
+#Variances can be considered homogeneous p-value > 0.05
+
+#Basic Approach
+# Compute the analysis of variance
+res.aov <- aov(sdata$tpstress ~ sdata$educ, data = sdata)
+# Summary of the analysis
+summary(res.aov)
+#Tukey pairwise comparison
+TukeyHSD(res.aov)
+
+#Alternative
+#run a one-way anova test using the correct post-hoc test Tukey in our case
+#Use Games-Howell for unequal variances
+one.way <- userfriendlyscience::oneway(sdata$educ, y = sdata$tpstress, posthoc = 'Tukey') 
+ 
+#printout a summary of the anova 
+one.way 
+
+#No significant differences found.
+```
+###2.	Are there differences in total self-esteem scores  (tslfset) for participants for young, middle aged and old participants (agegp3)?
+```{r}
+#Check the variable
+#Descriptive statistics by group describeBy is part of the psych package so you need to use it
+describeBy(sdata$tslfest,group=sdata$agegp3)
+#check the numbers in each group
+table(sdata$agegp3)
+
+#skewness and kurtosis from semTools with standard error 
+skew<-semTools::skew(sdata$tslfest)
+kurt<-semTools::kurtosis(sdata$tslfest)
+#We divide the skew statistic by the standard error to get the standardised score
+skew[1]/skew[2]
+kurt[1]/kurt[2]
+#Not falling within acceptable ranges
+#Check standardised scores
+summary(scale(sdata$tslfest))
+#Max and min are within acceptable ranges - we can use parametric tests
+
+#First need to check for homogeneity of variance
+#We use Bartlett's test 
+bartlett.test(sdata$tslfest, sdata$agegp3)
+#Variances can be considered homogeneous p-value > 0.05
+
+#Basic Approach
+# Compute the analysis of variance
+res.aov <- aov(tslfest ~ agegp3, data = sdata)
+# Summary of the analysis
+summary(res.aov)
+#Tukey pairwise comparison
+TukeyHSD(res.aov)
+
+#Alternative
+#run a one-way anova test using the correct post-hoc test Tukey in our case
+#Use Games-Howell for unequal variances
+one.way <- userfriendlyscience::oneway(sdata$agegp3, y = sdata$tslfest, posthoc = 'Tukey') 
+ 
+#printout a summary of the anova 
+one.way 
+
+#Significant differences found. 
+```
+
+##Using the Youthcohort dataset 
+###1.	Are there differences in GCSE English grades  (gradeng) achieved by students of different ethnicities (ethsfr)?
+```{r}
+ydata <- read.table("youthcohort.dat")
+#Setting the column names to be that used in the dataset
+colnames(sdata) <- tolower(colnames(ydata))
+#Look at the numbers in the relevant categories
+table(ydata$gradeng)
+table(ydata$ethsfr)
+
+#need to use non-parametric test
+psych::describeBy(as.numeric(ydata$gradeng),factor(ydata$ethsfr) )
+
+#run a kruskal wallis test
+stats::kruskal.test(gradeng~ethsfr,data=ydata)
+#There is a significant difference
+#Post hoc testing to locate where the difference is
+
+#Need library FSA to run the post-hoc tests
+
+tmp<-FSA::dunnTest(x=as.numeric(ydata$gradeng), g=factor(ydata$ethsfr), method="bonferroni") 
+#We need the as.numeric to make sure our gradeng variable is treated as a numeric variable and we are using the numerical categories for ethsfr so we use the factors
+print(tmp, dunn.test.results = TRUE)
+#in the output X=gradeng, g=ethsfr and the test statistic is Z with significance shown underneath
+```
+###2.	Are there differences in GCSE Maths grades (gradmath) achieved by students with parents of different educational attainment (s1pared)?
+```{r}
+#Look at the numers in the relevant categories
+table(ydata$gradmath)
+table(ydata$s1pared)
+
+#need to use non-parametric test
+psych::describeBy(as.numeric(ydata$gradmath),factor(ydata$s1pared) )
+
+#run a kruskal wallis test
+stats::kruskal.test(gradmath~s1pared,data=ydata)
+#There is a significant difference
+#Post hoc testing to locate where the difference is
+
+#Need library FSA to run the post-hoc tests
+
+tmp<-FSA::dunnTest(x=as.numeric(ydata$gradmath), g=factor(ydata$s1pared), method="bonferroni") 
+#We need the as.numeric to make sure our gradmath variable is treated as a numeric variable and we are using the numerical categories for s1pared so we use the factors
+print(tmp, dunn.test.results = TRUE)
+#in the output X=gradmath, g=s1pared and the test statistic is Z with significance shown underneath
+```
+###1.	Is there a difference between whether a student sat GCSE maths (satmath) for students of different gender (s1gender)?
+
+```{r}
+
+#Use the Crosstable function
+#CrossTable(predictor, outcome, fisher = TRUE, chisq = TRUE, expected = TRUE)
+
+gmodels::CrossTable(ydata$s1gender, ydata$satmath, fisher = TRUE, chisq = TRUE, expected = TRUE, sresid = TRUE, format = "SPSS")
+
+
+#More simplistic way to do your chi-square
+#Create your contingency table
+mytable<-xtabs(~satmath+s1gender, data=ydata)
+
+ctest<-chisq.test(mytable, correct=TRUE)#chi square test
+#correct=TRUE to get Yates correction needed for 2x2 table
+
+ctest#will give you the details of the test statistic and p-value
+ctest$expected#expected frequencies
+ctest$observed#observed frequencies
+ctest$p.value
+```
+
+###2.	Is there a difference between whether a student sat GCSE maths (satmath) for students of different educational attainment (s1pared)?
+```{r}
+
+gmodels::CrossTable(ydata$s1pared, ydata$satmath, fisher = TRUE, chisq = TRUE, expected = TRUE, sresid = TRUE, format = "SPSS")
+
+#more simplistic way of doing Chi-Square
+
+
+#Create your contingency table
+mytable<-xtabs(~satmath+s1pared, data=ydata)
+
+ctest<-chisq.test(mytable, correct=TRUE)#chi square test
+#correct=TRUE to get Yates correction needed for 2x2 table
+
+ctest#will give you the details of the test statistic and p-value
+ctest$expected#expected frequencies
+ctest$observed#observed frequencies
+ctest$p.value
+```
+
+
+
