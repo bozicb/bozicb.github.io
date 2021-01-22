@@ -29,3 +29,4 @@ For a quick inspection of your data, try the following:
 Task 4: Fit a model
 -------------------
 
+Use `LinearRegression` from the `sklearn.linear_model` module (or any other model of your choice) to fit
