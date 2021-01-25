@@ -1,7 +1,7 @@
 Lab Sheet 1
 ===========
 
-This is an introduction into standard libraries used in ML and how to load an existing data set.
+This is an introduction into standard libraries used in ML and how to load an existing data set. Before you start, I recommend installing [Jupyter Lab](https://jupyter.org/install.html) and using it for this and all future labs.
 
 Task 1: Load Libraries
 ----------------------
@@ -29,4 +29,4 @@ For a quick inspection of your data, try the following:
 Task 4: Fit a model
 -------------------
 
-Use `LinearRegression` from the `sklearn.linear_model` module (or any other model of your choice) to fit
+Use `LinearRegression` from the `sklearn.linear_model` module (or any other model of your choice) to fit.
