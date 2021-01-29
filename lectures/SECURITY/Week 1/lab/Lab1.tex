@@ -1,11 +1,31 @@
 \documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{listings}
+
 \title{Lab Sheet 1}
+\date{Security}
 
 \begin{document}
 \maketitle
 In our first lab, your task is to prepare a workable system for future exercises and problems. You will not need to sumit any solutions, however your work is a necessary preparation for the final assignment and therefore will be needed to finish it later on. In the following, you will be required to setup Kali Linux in a virtual machine, boot Kali and make sure your system is running and ready for future work.
-\section{Task 1: Download and install virutalisation software}
+
+\section{Task 1: Download and install virtualisation software}
+Feel free to use any virtualisation software you prefer. My recommendation is [VirtualBox]{virtualbox.org}. If you already have it on your computer you're fine. Otherwise, install and start the software.
+
 \section{Task 2: Download Kali Linux}
+Go to the \href{https://www.kali.org/downloads/}{Kali Linux download page} and pick 64-bit (Installer) version (recommended) or any other version that suits your hardware. Compare the checksum of your download with the SHA256Sum (in the respective column on the download page) by running the following command in your terminal:
+
+\begin{lstlisting}
+shasum -a .\kali-linux-2020.4-installer-amd64.iso
+\end{lstlisting}
+
+If they match you can be pretty sure that your download was successful and you got the right file.
+
 \section{Task 3: Install Kali Linux on your VM}
+The next step should be pretty straightforward, use the downloaded iso to setup a new virtual machine, start it up and follow the instructions to install Kali.
+
 \section{Task 4: Boot into Kali and explore your new operating system}
-\End{document}
+When you have a running VM with Kali, boot it up and have a look around, make sure that you can open a terminal, inspect preinstalled software and write in a few sentences what you noticed on a first impression. Send this together with a screenshot of your setup to me via slack.
+\end{document}
