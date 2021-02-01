@@ -7,10 +7,10 @@
 
 # Site settings
 title: Problems with Puffins
-email: bojan.bozic@dit.ie
+email: bojan.bozic@tudublin.ie
 description: > # this means to ignore newlines until "baseurl:"
   This is a blog about cool problems and their solutions, crazy ideas, tech news, 
-  algorithms with puffins, and many other topics in Machine Learning, Natural Language Processing,
+  algorithms with puffins, and many other topics in Semantic Web, Machine Learning, Natural Language Processing,
   and any other awesome research field that might come to my attention :)
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://yourdomain.com" # the base hostname & protocol for your site
