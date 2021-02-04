@@ -31,18 +31,26 @@ The success can also be derived from the statistics of this year's ISWC:
 This shows as well that Semantic Web technologies have a very high level of usability now.
 
 ## Semantic Web is now Knowledge Graphs
-One of the first things I noticed (although this might be just my subjective perception) since my last visit to an ISWC is that people prefer to talk about Knowledge Graphs rather than Semantic Web. Is it because Semantic Web is not nearly as sexy as Machine Learning these days or for other reasons, I don't know. It would be very interesting to read opinons in the comments below though. My humble interpretation is simply that since Semantic Web is in a very advanced stage right now and there are loads of implementations throughout academia and industry, people prefer to refer to specific parts of it rather than the whole field. And knowledge graphs are definitely the most useful result of Semantic Web research from the last couple of years. Even the [program][ISWC Program] itself reflects how practical the field has become and how friendly it is to other disciplines, such as Deep Learning and Natural Language Processing.
+One of the first things I noticed (although this might be just my subjective perception) since my last visit to an ISWC is that people prefer to talk about Knowledge Graphs rather than Semantic Web. Is it because Semantic Web is not nearly as sexy as Machine Learning these days or for other reasons, I don't know. It would be very interesting to read opinons in the comments below though. My humble interpretation is simply that since Semantic Web is in a very advanced stage right now and there are loads of implementations throughout academia and industry, people prefer to refer to specific parts of it rather than the whole field. And knowledge graphs are definitely the most useful result of Semantic Web research from the last couple of years. Even the [programme][ISWC Programme] itself reflects how practical the field has become and how friendly it is to other disciplines, such as Deep Learning and Natural Language Processing.
 
 ## Other Emerging Topics
-
+As always, one of the first impressions was about new topics that immediately jump on you just by looking at the programme. As mentioned, lots of stuff was about Machine Learning and how to leverage it in Semantic Web, and also how to apply Semantic Web technologies in industry or other fields and use cases. But THE research track highlights for me were clearly: [Recursive SHACL][SHACL paper], [BASH Datalog][BASH Datalog paper], [Wikidata Knowledge Graph][Wikidata paper] and [Explaining Knowledge Graph Relationships][Explaining KG paper].
 
 ## What about Machine Learning?
-## Workshops and Tutorials
-## Interesting Papers
+What really amazed me was that we had a whole Workshop dedicated to [Semantic Deep Learning][DL Workshop]. This was exactly what I was looking for and it didn't disappoint. There were talks about learning concept descriptions via NN, large document semantics, text/knowledge graphs embeddings and prediction tasks with neural embeddings. I can only hope that this workshop is here to stay.
+
 ## What are the Conclusions?
+After I missed out on the ISWC, I had a great time and met lots of old friends and even more new ones. This motivates me immensely to get involved more again and publish my own work at ISWC. So I can't wait to dig into my work of Machine Learning for Semantic Web and reconnect with my research group to work on interesting Semantic Web problems and hopefully be a regular visitor at ISWCs to come.
+
+
 
 [ISWC]: http://iswc2018.semanticweb.org/
-[ISWC Program]: http://iswc2018.semanticweb.org/program
+[ISWC Programme]: http://iswc2018.semanticweb.org/program
+[SHACL paper]: http://iswc2018.semanticweb.org/sessions/semantics-and-validation-of-recursive-shacl/index.html
+[BASH Datalog paper]: http://iswc2018.semanticweb.org/sessions/bash-datalog-answering-datalog-queries-with-unix-shell-commands/index.html
+[Wikidata paper]: http://iswc2018.semanticweb.org/sessions/getting-the-most-out-of-wikidata-semantic-technology-usage-in-wikipedias-knowledge-graph/index.html
+[Explaining KG paper]: http://iswc2018.semanticweb.org/sessions/thats-interesting-tell-me-more-finding-descriptive-support-passages-for-explaining-knowledge-graph-relationships/index.html
+[DL Workshop]: https://www.dfki.de/~declerck/semdeep-4/
 
 {% if page.comments %}
 <div id="disqus_thread"></div>
