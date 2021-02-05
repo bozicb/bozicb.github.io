@@ -42,7 +42,7 @@ What really amazed me was that we had a whole Workshop dedicated to [Semantic De
 ## What are the Conclusions?
 After I missed out on the ISWC, I had a great time and met lots of old friends and even more new ones. This motivates me immensely to get involved more again and publish my own work at ISWC. So I can't wait to dig into my work of Machine Learning for Semantic Web and reconnect with my research group to work on interesting Semantic Web problems and hopefully be a regular visitor at ISWCs to come.
 
-
+![Puffin and Deer](../images/iswc2018/room_view.png)
 
 [ISWC]: http://iswc2018.semanticweb.org/
 [ISWC Programme]: http://iswc2018.semanticweb.org/program
