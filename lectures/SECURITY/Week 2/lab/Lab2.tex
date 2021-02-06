@@ -9,10 +9,52 @@
 
 \begin{document}
 \maketitle
-In our second lab, we will work on classical encryption techniques in Kali Linux. Boot your Kali Linux installation and use a terminal to invoke shell commands for encryption and decryption. The starting point of each task is an open terminal. When finished post a screenshot of your answers to slack.
+
+In our second lab, we will work on classical encryption techniques in Kali Linux. Boot your Kali Linux installation and use a terminal to invoke shell commands for encryption and decryption. The starting point of each task is an open terminal. When finished post a screenshot of your answers to slack. HINT: If you have any trouble with importing libraries, run \texttt{sudo apt install python-is-python3}.
+
 \section{Task 1: Caesar Cipher}
 For this task, you will need to install the Python libray pycipher by typing \texttt{pip install pycipher} into your terminal.
+
 \subsection{Encryption with a known key}
 Type \texttt{python} to invoke the Python interpreter and use \texttt{pycipher} to encrypt the message \textit{m = 'hello world'} with key \textit{k = 3}.
-HINT: use \texttt{help(pyciper)} to find the right function.
+HINT: use \texttt{help(pycipher)} to find the right function.
+
+\subsection{Brute Force Attack on Caesar Cipher}
+Use a brute force attack with pycipher to decrypt the ciphertext \textit{c = 'FRUURJVBCANNC'}.
+
+\section{Task 2: Monoalphabetic Ciphers}
+Download the following \href{https://tinyurl.com/y6qfe2bq}{script} (link also available on Brightspace as crypto) and save it as a shell script file on Kali. HINT: don't forget to make it executable with \texttt{chmod +x}.
+\subsection{Frequency Analysis}
+Use the script to analyse the following ciphertext:
+\begin{lstlisting}
+  ziolegxkltqodlzgofzkgrxetngxzgzithkofeohstlqfrzteifoj
+  xtlgyltexkofuegdhxztklqfregdhxztkftzvgkalvoziygexlgfo
+  fztkftzltexkoznzitegxkltoltyytezoctsnlhsozofzgzvghqkz
+  lyoklzofzkgrxeofuzitzitgkngyeknhzgukqhinofesxrofuigvd
+  qfnesqlloeqsqfrhghxsqkqsugkozidlvgkaturtlklqrouozqslo
+  ufqzxktlqfrltegfrhkgcorofurtzqoslgyktqsofztkftzltexko
+  znhkgzgegslqsugkozidlqfrziktqzltuohltecokxltlyoktvqss
+  litfetngxvossstqkfwgzizitgktzoeqsqlhtezlgyegdhxztkqfr
+  ftzvgkaltexkoznqlvtssqligvziqzzitgknolqhhsotrofzitofz
+  tkftzziolafgvstrutvossitshngxofrtloufofuqfrrtctsghofu
+  ltexktqhhsoeqzogflqfrftzvgkahkgzgegslqlvtssqlwxosrofu
+  ltexktftzvgkal
+\end{lstlisting}
+Save it to a file and make sure it can be printed with \texttt{cat text.txt}. Use \texttt{crypto count letters text.txt percentsort} to see frequencies of letters. You can also use \texttt{crypto count digrams text.txt percentsort} to check the frequency of bigrams (double letters). Use the output to uncover most and least frequent letters and bigrams so you can replace them step by step and find the original text. HINT: Have a look at English letter frequency counts, e.g. \href{http://norvig.com/mayzner.html}{Mayzner Revisited} to help you find the connections.
+
+\section{Task 3: Vigen\`{e}re Cipher}
+Use \texttt{pycipher} again to encrypt the plaintext \textit{p = 'centralqueensland'} with the following keys:
+\begin{itemize}
+  \item \textit{key = 'cat'}
+  \item \textit{key = 'dog'}
+  \item \textit{key = 'a'}
+  \item \textit{key = 'giraffe'}
+\end{itemize}
+
+\section{Task 4: Transposition}
+Use \texttt{pycipher} again to decrypt the following text, using a Columnar Transposition Cipher:
+\begin{lstlisting}
+  IEEEIGTITGHDBONINSSRI
+\end{lstlisting}
+with the keyword \textit{k = 'doctor'}.
 \end{document}

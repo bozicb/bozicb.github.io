@@ -1,0 +1,9 @@
+import math
+
+def entropy(probabilites):
+    ent = 0
+    for p in probabilities:
+        ent += p*log(p,2)
+    ent = ent*(-1)
+    return ent
+

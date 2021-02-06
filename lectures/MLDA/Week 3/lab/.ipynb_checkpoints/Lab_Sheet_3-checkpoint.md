@@ -24,20 +24,8 @@ The variables we select to train the model on are called *features*. We should a
 
 Task 3: Building Your Model
 ---------------------------
-Here we will use the [sklearn](https://scikit-learn.org/stable/) library to fit our model. We will use it to define which model we want to use, fit the model to the data, make our predictions, and evaluate the predictions based on labels in our original dataset. So let's go ...
-
-1. Import a `DecisionTreeRegressor` from the `tree` module in `sklearn`.
-2. Intialise the model.
-3. Fit the model to your descriptive features and target.
-
-It's considered good practice to specify a number for `random_state` when initialising your model. It will assure that you get the same results on each run.
+Here we will use the [sklearn][https://scikit-learn.org/stable/] library to fit our model.
 
 Task 4: Make Predictions
 ------------------------
-In the final step you can select a few houses from your model and let the model make predictions for them. Then you can just compare these to the target feature of your dataset. As I said:
 
-1. Select houses you want predictions for.
-2. Let the model `predict` them.
-3. Compare to what the target values should have been.
-
-What did you notice? How happy are you with your model?
