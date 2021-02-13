@@ -24,7 +24,13 @@ The most useful effect of showing students how to turn a mathematical formula in
 sum([p*math.log(p,2) for p in probabilities])*(-1)
 {% endhighlight %}
 
-It becomes apparent that there needs to be a list of probabilities (according to our lecture examples it could be the probabilities to draw one of the four possible suits of cards out of a deck), and it will give us the entropy in bits. So we hope. But the of it, is that it actually doesn't look very different from the original formula in mathematical notation.
+It becomes apparent that there needs to be a list of probabilities (according to our lecture examples it could be the probabilities to draw one of the four possible suits of cards out of a deck), and it will give us the entropy in bits. So we hope. But the of it, is that it actually doesn't look very different from the original formula in mathematical notation. The best way to check if it's not only apparent to you, is to have a random student explain it to you.
+
+It gets a little bit harder though, if we look at the code for information gain (I've only outlined the interesting parts):
+
+{% highlight python linenos %}
+
+{% endhighlight %}
 
 # Publishing on GitHub
 
