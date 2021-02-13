@@ -20,7 +20,7 @@ In addition to explaining formulae on the virtual whiteboard and polling results
 # The Code
 The most useful effect of showing students how to turn a mathematical formula into code is that they are forced to think about how it is applied, i.e. what you need to feed it, and what it will give you back. As an example, if we look at the formula for Shannon's Entropy in Python code:
 
-{% highlight python linenos %}
+{% highlight python %}
 sum([p*math.log(p,2) for p in probabilities])*(-1)
 {% endhighlight %}
 
@@ -29,9 +29,54 @@ It becomes apparent that there needs to be a list of probabilities (according to
 It gets a little bit harder though, if we look at the code for information gain (I've only outlined the interesting parts):
 
 {% highlight python linenos %}
-
+ps = []
+for l in abt[target].unique():
+   ps.append(abt[target].value_counts()[l]/num_rows)
+e = entropy(ps)
+rems = []
+for feature in features:
+   levels = abt[feature].unique()
+   part_ents = []
+   for level in levels:
+      weight = abt[feature].value_counts()[level]/num_rows
+      ent = entropy(abt.loc[abt[feature] == level][target].value_counts()/len(abt.loc[abt[feature] == level]))
+      part_ents.append(weight*ent)
+   rems.append(sum(part_ents))
+infGains = e - rems
 {% endhighlight %}
 
+This looks a bit more confusing, at it will take a while for most students to understand, how we got here from the formula for the remainder of every feature. But still it follows the same process and once you understand how the code works, you will never again forget how to solve an information gain problem on paper again. OK, this is a huge exaggeration, but it definitely will be way harder compared to only solving problems on paper to get you ready for an exam :)
+
 # Publishing on GitHub
+As far as publishing is concerned, I found [GitHub](github.com) to be a good place to let students share, fork, modify and play around with the code. Sometimes, they will even do useful pull requests and make contributions to your code, so it's subject to constant improvement and reuse for future lectures.
 
 # Other Notes on Online Teaching
+So online teaching can be real fun and really depends on what you make of it. We are very lucky and priviledged to have so many options. I've even got my hands on a drawing tablet recently, so expect a blog post about that soon(ish) too. Overall, benefits are balancing out lots of the disadvantages and I will certainly keep using many online teaching elements in face to face lectures once we can return to some kind of *normal*. It's really been such a long time now, and I'm not sure if I would recognise a student if I saw them or even my own colleagues. I really miss the coffee chats and social interaction, not to talk about the occasional pints after work.
+
+So long and thanks for all the fish, friends. Please let me know about your thoughs in the comments or, even better, let us all know about how you're doing with online teaching, if you are a student or lecturer, or otherwise how you're managing life in a pandemic. Hope you're all safe and healthy. Over to the puffins ...
+
+![Fish?](/images/fish.png)
+
+{% if page.comments %}
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://bozicb-github-io.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
+{% endif %}
