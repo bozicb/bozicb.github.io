@@ -1,0 +1,55 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{listings}
+
+\title{Lab Sheet 4}
+\date{Security}
+
+\begin{document}
+\maketitle
+
+In our fourth lab, we will implement a virus in Python. The virus will be a Python script which infects other Python scripts and copies its payload into them. This is very much the same way as any virus would attack executable files and infect them with malicious code.
+
+\section{Task 1: Directory and Files}
+Create some dummy Python script files (e.g. hello world programs or programs with  random code, just make sure it's nothing important that you would like to keep) in a directory in your home folder. Then create a new Python script called \texttt{virus.py} in the same safe directory. HINT: Dont' forget to add the ``shebang'' to your Python files (i.e. the first line in a Python script should always be \texttt{\#!/usr/bin/env python}.
+
+\section{Task 2: Prepare Virus Code}
+To implement the virus, we will follow these steps:
+\begin{itemize}
+\item Clearly mark where the virus starts (use \texttt{\#\#\# VIRUS BEGIN \#\#\#} and \texttt{\#\#\# VIRUS END \#\#\#} comments.
+\item The virus will have to access files and directories, copy itself, etc. Therefore we will need to import the libraries \texttt{sys, glob, re} (make sure you know what these libraries offer and what they are here for). So import these libraries.
+\item Our virus (same as every other virus) has the following major functionality:
+  \begin{enumerate}
+  \item Makes a copy of itself.
+  \item Finds potential victims.
+  \item Checks and infect.
+  \item Optional payload.
+  \end{enumerate}
+\end{itemize}
+
+\section{Task 3: Copy the Virus}
+To copy the virus, we will need to read in the file that is running (i.e. the virus file) and search for the virus code. Then we will save every line in a list. So this is the code where the virus copies itself. (HINT: Look for your begin and end comments).
+
+\section{Task 4: Find potential victims}
+Use the \texttt{glov} library to look for other Python files in the same directory and save them to a list.
+
+\section{Task 5: Check and infect}
+Go through the list of Python files in the directory and for each do the following:
+\begin{enumerate}
+\item Open the file in reading mode.
+\item Read the lines and save them to a list.
+\item Close the file.
+\item Check if the file is already infected.
+\item If not, look for the ``shebang'' and add the virus code between it and the original program code to a list of code lines.
+\item Open the file in write mode this time and overwrite the contents with the content of your list.
+\item Close the file.
+\end{enumerate}
+
+\section{Task 6: Add Payload and Run the Virus}
+Add the payload to your virus (this is the code that does the damage). In our case it is sufficient to just print something like ``Infected!!!''.
+
+After you did this, run the \texttt{virus.py} script and watch what happens to your hello world program. Can you explain what the virus did?
+\end{document}
