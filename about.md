@@ -15,6 +15,7 @@ Links
 
 Memberships and Reviews
 -----------------------
+* Frontiers in Sustainable Cities (Guest Associate Editor)
 * Irish Conference on Artificial Intelligence and Cognitive Science (Program Committee) 
 * Information Integration and Web-based Applications and Services (Program Committee)
 * Journal of Knowledge Management (Reviewer)
@@ -26,6 +27,7 @@ Memberships and Reviews
 * 21st International Congress on Modelling and Simulation (Session Organiser)
 * 2nd International Workshop on Computational History and Data-Driven Humanities (Co-chair)
 * NumFOCUS Diversity and Inclusion Committee (Member)
+* PyData Dublin (Organisation Committee)
 
 Awards
 ------
@@ -33,6 +35,7 @@ Awards
 
 Recent Talks
 ------------
+* Opend Data Science Conference 2020: [Knowledge Graphs for the Greater Good](https://odsc.com/speakers/knowledge-graphs-for-the-greater-good/)
 * PyCon Ireland 2018: [Can we talk? Neural Machine Translation with Keras.](https://github.com/bozicb/presentations/raw/master/can_we_talk/Can_we_talk_.pdf)
 * Predict Conference 2018: [It's about Time - How to make sense of your time series data?](https://github.com/bozicb/presentations/raw/master/Bojan_Bozic_It_s_about_Time.pdf)
 * GeoDirectory Conference 2018: [Future Implications of Artificial Intelligence](https://vimeo.com/287975414)
@@ -40,9 +43,15 @@ Recent Talks
 
 Publications
 ------------
+2020
+====
+* B. Božić, A. Rios, S.-J. Delany: "Comparing tagging suggestion models on discrete corpora." Int. J. Web Inf. Syst. 16 (2020): 201-221.
+* S. Leech, and B. Božić: "Discordant Observation Modelling." International Conference on Time Series and Forecasting. Springer, Cham, 2020.
 
 2019
 ====
+* P. Dooley, B. Božić: "Towards Linked Data for Wikidata Revisions and Twitter Trending Hashtags." Proceedings of the 21st International Conference on Information Integration and Web-based Applications & Services (2019).
+* A. Kaur, B. Božić: "Convolutional Neural Network-based Automatic Prediction of Judgments of the European Court of Human Rights." AICS (2019).
 * M. Solanki, B. Božić, C. Dirschl, R. Brennan: "Towards a knowledge driven framework for bridging the gap between software and data engineering". Journal of Systems and Software 149: 476-484 (2019)
 
 2018
