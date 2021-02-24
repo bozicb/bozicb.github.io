@@ -43,6 +43,7 @@ Recent Talks
 
 Publications
 ------------
+
 2020
 ====
 * B. Božić, A. Rios, S.-J. Delany: "Comparing tagging suggestion models on discrete corpora." Int. J. Web Inf. Syst. 16 (2020): 201-221.
