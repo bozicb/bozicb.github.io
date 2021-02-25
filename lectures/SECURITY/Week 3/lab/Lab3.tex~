@@ -1,0 +1,33 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{listings}
+
+\title{Lab Sheet 3}
+\date{Security}
+
+\begin{document}
+\maketitle
+
+In our third lab, we will use \href{https://www.cyberpunk.rs/password-cracker-thc-hydra}{hydra}, a tool in Kali Linux, to perform a Brute Force attack on a Web based login. Hydra is the fastest network logon cracker which supports numerous attack protocols. It is very fast and flexible, and new modules are easy to add. This tool makes it possible for researchers and security consultants to show how easy it would be to gain unauthorized access to a system remotely. 
+
+\section{Task 1: Brute Force Web-based Login with hydra}
+We will use http to run a brute force attack on a vulnerability testing site.
+
+\subsection{Get to know your tool}
+Type \texttt{hydra -h} (\texttt{h} for help) in your Kali terminal and find out what \textit{hydra} is all about and how it might work.
+
+\subsection{}
+One of hydra's brute force attackingservices is used on Web-based logins, such as social media login forms, user banking login forms, your router's Web-based login, etc. That's \texttt{http[s]-{get|post}-form} which will handle this request.
+
+Before we fire up hydra, we should know some of the arguments:
+\begin{itemize}
+\item \textbf{Target:} http://testasp.vulnweb.com/Login.asp?RetURL=\%2FDefault\%2Easp\%3F
+\item \textbf{Login username:} admin (if you're not sure, bruteforce this)
+\item \textbf{Password list:} ``The location of the dictionary file list containing possible passwords.''
+\item \textbf{Form parameters:} ``Here we will be using iceweasel or firefox network developer toolbar.''
+\item \textbf{Service module:} http-post-form
+\end{itemize}
+
+\end{document}

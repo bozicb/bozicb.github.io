@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html>
-  <link rel="shortcut icon" type="image/x-icon" href="/images/puffin.png">
-  {% include head.html %}
-  
-  <body>
+
+    {% include head.html %}
+
+    <body>
 
     {% include header.html %}
-    {% include nav.html nav=site.data.menu %}
+
     <div class="page-content">
-      <div class="wrapper">
-        {{ content }}
+      <div class="wrap">
+      {{ content }}
       </div>
     </div>
 
     {% include footer.html %}
 
-  </body>
-
+    </body>
 </html>

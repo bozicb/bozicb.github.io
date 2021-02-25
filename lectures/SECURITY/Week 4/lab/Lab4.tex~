@@ -1,0 +1,22 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{listings}
+
+\title{Lab Sheet 4}
+\date{Security}
+
+\begin{document}
+\maketitle
+
+In our fourth lab, we will implement a virus in Python.
+
+\section{Task 1: Directory and Files}
+Create some dummy Python and text files (e.g. hello world programs and .txt files with some random text with them) in a directory in your home folder. Then create a new Python script called \texttt{virus.py}.
+
+\section{Task 2: Create Virus Code}
+
+
+\end{document}
