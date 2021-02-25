@@ -8,10 +8,10 @@ permalink: /about/
 
 Dr. Bojan Božić is an Assistant Lecturer in Computer Science at TU Dublin and has worked on Semantic Web, Machine Learning, and Data Science technologies since 2010. He was a Software Development Engineer in Speech Recognition at Philips Speech Recognition Systems in Vienna, a Scientist at the Austrian Institute of Technology, an External Lecturer at the University of Applied Sciences Burgenland and University of Vienna, and a Research Fellow at Trinity College Dublin and the Centre for Applied Data Analytics Research at Dublin Institute of Technology. At AIT's Safety and Security department, he worked in leading roles in European research projects such as SANY (Sensor Web Enablement), TaToo (Tagging Tools for Semantic Discovery), Europeana Creative (Cultural Inheritage), PELAGIOS (Linked Data), and C2-SENSE (Sensor Web and Interoperability). At Trinity College he worked on the H2020 project ALIGNED, modelling data and software engineering processes through ontologies and annotations for the Dacura platform. He joined CeADAR and the Dublin Institute of Technology to commence research in Data Science and approach innovation and collaboration opportunities in new projects and is now lecturing, performing leading research and colaborating on several academic and industrial research projects. His current research interests are Semantic Web, Machine Learning, and Natural Language Processing. 
 
-Links
+<!--Links
 -----
 * [PhD Thesis](http://othes.univie.ac.at/32976/)
-* [CV](CV.pdf)
+* [CV](CV.pdf)-->
 
 Memberships and Reviews
 -----------------------
