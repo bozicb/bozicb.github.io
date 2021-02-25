@@ -16,7 +16,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://yourdomain.com" # the base hostname & protocol for your site
 twitter_username: bojan_bozic
 github_username:  bozicb
-title_image: "http://gravatar.com/avatar/f7d5f824eb3ab163ac4c38f98a2153af"
+title_image: "/images/puffin.png"
 
 # Build settings
 markdown: kramdown
