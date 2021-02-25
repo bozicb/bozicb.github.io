@@ -17,7 +17,7 @@ url: "http://yourdomain.com" # the base hostname & protocol for your site
 twitter_username: bojan_bozic
 github_username:  bozicb
 linkedin_link: https://www.linkedin.com/in/bojan-bozic/
-title_image: "https://www.gravatar.com/avatar/f7d5f824eb3ab163ac4c38f98a2153af?s=500&d=mm"
+title_image: "images/title.jpg"
 
 # Build settings
 markdown: kramdown
