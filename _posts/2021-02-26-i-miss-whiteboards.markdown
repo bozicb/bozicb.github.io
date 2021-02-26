@@ -23,7 +23,7 @@ But of course there were struggles too. I have two right hands when it comes to 
 
 ## The Result
 Overall, I gotta say, it didn't come out all that bad, as you can see for yourself here: 
-[![Entropy]({/images/video.png})]({https://youtu.be/LQBhPIQFoQI} "Entropy Video")
+[![Entropy](/images/video.png)](https://youtu.be/LQBhPIQFoQI)
 I think it will serve its purpose and make it easier for me to endure the loss of my beloved whiteboard for the last few months (as of now I hope we will be able to return to the real thing in autumn). I'm very curious what you think though, and whether you have any experience with drawing tablets or how you solved online teaching when it comes to maths problems, so please leave a comment and let me know. Don't forget to go outside, but keep distance and wear a mask! Over to you, puffins ...
 
 ![Test on Training](/images/test-on-training.png)
