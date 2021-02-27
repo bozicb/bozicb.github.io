@@ -8,7 +8,7 @@ comments: true
 
 Ha, this time I managed to fire out even two posts in only one month! Just watch me, and there is even more in the coming ;) But enough about me, the puffins have been very busy too and they have come up with a new outfit. Our new member Rubyrta is presenting their new style after the article, so make sure you read all through it!
 
-This time I wanna talk a bit more about online teaching, I know it's a recurring topic here, but we are still in lockdown and only the great puffin knows when we will see real students and each other again. As already mentioned in the [last article](2021-02-04-information-theory-in-python.markdown), online teaching has bright and dark sides, but what I miss most is the whiteboard. That huge beautiful board that is always blank when your lecture starts, but shows all the work you did after. Sometimes lots of struggles too which reflect how you were trying to explain problems and sometimes you really stop to wonder how people are ever supposed to decrypt your sloppy, messy handwriting.
+This time I wanna talk a bit more about online teaching, I know it's a recurring topic here, but we are still in lockdown and only the great puffin knows when we will see real students and each other again. As already mentioned in the [last article](/jekyll/update/2021/02/04/information-theory-in-python.html), online teaching has bright and dark sides, but what I miss most is the whiteboard. That huge beautiful board that is always blank when your lecture starts, but shows all the work you did after. Sometimes lots of struggles too which reflect how you were trying to explain problems and sometimes you really stop to wonder how people are ever supposed to decrypt your sloppy, messy handwriting.
 
 It was not feasible for the moment to install a whiteboard at home, so I went for what I thought was the second best solution: a drawing tablet. Now our university had a One by Wacom in stock (I'm really just mentioning the make here so you know what I got, but since this is the only drawing tablet I ever used, it's most certainly not meant to be a recommendation and I will not comment on whether you should get one or not as I have no clue how bad or good others are), so I decided to grab it while it was fresh.
 
@@ -30,4 +30,22 @@ I think it will serve its purpose and make it easier for me to endure the loss o
 
 Sorry, they have to learn it the hard way.
 
-
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://bozicb-github-io.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
+{% endif %}
