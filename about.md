@@ -47,7 +47,7 @@ Publications
 2020
 ====
 * B. Božić, A. Rios, S.-J. Delany: "Comparing tagging suggestion models on discrete corpora." Int. J. Web Inf. Syst. 16 (2020): 201-221.
-* S. Leech, and B. Božić: "Discordant Observation Modelling." International Conference on Time Series and Forecasting. Springer, Cham, 2020.
+* S. Leech, B. Božić: "Discordant Observation Modelling." International Conference on Time Series and Forecasting. Springer, Cham, 2020.
 
 2019
 ====
