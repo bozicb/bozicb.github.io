@@ -1,0 +1,4 @@
+\BOOKMARK [1][-]{section.1}{Task 1: Identify all open ports}{}% 1
+\BOOKMARK [1][-]{section.2}{Task 2: Allow inbound TCP connections on ports 22, 80, and 443 only}{}% 2
+\BOOKMARK [1][-]{section.3}{Task 3: Verify other ports are blocked with netcat}{}% 3
+\BOOKMARK [1][-]{section.4}{Task 4: Make sure rules persist after reboot}{}% 4

@@ -1,4 +1,4 @@
-Lab Sheet 5
+Lab Sheet 6
 ===========
 In this lab sheet we will use Linear Regression to predict house prices and Logistic Regression to predict heart disease. We will use `sklearn` to train the models and make predictions. Some evaluation is covered here as well, however the theory part of this will be covered in week 8.
 

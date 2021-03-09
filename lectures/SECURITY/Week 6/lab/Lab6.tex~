@@ -1,0 +1,15 @@
+
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{listings}
+
+\title{Lab Sheet 6}
+\date{Security}
+
+\begin{document}
+\maketitle
+Our sixth lab is about firewalls. The Linux kernel embeds the \textit{netfilter} firewall. There is no turn-key solution for configuring any firewall since network and user requirements differ. However, you can control \textit{netfilter} from user space with the \textbf{iptables} and \textbf{ip6tables} commands. The difference between these two commands is that the former works for IPv4 networks, whereas the latter works on IPv6. Since both network protocol stacks will probably be around for many years, both tools will need to be used in parallel. You can also use the excellent GUI-based fwbuilder tool, which provides a graphical representation of the filtering rules.
+\end{document}
