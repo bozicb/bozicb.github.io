@@ -2,7 +2,7 @@
 layout: post
 title: "Teaching during Lockdown or Information Theory in Python"
 date: 2021-02-04 20:00:00 +0000
-categories: jekyll update
+categories: python information lockdown
 comments: true
 ---
 
@@ -12,12 +12,12 @@ Personally, I found lecturing without being in the same room with students, quit
 
 So things have changed, and it mostly affects the use of technology to get the most of our lectures. I hope I will post a few things about the best way (imho) to work on maths problems collaboratively online, but I'm not quite there. Still testing stuff. However, this post is all about how to use code to make math problems more interesting. In particular, I'll be looking into teaching information theory in Python today. You can find all my code, here: [GitHub Information Theory Repo](https://github.com/bozicb/information-theory) It's still in its baby shoes and growing constantly, but feel free to fork and send me pull requests.
 
-# Some Basics
+## Some Basics
 As I mentioned the challenges lecturer face with online teaching, what I was referring to has mostly to do with student interaction. We can't see faces, so we have little information of how bored students are at any specific point during a lecture, how confused they look, or just how they react to our inputs and monologues. So what I found works at least in parts to get a feeling for the mood in my class is doing live polls on either the materials that I just covered, to see how much of a clue they got, or just general questions about how they feel and whether the pace is ok for them. I recommend doing this every 15 to 20 minutes or at any point that makes sense, but to err rather on the too frequent side. My recent lecture covered information theory, so I stopped to leave them a few minutes to work on a simple problem or ask if they understood a formula. Luckily, [Bongo](https://www.bongolearn.com) supports live polls and has easy access to them, so I can create a poll even while I talk and can get instant feedback from students.
 
 In addition to explaining formulae on the virtual whiteboard and polling results of examples from students, I am also using Python code to explain how to implement formulae. In my case this was `entropy`, `ig` (information gain), `ig_ration`, and `gini_index`.
 
-# The Code
+## The Code
 The most useful effect of showing students how to turn a mathematical formula into code is that they are forced to think about how it is applied, i.e. what you need to feed it, and what it will give you back. As an example, if we look at the formula for Shannon's Entropy in Python code:
 
 {% highlight python %}
@@ -47,10 +47,10 @@ infGains = e - rems
 
 This looks a bit more confusing, at it will take a while for most students to understand, how we got here from the formula for the remainder of every feature. But still it follows the same process and once you understand how the code works, you will never again forget how to solve an information gain problem on paper again. OK, this is a huge exaggeration, but it definitely will be way harder compared to only solving problems on paper to get you ready for an exam :)
 
-# Publishing on GitHub
+## Publishing on GitHub
 As far as publishing is concerned, I found [GitHub](github.com) to be a good place to let students share, fork, modify and play around with the code. Sometimes, they will even do useful pull requests and make contributions to your code, so it's subject to constant improvement and reuse for future lectures.
 
-# Other Notes on Online Teaching
+## Other Notes on Online Teaching
 So online teaching can be real fun and really depends on what you make of it. We are very lucky and priviledged to have so many options. I've even got my hands on a drawing tablet recently, so expect a blog post about that soon(ish) too. Overall, benefits are balancing out lots of the disadvantages and I will certainly keep using many online teaching elements in face to face lectures once we can return to some kind of *normal*. It's really been such a long time now, and I'm not sure if I would recognise a student if I saw them or even my own colleagues. I really miss the coffee chats and social interaction, not to talk about the occasional pints after work.
 
 So long and thanks for all the fish, friends. Please let me know about your thoughs in the comments or, even better, let us all know about how you're doing with online teaching, if you are a student or lecturer, or otherwise how you're managing life in a pandemic. Hope you're all safe and healthy. Over to the puffins ...
