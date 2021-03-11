@@ -46,7 +46,7 @@ Hope you share my enthusiasm for Ruby and appreciate the beauty of that code. Le
 
 Let's see what the puffins are up to ...
 
-![Keep your (Euclidean) distance.](euclidean.png)
+![Keep your (Euclidean) distance.](/images/knn-ruby/euclidean.png)
 
 {% if page.comments %}
 <div id="disqus_thread"></div>
