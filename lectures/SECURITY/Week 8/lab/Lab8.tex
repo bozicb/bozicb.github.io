@@ -1,0 +1,86 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{minted}
+
+\usemintedstyle{monokai}
+
+\title{Lab Sheet 8 - GnuPG}
+\date{Security}
+
+\begin{document}
+\maketitle
+Our eight lab is about using GnuPG to encrypt and decrypt messages. \href{https://linux.die.net/man/1/gpg}{Gnu Privacy Guard} is preinstalled on Kali Linux and complies with the OpenPGP standard. In this lab you will generate your public and private keys and use them for several tasks. As a first step, have a took at the man page: \texttt{man gpg}.
+
+\section{Task 1: Generate Your Keys}
+Use the following command to generate your keys:
+\begin{minted}{bash}
+democles@swords:~> gpg --full-generate-key
+\end{minted}
+
+You can pick an encryption type, expiry, personal details and password. This will generate your keys in the \texttt{~/.gnupg} directory.
+
+\section{Task2: Importing Someone Else's Public Key}
+In this step, pick a friend from the lab and import their public key to your key ring. First you need their key file and then you can run the following command:
+
+\begin{minted}{bash}
+democles@swords:~> gpg --import jane-nerdy.key
+\end{minted}
+
+That will ad their key to you key ring.
+
+\section{Task 3: Verifying and Signing a Key}
+The next step is to verify and sign a key. If you want to know if the key is indeed from the person you believe it is from, look at the fingerprint:
+
+\begin{minted}{bash}
+democles@swords:~> gpg --fingerprint jane.nerdy@ecorp.com
+\end{minted}
+
+If this matches the fingerprint they sent you, you can be safely say that the key is from your friend.
+
+Now you can sign the key:
+\begin{minted}{bash}
+democles@swords:~> gpg --sign-key jane.nerdy@ecorp.com
+\end{minted}
+
+You’ll see information about the key and the person, and will be asked to verify you really want to sign the key. Press \texttt{Y} and hit \texttt{Enter} to sign the key.
+
+\section{Task 4: Share Your Public Key}
+To share your key as a file, you need to export it from the gpg local key store. To do this, you can use the \texttt{--export} option, which must be followed by the email address that you used to generate the key. The \texttt{--output} option must be followed by the name fo the file you wish to have the key exported into. The \texttt{--armor} option tells gpg to generate ASCII armor output instead of a binary file.
+
+\begin{minted}{bash}
+democles@swords:~> gpg --output ~/declan-geek.key --armor --export declan-geek@fsociety.org
+\end{minted}
+
+You can look into the key file with \texttt{less}:
+
+\begin{minted}{bash}
+democles@swords:~> less declan-geek@fsociety.org
+\end{minted}
+
+To share your key with others, you can store it in a file. HINT: use the \texttt{>} symbol to redirect output to a file.
+
+\section{Task 5: Encrypting Files}
+You're finally ready to encrypt a file and send it to your friend. The file is called our-secret-hack.txt.
+
+The \texttt{--encrypt} option tells gpg to encrypt the file, and the \texttt{--sign} option tells it to sign the file with your details. The \texttt{--armor} option tells gpg to create an ASCII file. The \texttt{-r} (recipient) option must be followed by the email address of the person you're sending the file to.
+
+\begin{minted}{bash}
+democles@swords:~> gpg --encrypt --sign --armor -r jane-nerdy@ecorp.com our-secret-hack.txt
+\end{minted}
+
+You can again use \texttt{less} to look into the file (it now ends wit \texttt{.asc}. No way you can read that, but hopefully your friend will be able to encrypt it with your public key.
+
+\section{Task 6: Decrypting Files}
+Your friend has sent a reply. It is in an encrypted file called \texttt{cipher.asc}. You can decrypt it easily using the \texttt{--decrypt} option. You can redirect the output into another file called\texttt{plain.txt}.
+
+Note that you don’t have to tell gpg who the file is from. It can work that out from the encrypted contents of the file.
+\begin{minted}{bash}
+democles@swords:~> gpg --decrypt cipher.asc > plain.txt 
+\end{minted}
+
+Again, use less on the output and you should be able to read the content.
+
+\end{document}
