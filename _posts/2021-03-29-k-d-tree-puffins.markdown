@@ -30,4 +30,4 @@ But I bet you will get the gist once you try playing around a bit with the user 
 </div>
 
 ## Conclusion
-
+As you can see, the puffins had lots of fun playing with *feature spaces* and *k-d trees*, hope that example helped you understand the concept. Leave a comment or two if you have any questions or feedback, especially if you have any ideas how to improve the visualisation as that's always very helpful. This example has been coded on [glitch](glitch.com), so if you liked it check it out yourself and see if you can do a better job that the puffins :) We also used [D3](d3js.org) for the graphs, which already came with a tree layout and works really well for data visualisations in general, so that's another recommendation if you're planning to do something similar. Next time we will be back to Ruby and data science and we also plan to do a post on NeoVim as a favourite editor/programming environment, so stay tuned and see you soon!
