@@ -20,7 +20,7 @@ The puffins k-d tree, like every proper k-d tree, has two visual areas. 1) The f
 But I bet you will get the gist once you try playing around a bit with the user interface, so why not just give it a go?
 
 <!-- Copy and Paste Me -->
-<div class="glitch-embed-wrap" style="height: 420px; width: 100%;">
+<div class="glitch-embed-wrap" style="height: 1000px; width: 100%;">
   <iframe
     src="https://glitch.com/embed/#!/embed/k-d-tree?path=script.js&previewSize=100"
     title="k-d-tree on Glitch"
