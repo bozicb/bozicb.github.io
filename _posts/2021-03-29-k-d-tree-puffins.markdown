@@ -31,3 +31,28 @@ But I bet you will get the gist once you try playing around a bit with the user 
 
 ## Conclusion
 As you can see, the puffins had lots of fun playing with *feature spaces* and *k-d trees*, hope that example helped you understand the concept. Leave a comment or two if you have any questions or feedback, especially if you have any ideas how to improve the visualisation as that's always very helpful. This example has been coded on [glitch](glitch.com), so if you liked it check it out yourself and see if you can do a better job that the puffins :) We also used [D3](d3js.org) for the graphs, which already came with a tree layout and works really well for data visualisations in general, so that's another recommendation if you're planning to do something similar. Next time we will be back to Ruby and data science and we also plan to do a post on NeoVim as a favourite editor/programming environment, so stay tuned and see you soon!
+
+{% if page.comments %}
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://bozicb-github-io.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
+{% endif %}
+
