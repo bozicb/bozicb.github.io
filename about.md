@@ -44,6 +44,10 @@ Recent Talks
 Publications
 ------------
 
+2021
+====
+* F. Kambarami, S. McLachlan, B. Božić, K. Dube, H. Chimhundu: "Computational Modelling of Agglutinative Languages: The Challenge of Southern Bantu Languages." Arusha Working Papers in African Linguistics 3(1), pp.52-81, 2021.
+
 2020
 ====
 * B. Božić, A. Rios, S.-J. Delany: "Comparing tagging suggestion models on discrete corpora." Int. J. Web Inf. Syst. 16 (2020): 201-221.
