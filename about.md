@@ -28,6 +28,7 @@ Memberships and Reviews
 * 2nd International Workshop on Computational History and Data-Driven Humanities (Co-chair)
 * NumFOCUS Diversity and Inclusion Committee (Member)
 * PyData Dublin (Organisation Committee)
+* International Semantic Intelligence Conference (Program Committee)
 
 Awards
 ------
@@ -35,7 +36,9 @@ Awards
 
 Recent Talks
 ------------
-* Opend Data Science Conference 2020: [Knowledge Graphs for the Greater Good](https://odsc.com/speakers/knowledge-graphs-for-the-greater-good/)
+* Atlanta Ruby Meetup 2021: A Gem for Your Data - Data Analysis Intro in Ruby
+* CeADAR Online Seminar Series 2020: [The Semantic Web and Knowledge Graphs](https://www.youtube.com/watch?v=XZKjpXaUBAw&t=23s)
+* Open Data Science Conference 2020: [Knowledge Graphs for the Greater Good](https://odsc.com/speakers/knowledge-graphs-for-the-greater-good/)
 * PyCon Ireland 2018: [Can we talk? Neural Machine Translation with Keras.](https://github.com/bozicb/presentations/raw/master/can_we_talk/Can_we_talk_.pdf)
 * Predict Conference 2018: [It's about Time - How to make sense of your time series data?](https://github.com/bozicb/presentations/raw/master/Bojan_Bozic_It_s_about_Time.pdf)
 * GeoDirectory Conference 2018: [Future Implications of Artificial Intelligence](https://vimeo.com/287975414)
@@ -46,6 +49,7 @@ Publications
 
 2021
 ====
+* A. Nayak, B. Božić, L. Longo: "(Linked) Data Quality Assessment: An Ontological Approach." RuleML+RR: (CEUR-WS.org/Vol-2956/paper17.pdf)[CEUR-WS.org/Vol-2956/paper17.pdf]
 * F. Kambarami, S. McLachlan, B. Božić, K. Dube, H. Chimhundu: "Computational Modelling of Agglutinative Languages: The Challenge of Southern Bantu Languages." Arusha Working Papers in African Linguistics 3(1), pp.52-81, 2021.
 
 2020
