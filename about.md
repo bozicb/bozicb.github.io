@@ -47,8 +47,18 @@ Recent Talks
 Publications
 ------------
 
+2022
+====
+* C. Gomez-Tapia, B. Božić, L. Longo: "On the Minimal Amount of EEG Data Required for Learning Distinctive Human Features for Task-Dependent Biometric Applications." Frontiers Neuroinformatics 16: 844667 (2022).
+* A. Nayak, B. Božić, L. Longo: "An Ontological Approach for Recommending a Feature Selection Algorithm." ICWE 2022: 300-314. 
+* K. Hamilton, A. Nayak, B. Božić, L. Longo: "Is Neuro-Symbolic AI Meeting Its Promise in Natural Language Processing? A Structured Review." Semantic Web Journal, CoRR abs/2202.12205 (2022).
+
 2021
 ====
+* A. Nayak, B. Božić, L. Longo: "Data Quality Assessment of Comma Separated Values Using Linked Data Approach." BIS (Workshops) 2021: 240-250.
+* A. Nayak, B. Božić, L. Longo: "Linked Data Quality Assessment: A Survey." ICWS 2021: 63-76.
+* B. Božić, J. Kumar Sasikumar, T. Matthews: "KnowText: Auto-generated Knowledge Graphs for Custom Domain Applications." iiWAS 2021: 350-358.
+* K. Hamilton, B. Božić, L. Longo: "Interrupting the Propaganda Supply Chain." KnOD@WWW, 2021.
 * A. Nayak, B. Božić, L. Longo: "(Linked) Data Quality Assessment: An Ontological Approach." RuleML+RR: (CEUR-WS.org/Vol-2956/paper17.pdf)[CEUR-WS.org/Vol-2956/paper17.pdf]
 * F. Kambarami, S. McLachlan, B. Božić, K. Dube, H. Chimhundu: "Computational Modelling of Agglutinative Languages: The Challenge of Southern Bantu Languages." Arusha Working Papers in African Linguistics 3(1), pp.52-81, 2021.
 
@@ -56,6 +66,7 @@ Publications
 ====
 * B. Božić, A. Rios, S.-J. Delany: "Comparing tagging suggestion models on discrete corpora." Int. J. Web Inf. Syst. 16 (2020): 201-221.
 * S. Leech, B. Božić: "Discordant Observation Modelling." International Conference on Time Series and Forecasting. Springer, Cham, 2020.
+* P. Dooley, B. Božić: "Towards Linked Data for Wikidata Revisions and Twitter Trending Hashtags." J. Data Intell. 1(3): 351-377, 2020.
 
 2019
 ====
@@ -77,7 +88,7 @@ Publications
 2016
 ====
 * B. Božić, R. Brennan, K. Feeney, G. Mendel-Gleason: "Describing Reasoning Results with RVO, the Reasoning Violations Ontology"; Extended Semantic Web Conference, Heraklion; 29.05.2016 - 02.06.2016; in: "Linkded Data Quality Workshop"
-* O. Gavin, D. Kontokostas, A. Koller, J. Davies, P. Francois, A. Marciniak, B. Božić, G. Mendel-Gleason, K. Feeney, R. Brennan: "The ALIGNED Project â€“ Aligned, Quality-centric Software and Data Engineering Driven by Semantics"; Extended Semantic Web Conference, Heraklion; 29.05.2016 - 02.06.2016; in LNCS, H. Sack, Blomqvist, E., d'Aquin, M., Ghidini, C., Paolo Ponzetto, S., Lange, C. (eds.) (2016). (Vol. 9678)
+* O. Gavin, D. Kontokostas, A. Koller, J. Davies, P. Francois, A. Marciniak, B. Božić, G. Mendel-Gleason, K. Feeney, R. Brennan: "The ALIGNED Project: Aligned, Quality-centric Software and Data Engineering Driven by Semantics"; Extended Semantic Web Conference, Heraklion; 29.05.2016 - 02.06.2016; in LNCS, H. Sack, Blomqvist, E., d'Aquin, M., Ghidini, C., Paolo Ponzetto, S., Lange, C. (eds.) (2016). (Vol. 9678)
 * R. Brennan, K. Feeney, G. Mendel-Gleason, B. Božić, P. Turchin, H. Whitehouse, P. Francois, T. Currie, S. Grohmann: Building the Seshat Ontology for a Global History Databank Extended Semantic Web Conference, Heraklion; 29.05.2016 - 02.06.2016; in LNCS, H. Sack, Blomqvist, E., d'Aquin, M., Ghidini, C., Paolo Ponzetto, S., Lange, C. (eds.) (2016). (Vol. 9678)
 
 2015
