@@ -36,7 +36,8 @@ Awards
 
 Recent Talks
 ------------
-* Atlanta Ruby Meetup 2021: A Gem for Your Data - Data Analysis Intro in Ruby
+* SETU Equitas HE (Equality, Diversity and Inclusion in Higher Education) Conference 2023: [Fair Chatbots for Students - How to fight Inequality, Racism and Gender Bias in Large Language Models?](Fair_Chatbots_for_Students.pdf)
+* Atlanta Ruby Meetup 2021: [A Gem for Your Data - Data Analysis Intro in Ruby](https://www.youtube.com/watch?v=SWQbWl3TJmA)
 * CeADAR Online Seminar Series 2020: [The Semantic Web and Knowledge Graphs](https://www.youtube.com/watch?v=XZKjpXaUBAw&t=23s)
 * Open Data Science Conference 2020: [Knowledge Graphs for the Greater Good](https://odsc.com/speakers/knowledge-graphs-for-the-greater-good/)
 * PyCon Ireland 2018: [Can we talk? Neural Machine Translation with Keras.](https://github.com/bozicb/presentations/raw/master/can_we_talk/Can_we_talk_.pdf)
